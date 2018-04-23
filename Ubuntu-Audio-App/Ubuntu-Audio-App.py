@@ -71,12 +71,9 @@ class AppGUI1:
         label.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         label.place(relx=1, x=-770, y=135)
 
-        SetRe1_button = Button(text="Default", command=self.SetRe1)
+        SetRe1_button = Button(text="Default Settings", command=self.SetRe1)
         SetRe1_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         SetRe1_button.place(relx=1, x=-774, y=165)
-
-
-
 
         SetRe3_button = Button(master, text="Medium quality", command=self.SetRe3)
         SetRe3_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
@@ -89,7 +86,6 @@ class AppGUI1:
         SetRe5_button = Button(master, text="Zero order hold", command=self.SetRe5)
         SetRe5_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         SetRe5_button.place(relx=1, x=-275, y=134)
-
 
         SetRe10_button = Button(master, text="ffmpeg", command=self.SetRe10)
         SetRe10_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
@@ -160,7 +156,7 @@ class AppGUI1:
 
 
     def SetRe1(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
+           subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s16le" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 44000" /etc/pulse/daemon.conf', shell=True)
 
     def SetRe3(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = src-sinc-medium-quality" /etc/pulse/daemon.conf', shell=True)
@@ -171,7 +167,6 @@ class AppGUI1:
     def SetRe5(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = src-zero-order-hold" /etc/pulse/daemon.conf', shell=True)
 
-
     def SetRe10(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = ffmpeg" /etc/pulse/daemon.conf', shell=True)
 
@@ -180,6 +175,7 @@ class AppGUI1:
 
     def SetRe13(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = soxr-vhq" /etc/pulse/daemon.conf', shell=True)
+
 
     def Test(self):
            subprocess.call('pacmd list-sinks | grep sample', shell=True)
