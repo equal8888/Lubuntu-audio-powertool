@@ -7,4 +7,4 @@
 ```
 python3 Ubuntu-Audio-App.py
 ```
-for now first time usage will promt your user password from the terminal
+for now first time usage will promt user password from the terminal
