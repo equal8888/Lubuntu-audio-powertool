@@ -1,4 +1,4 @@
-## python app for quic audio setting configuration on the fly
+## python app for quick audio setting configuration on the fly
 
 <img src="https://drive.google.com/uc?id=1v3JaTpenHigxHqgPXjh-olzC8Zl4K9k7" width="auto" height="200"/>
 
