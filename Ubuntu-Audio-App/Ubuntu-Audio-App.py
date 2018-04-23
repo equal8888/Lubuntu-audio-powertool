@@ -5,7 +5,7 @@ from tkinter import ttk, Tk, Label, Button, Entry, StringVar, DISABLED, NORMAL, 
 import subprocess
 import os
 
-class MyFirstGUI1:
+class AppGUI1:
     def __init__(self, master):
         window = master
         master.minsize(width=790, height=225)
@@ -223,5 +223,5 @@ class MyFirstGUI1:
 
 
 root = Tk()
-my_gui = MyFirstGUI1(root)
+my_gui = AppGUI1(root)
 root.mainloop()
