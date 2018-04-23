@@ -112,29 +112,31 @@ class AppGUI1:
 
         SetRe11_button = Button(master, text="soxr-mq", command=self.SetRe11)
         SetRe11_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe11_button.place(relx=1, x=-663, y=191)
+        SetRe11_button.place(relx=1, x=-215, y=163)
 
         SetRe12_button = Button(master, text="soxr-hq", command=self.SetRe12)
         SetRe12_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe12_button.place(relx=1, x=-586, y=191)
+        SetRe12_button.place(relx=1, x=-180, y=134)
 
         SetRe13_button = Button(master, text="soxr-vhq", command=self.SetRe13)
         SetRe13_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe13_button.place(relx=1, x=-513, y=191)
+        SetRe13_button.place(relx=1, x=-107, y=134)
         fm4.pack(fill=BOTH)
+
+        ttk.Separator(root).place(x=0, y=192, relwidth=10)
 
         fm5 = Frame(master)
         Test_button = Button(master, text="Show current sample rate", command=self.Test)
         Test_button.pack()
         Test_button.place(relx=1, x=-2, y=2, anchor=NE)
 
-        Confirm_button = Button(master, text="Apply !", command=self.Confirm)
+        Confirm_button = Button(master, text="   Apply !   ", command=self.Confirm)
         Confirm_button.pack()
-        Confirm_button.place(relx=1, x=-140, y=191)
+        Confirm_button.place(relx=1, x=-160, y=195)
 
-        close_button = Button(master, text="Close", command=master.quit)
+        close_button = Button(master, text="Close ", command=master.quit)
         close_button.pack()
-        close_button.place(relx=1, x=-65, y=191)
+        close_button.place(relx=1, x=-65, y=195)
         fm5.pack(fill=BOTH)
 
     def Setbit1(self):
