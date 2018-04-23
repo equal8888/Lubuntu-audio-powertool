@@ -1,7 +1,7 @@
 ## App for audio samplerate tweaks from Ubuntu on the fly.
-Make the best out of your hardware. GUI will be updated.
-<br>
 <img src="https://drive.google.com/uc?id=1G4cYHBqlbjhQVipsCkiaJEhP98Nk3Xue" width="auto" height="200"/>
+<br>
+Make the best out of your hardware. GUI will be updated.
 
 ## Usage
 
