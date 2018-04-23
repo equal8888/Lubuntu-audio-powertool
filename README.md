@@ -1,5 +1,5 @@
 ## App for audio tweaks
-<img src="https://drive.google.com/uc?id=18PkKkWaI6u6vGAAAvIRVNIVvGQ9pzwU8" width="auto" height="200"/>
+<img src="https://drive.google.com/uc?id=1BU5LEQ4e8k_ZWMpqz-9D7x7yMXszIkwR" width="auto" height="200"/>
 <br>
 App will re-configure pulseaudio daemon.conf file. <strong>GUI will be updated</strong>.
 
