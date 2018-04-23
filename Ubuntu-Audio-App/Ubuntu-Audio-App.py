@@ -75,15 +75,15 @@ class AppGUI1:
         SetRe1_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         SetRe1_button.place(relx=1, x=-774, y=165)
 
-        SetRe3_button = Button(master, text="Medium quality", command=self.SetRe3)
+        SetRe3_button = Button(master, text="medium quality", command=self.SetRe3)
         SetRe3_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         SetRe3_button.place(relx=1, x=-495, y=134)
 
-        SetRe4_button = Button(master, text="Best quality", command=self.SetRe4)
+        SetRe4_button = Button(master, text="best quality", command=self.SetRe4)
         SetRe4_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         SetRe4_button.place(relx=1, x=-374, y=134)
 
-        SetRe5_button = Button(master, text="Zero order hold", command=self.SetRe5)
+        SetRe5_button = Button(master, text="zero order hold", command=self.SetRe5)
         SetRe5_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
         SetRe5_button.place(relx=1, x=-275, y=134)
 
