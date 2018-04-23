@@ -25,7 +25,7 @@ class AppGUI1:
         fm.pack(fill=BOTH)
 
         fm2 = Frame(master)
-        label = Label(fm2, text="Set primary Sample Rate ->    ")
+        label = Label(fm2, text="Set primary sample rate ->    ")
         label.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
 
         Set1_button = Button(fm2, text="44,100 Hz", command=self.Set1)
@@ -45,7 +45,7 @@ class AppGUI1:
         fm2.pack(fill=BOTH)
 
         fm3 = Frame(master)
-        label = Label(master, text="Set alternative Sample Rate ->")
+        label = Label(master, text="Set alternative sample rate ->")
         label.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
 
         Setalt1_button = Button(master, text="44,100 Hz", command=self.Setalt1)
