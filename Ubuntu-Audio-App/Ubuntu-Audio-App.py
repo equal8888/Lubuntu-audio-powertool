@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 import tkinter
 from tkinter import *
-import tkinter.messagebox    #coming soon.
 from tkinter import ttk, Tk, Label, Button, Entry, StringVar, DISABLED, NORMAL, END, E, W
 import subprocess
 import os
-import os.path         #used to check the system path.
-import time            #used to put the program to sleep.
-import datetime        #used to get the current time.
-import readline        #enables user to have inline editing and history.
 
 class MyFirstGUI1:
     def __init__(self, master):
@@ -21,18 +16,6 @@ class MyFirstGUI1:
         fm = Frame(master, bg="blue")
         label = Label(fm, text=" Set bitdepth")
         label.pack(side=TOP, anchor=NW)
-
-        # Terminal
-
-#        termf = Frame(master)
-#        termf.pack(fill=BOTH, expand=YES)
-#        wid = termf.winfo_id()
-#        os.system('lxterminal -into[ expr [winfo id .f ]] -e $env(EDITOR) &')
-
-
-        # Notify
-
-        #
 
         Setbit1_button = Button(fm, text="   16bit   ", command=self.Setbit1)
         Setbit1_button.pack(side=TOP, anchor=NW)
@@ -233,25 +216,10 @@ class MyFirstGUI1:
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = soxr-vhq" /etc/pulse/daemon.conf', shell=True)
 
     def Test(self):
-           #subprocess.call('pacmd list-sinks | grep sample', shell=True)
-           os.system('clear')
-           cmd14="pacmd list-sinks | grep sample"
-           os.system(cmd14)
+           subprocess.call('pacmd list-sinks | grep sample', shell=True)
 
     def Confirm(self):
            subprocess.call('pulseaudio --kill && pulseaudio --start', shell=True)
-
-    # notification
-
-    def notify():
-        global sixthFrame
-        global notify
-
-        notifycmd ="notify-send APT-Mananger 'Operation Finished'"
-        conf.write("notification=enabled\n")
-        conf.write("EOF")
-        conf.close()
-        sixthFrame.destroy()
 
 
 root = Tk()
