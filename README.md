@@ -8,4 +8,4 @@ Make the best out of your hardware. GUI will be updated.
 ```
 python3 Ubuntu-Audio-App.py
 ```
-for now first time usage will promt user password from the terminal
+user will be prompted for his password
