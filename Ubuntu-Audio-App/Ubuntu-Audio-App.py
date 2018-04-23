@@ -8,9 +8,9 @@ import os
 class AppGUI1:
     def __init__(self, master):
         window = master
-        master.minsize(width=790, height=225)
-        master.maxsize(width=790, height=225)
-        master.title("Ubuntu Audio Settings")
+        master.minsize(width=775, height=194)
+        master.maxsize(width=775, height=194)
+        master.title("Ubuntu Audio App")
         master.geometry("100x500")
 
         fm = Frame(master, bg="blue")
@@ -25,7 +25,7 @@ class AppGUI1:
         fm.pack(fill=BOTH)
 
         fm2 = Frame(master)
-        label = Label(fm2, text="Set primary quality ->")
+        label = Label(fm2, text="Set primary Sample Rate ->    ")
         label.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
 
         Set1_button = Button(fm2, text="44,100 Hz", command=self.Set1)
@@ -45,8 +45,9 @@ class AppGUI1:
         fm2.pack(fill=BOTH)
 
         fm3 = Frame(master)
-        label = Label(master, text="Set alternative quality ->")
+        label = Label(master, text="Set alternative Sample Rate ->")
         label.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
+
         Setalt1_button = Button(master, text="44,100 Hz", command=self.Setalt1)
         Setalt1_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
 
@@ -61,69 +62,49 @@ class AppGUI1:
 
         Setalt5_button = Button(master, text="192,000 Hz", command=self.Setalt5)
         Setalt5_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        fm3.pack(fill=BOTH, padx=10)
+        fm3.pack(fill=BOTH)
 
         ttk.Separator(root).place(x=0, y=131, relwidth=10)
 
         fm4 = Frame(master)
         label = Label(text="Resample method")
         label.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        label.place(relx=1, x=-782, y=135)
+        label.place(relx=1, x=-770, y=135)
 
         SetRe1_button = Button(text="Default", command=self.SetRe1)
         SetRe1_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe1_button.place(relx=1, x=-663, y=134)
+        SetRe1_button.place(relx=1, x=-774, y=165)
 
-        SetRe2_button = Button(master, text="Fastest", command=self.SetRe2)
-        SetRe2_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe2_button.place(relx=1, x=-592, y=134)
+
+
 
         SetRe3_button = Button(master, text="Medium quality", command=self.SetRe3)
         SetRe3_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe3_button.place(relx=1, x=-521, y=134)
+        SetRe3_button.place(relx=1, x=-495, y=134)
 
         SetRe4_button = Button(master, text="Best quality", command=self.SetRe4)
         SetRe4_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe4_button.place(relx=1, x=-400, y=134)
+        SetRe4_button.place(relx=1, x=-374, y=134)
 
         SetRe5_button = Button(master, text="Zero order hold", command=self.SetRe5)
         SetRe5_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe5_button.place(relx=1, x=-301, y=134)
+        SetRe5_button.place(relx=1, x=-275, y=134)
 
-        SetRe6_button = Button(master, text="SRC Linear", command=self.SetRe6)
-        SetRe6_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe6_button.place(relx=1, x=-663, y=163)
-
-        SetRe7_button = Button(master, text="Trivial", command=self.SetRe7)
-        SetRe7_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe7_button.place(relx=1, x=-570, y=163)
-
-        SetRe8_button = Button(master, text="Speed float N", command=self.SetRe8)
-        SetRe8_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe8_button.place(relx=1, x=-507, y=163)
-
-        SetRe9_button = Button(master, text="Speed fixed N", command=self.SetRe9)
-        SetRe9_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe9_button.place(relx=1, x=-398, y=163)
 
         SetRe10_button = Button(master, text="ffmpeg", command=self.SetRe10)
         SetRe10_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe10_button.place(relx=1, x=-286, y=163)
-
-        SetRe11_button = Button(master, text="soxr-mq", command=self.SetRe11)
-        SetRe11_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe11_button.place(relx=1, x=-215, y=163)
+        SetRe10_button.place(relx=1, x=-566, y=134)
 
         SetRe12_button = Button(master, text="soxr-hq", command=self.SetRe12)
         SetRe12_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe12_button.place(relx=1, x=-180, y=134)
+        SetRe12_button.place(relx=1, x=-154, y=134)
 
         SetRe13_button = Button(master, text="soxr-vhq", command=self.SetRe13)
         SetRe13_button.pack(side=LEFT, anchor=NW, fill=X, expand=YES)
-        SetRe13_button.place(relx=1, x=-107, y=134)
+        SetRe13_button.place(relx=1, x=-81, y=134)
         fm4.pack(fill=BOTH)
 
-        ttk.Separator(root).place(x=0, y=192, relwidth=10)
+        ttk.Separator(root).place(x=0, y=163, relwidth=10)
 
         fm5 = Frame(master)
         Test_button = Button(master, text="Show current sample rate", command=self.Test)
@@ -132,11 +113,11 @@ class AppGUI1:
 
         Confirm_button = Button(master, text="   Apply !   ", command=self.Confirm)
         Confirm_button.pack()
-        Confirm_button.place(relx=1, x=-160, y=195)
+        Confirm_button.place(relx=1, x=-160, y=165)
 
         close_button = Button(master, text="Close ", command=master.quit)
         close_button.pack()
-        close_button.place(relx=1, x=-65, y=195)
+        close_button.place(relx=1, x=-65, y=165)
         fm5.pack(fill=BOTH)
 
     def Setbit1(self):
@@ -181,9 +162,6 @@ class AppGUI1:
     def SetRe1(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
 
-    def SetRe2(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = src-sinc-fastest" /etc/pulse/daemon.conf', shell=True)
-
     def SetRe3(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = src-sinc-medium-quality" /etc/pulse/daemon.conf', shell=True)
 
@@ -193,23 +171,9 @@ class AppGUI1:
     def SetRe5(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = src-zero-order-hold" /etc/pulse/daemon.conf', shell=True)
 
-    def SetRe6(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = src-linear" /etc/pulse/daemon.conf', shell=True)
-
-    def SetRe7(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = trivial" /etc/pulse/daemon.conf', shell=True)
-
-    def SetRe8(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-N" /etc/pulse/daemon.conf', shell=True)
-
-    def SetRe9(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-fixed-N" /etc/pulse/daemon.conf', shell=True)
 
     def SetRe10(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = ffmpeg" /etc/pulse/daemon.conf', shell=True)
-
-    def SetRe11(self):
-           subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = soxr-mq" /etc/pulse/daemon.conf', shell=True)
 
     def SetRe12(self):
            subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = soxr-hq" /etc/pulse/daemon.conf', shell=True)
