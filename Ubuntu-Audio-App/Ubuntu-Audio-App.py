@@ -13,7 +13,15 @@ class AppGUI1:
         master.title("Ubuntu Audio App")
         master.geometry("100x500")
 
-        fm = Frame(master, bg="blue")
+        fm = Frame(master, bg="blue") # bg="blue"
+
+        filename = PhotoImage(file = "desk03.gif")
+        background_label = Label(fm, image=filename)
+        background_label.image = filename # anchor
+        background_label.place(x=50, y=0, relwidth=1, relheight=1)
+        background_label.place()
+
+
         label = Label(fm, text=" Set bitdepth")
         label.pack(side=TOP, anchor=NW)
 
@@ -115,9 +123,9 @@ class AppGUI1:
         Class2_button.pack()
         Class2_button.place(relx=1, x=-508, y=195)
 
-        Test_button = Button(master, text="Show current sample rate", command=self.Test)
-        Test_button.pack()
-        Test_button.place(relx=1, x=-2, y=2, anchor=NE)
+#        Test_button = Button(master, text="Show current sample rate", command=self.Test)
+#        Test_button.pack()
+#        Test_button.place(relx=1, x=-2, y=2, anchor=NE)
 
         Confirm_button = Button(master, text="   Apply !   ", command=self.Confirm)
         Confirm_button.pack()
