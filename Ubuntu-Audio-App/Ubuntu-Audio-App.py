@@ -13,7 +13,7 @@ class AppGUI1:
         master.title("Ubuntu Audio App")
         master.geometry("100x500")
 
-        fm = Frame(master, bg="blue") # bg="blue"
+        fm = Frame(master) # bg="blue"
 
         filename = PhotoImage(file = "desk03.gif")
         background_label = Label(fm, image=filename)
@@ -22,7 +22,7 @@ class AppGUI1:
         background_label.place()
 
 
-        label = Label(fm, text=" Set bitdepth")
+        label = Label(fm, text=" Set bit depth")
         label.pack(side=TOP, anchor=NW)
 
         Setbit1_button = Button(fm, text="   16bit   ", command=self.Setbit1)
