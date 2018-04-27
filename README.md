@@ -1,5 +1,5 @@
 ﻿## App for any usb dac
-<img src="https://drive.google.com/uc?id=1oGtjCTXiNeQ0AhN_ZiUXEOfr-BNHtA7H" width="auto" height="200"/>
+<img src="https://drive.google.com/uc?id=1ll3pFGt_kPIJz2fp6HS3h2pVZuT1cBiY" width="auto" height="200"/>
 <br>
  <strong>Manual</strong>
 <br>
