@@ -2,12 +2,15 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import tkinter.messagebox
+
 import os
 import subprocess
 
+
 # Bit depth Button functions
 def select_bitdepth_16(var):
-    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s16le" /etc/pulse/daemon.conf', shell=True)
+    os.system('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s16le" /etc/pulse/daemon.conf')
 def select_bitdepth_24(var):
     subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf', shell=True)
 def select_bitdepth_32(var):
@@ -83,8 +86,19 @@ def Confirm(applybutton):
 
 # samplerate button for now
 def showsamplerate(samplebutton):
-    subprocess.call('pacmd list-sinks | grep sample', shell=True)
+        subprocess.call('currentbitrate1=$(pacmd list-sinks | grep sample) && notify-send "$currentbitrate1"', shell=True)
 
+# set Login
+# def root_login():
+#    try:
+#        subprocess.call(["gksudo", "su"])
+#    except subprocess.CalledProcessError:
+#        tkinter.messagebox.showinfo("message", "OOOOPS...\nWrong password!")
+#    else:
+#        tkinter.messagebox.showinfo("message", "Login successful!")
+
+#    def close_window():
+#        top.destroy()
 
 # Render main  window
 def main():
@@ -211,6 +225,14 @@ def main():
 
     label = Label(text="Predefined Settings")
     label.grid(row=9, column=1, columnspan = 2, pady=5)
+
+# tkinter login for now
+#    B = Button(root, text ="Login", command = root_login)
+#    B.grid(row=10, column=6)
+
+#    Q = Button(root, text ="Quit", command = close_window)
+#    Q.pack()
+
 
 #   default button for now
     apply_btn=Button(root, text='Default settings', command=lambda: defaultbutton(defaultbutton1) )
