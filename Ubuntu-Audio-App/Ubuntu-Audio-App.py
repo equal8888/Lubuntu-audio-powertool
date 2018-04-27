@@ -27,7 +27,7 @@ def select_prisamplerate_96000(var1):
 def select_prisamplerate_192000(var1):
     subprocess.call('currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 192000" /etc/pulse/daemon.conf', shell=True)
 
-# secondary sample rate button functions
+# alternative sample rate button functions
 def select_altsamplerate_44100(var2):
     subprocess.call('currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 44100" /etc/pulse/daemon.conf', shell=True)
 def select_altsamplerate_48000(var2):
@@ -67,6 +67,10 @@ def select_prisamplerate_soxrhq(var3):
 def select_prisamplerate_soxrvhq(var3):
     subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = soxr-vhq" /etc/pulse/daemon.conf', shell=True)
 
+# default button for now
+def defaultbutton(defaultbutton1):
+           subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c ; default-sample-format = s16le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44100" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c ; alternate-sample-rate = 44100" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
+
 # ok button for now
 def Confirm(applybutton):
            subprocess.call('pulseaudio --kill && pulseaudio --start', shell=True)
@@ -89,6 +93,7 @@ def main():
     var3 = IntVar()
     applybutton = IntVar()
     samplebutton = IntVar()
+    defaultbutton1 = IntVar()
 
     # background image
     filename = PhotoImage(file = "desk03.gif")
@@ -136,7 +141,7 @@ def main():
     # Set Secondary sample rate
 
     label = Label(text="Alternative Sample rate")
-    label.grid(row=6, column=1, columnspan = 2,)
+    label.grid(row=6, column=1, columnspan = 2)
 
     select_secsamplerate_1=Radiobutton(root, text='44,100 Hz', variable=var2, command=lambda: select_altsamplerate_44100(var2), value=14100, width=9)
     select_secsamplerate_1.grid(row=6, column=3)
@@ -159,7 +164,7 @@ def main():
     # Set Secondary sample rate
 
     label = Label(text="Resample method")
-    label.grid(row=7, column=1, columnspan = 2,)
+    label.grid(row=7, column=1, columnspan = 2)
 
     select_secsamplerate_1=Radiobutton(root, indicatoron=0, text='default', variable=var3, command=lambda: select_prisamplerate_default(var3), value=1, width=12)
     select_secsamplerate_1.grid(row=7, column=3)
@@ -199,6 +204,13 @@ def main():
 
     # Separator3
     ttk.Separator(root).place(x=0, y=158, relwidth=10)
+
+    label = Label(text="Predefined Settings")
+    label.grid(row=9, column=1, columnspan = 2, pady=5)
+
+#   default button for now
+    apply_btn=Button(root, text='Default settings', command=lambda: defaultbutton(defaultbutton1) )
+    apply_btn.place(relx=1, x=-712, y=190)
 
 #   ok button for now
     apply_btn=Button(root, text='Apply', command=lambda: Confirm(applybutton) )
