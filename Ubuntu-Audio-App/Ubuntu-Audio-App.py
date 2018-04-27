@@ -69,15 +69,23 @@ def select_prisamplerate_soxrvhq(var3):
 
 # default button for now
 def defaultbutton(defaultbutton1):
-           subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c ; default-sample-format = s16le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44100" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c ; alternate-sample-rate = 44100" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
+    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c ; default-sample-format = s16le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44100" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c ; alternate-sample-rate = 44100" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
+
+# usb1 button for now
+def usb1button(usbbutton1):
+    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 96000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 96000" /etc/pulse/daemon.conf', shell=True)
+
+# usb2 button for now
+def usb2button(usbbutton2):
+    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 192000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 192000" /etc/pulse/daemon.conf', shell=True)
 
 # ok button for now
 def Confirm(applybutton):
-           subprocess.call('pulseaudio --kill && pulseaudio --start', shell=True)
+    subprocess.call('pulseaudio --kill && pulseaudio --start', shell=True)
 
 # samplerate button for now
 def showsamplerate(samplebutton):
-           subprocess.call('pacmd list-sinks | grep sample', shell=True)
+    subprocess.call('pacmd list-sinks | grep sample', shell=True)
 
 
 # Render main  window
@@ -94,6 +102,8 @@ def main():
     applybutton = IntVar()
     samplebutton = IntVar()
     defaultbutton1 = IntVar()
+    usbbutton1 = IntVar()
+    usbbutton2 = IntVar()
 
     # background image
     filename = PhotoImage(file = "desk03.gif")
@@ -202,7 +212,7 @@ def main():
     select_secsamplerate_1=Radiobutton(root, indicatoron=0, text='soxr-vhq', variable=var3, command=lambda: select_prisamplerate_soxrvhq(var3), value=13, width=12)
     select_secsamplerate_1.grid(row=8, column=7)
 
-    # Separator3
+    # Separator3 usb1button
     ttk.Separator(root).place(x=0, y=158, relwidth=10)
 
     label = Label(text="Predefined Settings")
@@ -211,6 +221,14 @@ def main():
 #   default button for now
     apply_btn=Button(root, text='Default settings', command=lambda: defaultbutton(defaultbutton1) )
     apply_btn.place(relx=1, x=-712, y=190)
+
+#   usb1 button for now
+    apply_btn=Button(root, text='USB Audio: Class 1', command=lambda: usb1button(usbbutton1) )
+    apply_btn.place(relx=1, x=-589, y=190)
+
+#   usb1 button for now
+    apply_btn=Button(root, text='USB Audio: Class 2', command=lambda: usb2button(usbbutton2) )
+    apply_btn.place(relx=1, x=-448, y=190)
 
 #   ok button for now
     apply_btn=Button(root, text='Apply', command=lambda: Confirm(applybutton) )
