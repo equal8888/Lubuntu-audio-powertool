@@ -2,7 +2,7 @@
 <img src="https://drive.google.com/uc?id=1uHj9NVVXV8XsdvtcsAnOdiv8MxiheALA" width="auto" height="200"/>
 <br>
  <strong>Manual</strong>
-<br>
+<br> 
 don't set sample rate to "maximum option available", that will do audio resampling and you don't want that! Set sampling rate according to what you hear. Bit depth instead should always be the highest available what your hardware can handle. App will reconfigure pulseaudio daemon.conf file.
 <br>
 <br>
