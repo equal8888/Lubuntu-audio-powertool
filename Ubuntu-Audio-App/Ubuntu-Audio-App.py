@@ -102,7 +102,7 @@ def showsamplerate(samplebutton):
 # Render main  window
 def main():
     root = tk.Tk()
-    root.title("Lubuntu Audio Tweaks")
+    root.title("Ubuntu Audio Tweaks")
     root.geometry("715x220")
 
     # define var's
