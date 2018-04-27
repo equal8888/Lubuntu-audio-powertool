@@ -7,7 +7,6 @@ import tkinter.messagebox
 import os
 import subprocess
 
-
 # Bit depth Button functions
 def select_bitdepth_16(var):
     subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s16le" /etc/pulse/daemon.conf', shell=True)
@@ -103,7 +102,7 @@ def showsamplerate(samplebutton):
 # Render main  window
 def main():
     root = tk.Tk()
-    root.title("Ubuntu Audio App")
+    root.title("Lubuntu Audio Tweaks")
     root.geometry("715x220")
 
     # define var's
