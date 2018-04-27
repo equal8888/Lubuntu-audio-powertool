@@ -8,10 +8,12 @@ don't set sample rate to "maximum option available", that will do audio resampli
 <br>
 Tested on Lubuntu (15.04 & 16.04)
 <br>
+
 ## Usage
+
 from terminal
 ```
 python3 Ubuntu-Audio-App.py
 ```
-<br>
+
 user will be prompted for his password
