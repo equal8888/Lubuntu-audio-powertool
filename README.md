@@ -13,4 +13,5 @@ from terminal
 ```
 python3 Ubuntu-Audio-App.py
 ```
+<br>
 user will be prompted for his password
