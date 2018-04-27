@@ -1,11 +1,9 @@
-from __future__ import print_function
-#from functools import partial
+#!/usr/bin/env python3
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import os
 import subprocess
-
 
 # Bit depth Button functions
 def select_bitdepth_16(var):
@@ -69,15 +67,15 @@ def select_prisamplerate_soxrvhq(var3):
 
 # default button for now
 def defaultbutton(defaultbutton1):
-    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c ; default-sample-format = s16le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44100" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c ; alternate-sample-rate = 44100" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
+    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c ; default-sample-format = s16le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44100" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c ; alternate-sample-rate = 44100" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf && pulseaudio --kill && pulseaudio --start', shell=True)
 
 # usb1 button for now
 def usb1button(usbbutton1):
-    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 96000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 96000" /etc/pulse/daemon.conf', shell=True)
+    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 96000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 96000" /etc/pulse/daemon.conf && pulseaudio --kill && pulseaudio --start', shell=True)
 
 # usb2 button for now
 def usb2button(usbbutton2):
-    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 192000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 192000" /etc/pulse/daemon.conf', shell=True)
+    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 192000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 192000" /etc/pulse/daemon.conf && pulseaudio --kill && pulseaudio --start', shell=True)
 
 # ok button for now
 def Confirm(applybutton):
@@ -112,7 +110,6 @@ def main():
     background_label.place(x=70, y=-75, relwidth=1, relheight=1)
 
     # Set bit depth
-
     label = Label(text="Set bit depth")
     label.grid(row=1, column=1)
 
@@ -129,7 +126,6 @@ def main():
     ttk.Separator(root).place(x=0, y=77, relwidth=10)
 
     # Set primary sample rate
-
     label = Label(text="Primary Sample rate")
     label.grid(row=5, column=1, columnspan = 2,)
 
@@ -149,7 +145,6 @@ def main():
     select_prisamplerate_1.grid(row=5, column=7)
 
     # Set Secondary sample rate
-
     label = Label(text="Alternative Sample rate")
     label.grid(row=6, column=1, columnspan = 2)
 
@@ -172,7 +167,6 @@ def main():
     ttk.Separator(root).place(x=0, y=117, relwidth=10)
 
     # Set Secondary sample rate
-
     label = Label(text="Resample method")
     label.grid(row=7, column=1, columnspan = 2)
 
@@ -234,9 +228,9 @@ def main():
     apply_btn=Button(root, text='Apply', command=lambda: Confirm(applybutton) )
     apply_btn.place(relx=1, x=-65, y=190)
 
-#   samplerate button for now
+#   samplerate button for now (row=1, column=1)
     apply_btn=Button(root, text='Show current sample rate', command=lambda: showsamplerate(samplebutton) )
-    apply_btn.place(relx=1, x=-250, y=190)
+    apply_btn.place(relx=1, x=-186, y=3)
 
     root.mainloop()
 
