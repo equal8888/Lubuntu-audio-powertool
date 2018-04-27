@@ -1,4 +1,4 @@
-﻿## App for any usb dac
+﻿## App for audio tweaks
 <img src="https://drive.google.com/uc?id=1ll3pFGt_kPIJz2fp6HS3h2pVZuT1cBiY" width="auto" height="200"/>
 <br>
  <strong>Manual</strong>
