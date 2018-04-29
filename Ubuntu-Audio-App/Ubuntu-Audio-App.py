@@ -116,11 +116,11 @@ def main():
     usbbutton1 = IntVar()
     usbbutton2 = IntVar()
 
-    # background image
-    filename = PhotoImage(file = "desk03.gif")
-    background_label = Label( image=filename)
-    background_label.image = filename # anchor
-    background_label.place(x=70, y=-75, relwidth=1, relheight=1)
+    # background image (Commented out for quic fix)
+#    filename = PhotoImage(file = "desk03.gif")
+#    background_label = Label( image=filename)
+#    background_label.image = filename # anchor
+#    background_label.place(x=70, y=-75, relwidth=1, relheight=1)
 
     # Set bit depth
     label = Label(text="Set bit depth")
