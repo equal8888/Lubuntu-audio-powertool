@@ -71,9 +71,9 @@ def select_prisamplerate_soxrvhq(var3):
 def defaultbutton(defaultbutton1):
     subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c ; default-sample-format = s16le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c ; default-sample-rate = 44100" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c ; alternate-sample-rate = 44100" /etc/pulse/daemon.conf && currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf && pulseaudio --kill && pulseaudio --start', shell=True)
 
-# usb1 button for now
-def usb1button(usbbutton1):
-    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 96000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 96000" /etc/pulse/daemon.conf && pulseaudio --kill && pulseaudio --start', shell=True)
+# alsa button for now
+def alsabutton(alsabutton1):
+    subprocess.call('cd ~ && sudo ./Documents/gitfix/Ubuntu-Audio-App/alsa-settings.sh', shell=True)
 
 # usb2 button for now
 def usb2button(usbbutton2):
@@ -81,7 +81,7 @@ def usb2button(usbbutton2):
 
 # ok button for now
 def Confirm(applybutton):
-    subprocess.call('pulseaudio --kill && pulseaudio --start', shell=True)
+    subprocess.call('pulseaudio -k && sudo alsa force-reload', shell=True)
 
 # samplerate button for now
 def showsamplerate(samplebutton):
@@ -115,6 +115,7 @@ def main():
     defaultbutton1 = IntVar()
     usbbutton1 = IntVar()
     usbbutton2 = IntVar()
+    alsabutton1 = IntVar()
 
     # background image (Commented out for quic fix)
 #    filename = PhotoImage(file = "desk03.gif")
@@ -232,18 +233,13 @@ def main():
 #    Q = Button(root, text ="Quit", command = close_window)
 #    Q.pack()
 
-
 #   default button for now
     apply_btn=Button(root, text='Default settings', command=lambda: defaultbutton(defaultbutton1) )
     apply_btn.place(relx=1, x=-712, y=190)
 
-#   usb1 button for now
-    apply_btn=Button(root, text='USB Audio: Class 1', command=lambda: usb1button(usbbutton1) )
+#   Alsa hardware Mixing
+    apply_btn=Button(root, text='ALSA: hardware mixing', command=lambda: alsabutton(alsabutton1) )
     apply_btn.place(relx=1, x=-589, y=190)
-
-#   usb1 button for now
-    apply_btn=Button(root, text='USB Audio: Class 2', command=lambda: usb2button(usbbutton2) )
-    apply_btn.place(relx=1, x=-448, y=190)
 
 #   ok button for now
     apply_btn=Button(root, text='Apply', command=lambda: Confirm(applybutton) )
