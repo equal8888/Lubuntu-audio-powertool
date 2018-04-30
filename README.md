@@ -21,8 +21,20 @@ user will be prompted for his password
 
 ## Troubleshoot
 
-button show samplerate wont work ?
+Some buttons wont work ?
 
 ```
 sudo apt-get install libnotify-bin
+
 ```
+
+On app root directory
+
+
+```
+sudo chmod +x alsa-settings.sh
+
+sudo chmod +x default-settings.sh
+
+```
+
