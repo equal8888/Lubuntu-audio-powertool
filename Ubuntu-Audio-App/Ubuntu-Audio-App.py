@@ -212,11 +212,9 @@ def main():
 #   default button for now
     apply_btn=Button(root, text='Default everything', command=lambda: defaultbutton(defaultbutton1) )
     apply_btn.grid(row=13, column=1, columnspan =2)
-
 #   Alsa hardware Mixing
     apply_btn=Button(root, text='ALSA: hardware mixing', command=lambda: alsabutton(alsabutton1) )
     apply_btn.grid(row=13, column=3, columnspan =2)
-
 #   ok button for now
     apply_btn=Button(root, text='Apply', command=lambda: Confirm(applybutton) )
     apply_btn.place(relx=1, x=-65, y=190)
