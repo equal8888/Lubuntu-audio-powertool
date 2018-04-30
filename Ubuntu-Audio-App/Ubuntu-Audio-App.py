@@ -75,10 +75,6 @@ def defaultbutton(defaultbutton1):
 def alsabutton(alsabutton1):
     subprocess.call('cd ~ && sudo ./Documents/gitfix/Ubuntu-Audio-App/alsa-settings.sh', shell=True)
 
-# usb2 button for now
-def usb2button(usbbutton2):
-    subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s24le" /etc/pulse/daemon.conf && currentsamplerate=$(grep "default-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentsamplerate}/ c default-sample-rate = 192000" /etc/pulse/daemon.conf && currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && sudo sed -i "/${currentaltsamplerate}/ c alternate-sample-rate = 192000" /etc/pulse/daemon.conf && pulseaudio --kill && pulseaudio --start', shell=True)
-
 # ok button for now
 def Confirm(applybutton):
     subprocess.call('pulseaudio -k && sudo alsa force-reload', shell=True)
@@ -86,18 +82,6 @@ def Confirm(applybutton):
 # samplerate button for now
 def showsamplerate(samplebutton):
         subprocess.call('currentbitrate1=$(pacmd list-sinks | grep sample) && notify-send "$currentbitrate1"', shell=True)
-
-# set Login
-# def root_login():
-#    try:
-#        subprocess.call(["gksudo", "su"])
-#    except subprocess.CalledProcessError:
-#        tkinter.messagebox.showinfo("message", "OOOOPS...\nWrong password!")
-#    else:
-#        tkinter.messagebox.showinfo("message", "Login successful!")
-
-#    def close_window():
-#        top.destroy()
 
 # Render main  window
 def main():
@@ -116,12 +100,6 @@ def main():
     usbbutton1 = IntVar()
     usbbutton2 = IntVar()
     alsabutton1 = IntVar()
-
-    # background image (Commented out for quic fix)
-#    filename = PhotoImage(file = "desk03.gif")
-#    background_label = Label( image=filename)
-#    background_label.image = filename # anchor
-#    background_label.place(x=70, y=-75, relwidth=1, relheight=1)
 
     # Set bit depth
     label = Label(text="Set bit depth")
@@ -225,13 +203,6 @@ def main():
 
     label = Label(text="Predefined Settings")
     label.grid(row=9, column=1, columnspan = 2, pady=5)
-
-# tkinter login for now
-#    B = Button(root, text ="Login", command = root_login)
-#    B.grid(row=10, column=6)
-
-#    Q = Button(root, text ="Quit", command = close_window)
-#    Q.pack()
 
 #   default button for now
     apply_btn=Button(root, text='Default settings', command=lambda: defaultbutton(defaultbutton1) )
