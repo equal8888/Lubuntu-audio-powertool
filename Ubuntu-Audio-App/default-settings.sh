@@ -23,8 +23,5 @@ currentaltsamplerate=$(grep "alternate-sample-rate" /etc/pulse/daemon.conf) && s
 # default resample
 currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf &&
 
-# start Everything
-sudo alsa force-reload && pulseaudio --kill && pulseaudio --start &&
-
 # Script finished
 echo "Everything Default !"
