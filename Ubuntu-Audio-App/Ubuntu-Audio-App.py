@@ -143,7 +143,7 @@ def main():
 
     # Set Secondary sample rate
     label = Label(text="Alternative Sample rate")
-    label.grid(row=6, column=1, columnspan = 2)
+    label.grid(row=7, column=1, columnspan = 2)
 
     select_secsamplerate_1=Radiobutton(root, text='44,100 Hz', variable=var2, command=lambda: select_altsamplerate_44100(var2), value=14100, width=9)
     select_secsamplerate_1.grid(row=7, column=3)
