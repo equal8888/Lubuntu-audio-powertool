@@ -77,7 +77,7 @@ def alsabutton(alsabutton1):
 
 # ok button for now
 def Confirm(applybutton):
-    subprocess.call('sudo alsa force-reload && pulseaudio -k', shell=True)
+    subprocess.call('sudo alsa force-reload && pulseaudio --kill && pulseaudio --start', shell=True)
 
 # samplerate button for now
 def showsamplerate(samplebutton):
