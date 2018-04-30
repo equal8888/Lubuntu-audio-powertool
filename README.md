@@ -7,9 +7,6 @@
 don't set sample rate to "maximum option available", that will do audio resampling and you don't want that! Set sampling rate according to what you hear. Bit depth instead should always be the highest available what your hardware can handle. App will reconfigure pulseaudio daemon.conf file.
 <br>
 <br>
-Quotes from Pulseaudio developers "By default, PulseAudio (PA) uses very conservative settings. This will work fine for most audio media as you will most likely have 44,100Hz sample rate files. However, if you have higher sample rate recordings it is recommended that you increase the sample rate that PA uses."
-<br>
-<br>
 Tested on Lubuntu (16.04 LTS)
 <br>
 
