@@ -21,7 +21,7 @@ dmixcard3=$(grep "pcm.dmix cards.pcm.dmix" /usr/share/alsa/alsa.conf) && sudo se
 # working_path=$(realpath asound.conf)
 
 cd ~ &&
-sudo cp realpath asound.con /etc/ &&
+sudo cp /Documents/gitfix/Ubuntu-Audio-App/asound.con /etc/ &&
 
 # Script finished
 echo "ALSA: All Set !"
