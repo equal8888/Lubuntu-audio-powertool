@@ -17,8 +17,11 @@ dmixcard2=$(grep "defaults.pcm.dmix.device defaults.pcm.device" /usr/share/alsa/
 dmixcard3=$(grep "pcm.dmix cards.pcm.dmix" /usr/share/alsa/alsa.conf) && sudo sed -i "/${dmixcard3}/ c # pcm.dmix cards.pcm.dmix" /usr/share/alsa/alsa.conf &&
 
 # Create new asound.conf for hardware rendering
+# Needs better solution
+# working_path=$(realpath asound.conf)
+
 cd ~ &&
-sudo cp Documents/gitfix/Ubuntu-Audio-App/asound.conf /etc/ &&
+sudo cp realpath asound.con /etc/ &&
 
 # Script finished
 echo "ALSA: All Set !"
