@@ -4,7 +4,7 @@
 
 # defaults.pcm.dmix.max_periods 0
 # defaults.pcm.dmix.rate 48000
-# defaults.pcm.dmix.format
+# defaults.pcm.dmix.format 'unchanged'
 # defaults.pcm.dmix.card defaults.pcm.card
 # defaults.pcm.dmix.device defaults.pcm.device
 # pcm.dmix cards.pcm.dmix
