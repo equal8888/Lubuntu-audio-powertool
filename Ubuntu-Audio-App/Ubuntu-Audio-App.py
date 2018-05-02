@@ -68,8 +68,8 @@ def select_prisamplerate_soxrvhq(var3):
     subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = soxr-vhq" /etc/pulse/daemon.conf', shell=True)
 
 # default button for now
-def defaultbutton(defaultbutton1):
-    subprocess.call('cd ~ && ./Documents/gitfix/Ubuntu-Audio-App/default-settings.sh', shell=True)
+def defaultpulsebutton(defaultpulsebutton1):
+    subprocess.call('cd ~ && ./Documents/gitfix/Ubuntu-Audio-App/default-settings-pulseaudio.sh', shell=True)
 
 # alsa button for now
 def alsabutton(alsabutton1):
@@ -106,7 +106,7 @@ def main():
     var3 = IntVar()
     applybutton = IntVar()
     samplebutton = IntVar()
-    defaultbutton1 = IntVar()
+    defaultpulsebutton1 = IntVar()
     usbbutton1 = IntVar()
     usbbutton2 = IntVar()
     alsabutton1 = IntVar()
@@ -136,7 +136,7 @@ def main():
     page2 = ttk.Frame(nb)
     nb.add(page2, text='ALSA')
 
-    # Page1 Maincode
+    # PAGE1 Maincode
 
     # Blue frame
     frame97 = tkinter.LabelFrame(frame99)
@@ -144,8 +144,6 @@ def main():
 
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
-
-
 
     label = Label(frame99, text="     Set bit depth     ")
     label.grid(row=1, column=1)
@@ -251,7 +249,7 @@ def main():
                       padx=5, pady=5)
 
 #   default button for now
-    apply_btn=Button(frame99, text='Default everything (for now)', command=lambda: defaultbutton(defaultbutton1) )
+    apply_btn=Button(frame99, text='Default Pulseaudio settings', command=lambda: defaultpulsebutton(defaultpulsebutton1) )
     apply_btn.grid(row=12, column=1, columnspan=2, padx=5, pady=5)
 
 #   restart pulseaudio
@@ -261,6 +259,9 @@ def main():
 #   samplerate button for now (row=1, column=1)
     apply_btn=Button(frame99, text='PulseAudio sample rate', command=lambda: showsamplerate(samplebutton) )
     apply_btn.grid(row=1, column=6, sticky='E', columnspan=2, padx=3, pady=5)
+
+# PAGE2 Maincode
+
 
     root.mainloop()
 
