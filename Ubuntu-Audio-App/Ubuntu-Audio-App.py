@@ -98,7 +98,7 @@ def donothing():
 def main():
     root = tk.Tk()
     root.title("Audio Powertool")
-    root.minsize(width=730, height=268)
+    root.minsize(width=730, height=258)
 #    root.maxsize(width=740, height=225)
     root.geometry("715x220")
 
@@ -152,22 +152,22 @@ def main():
 
     # Blue frame
     frame97 = tkinter.LabelFrame(frame99)
-    frame97.grid(row=1, column=2, columnspan=7, rowspan=4, sticky='NESW')
+    frame97.grid(row=1, column=2, columnspan=7, rowspan=5, sticky='NESW')
 
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
 
     label = Label(frame99, text=" Set bit depth ")
-    label.grid(row=1, column=1)
+    label.grid(row=1, column=1, padx=1, pady=5)
 
     select_bitdepth_1=Radiobutton(frame99, command=select_bitdepth_16, text='16 Bit', variable=var, value=16, width=9)
-    select_bitdepth_1.grid(row=2, column=1)
+    select_bitdepth_1.grid(row=2, column=1, sticky='N')
 
     select_bitdepth_2=Radiobutton(frame99, command=select_bitdepth_24, text='24 Bit', variable=var, value=24, width=9)
-    select_bitdepth_2.grid(row=3, column=1)
+    select_bitdepth_2.grid(row=3, column=1, sticky='N')
 
     select_bitdepth_3=Radiobutton(frame99, command=select_bitdepth_32, text='32 Bit', variable=var, value=32, width=9)
-    select_bitdepth_3.grid(row=4, column=1)
+    select_bitdepth_3.grid(row=4, column=1, sticky='N')
 
     # Separator1
     ttk.Separator(frame99).grid(row=5, column=1, columnspan=11, sticky="ew")
@@ -270,7 +270,7 @@ def main():
 
 #   samplerate button for now (row=1, column=1)
     apply_btn=Button(frame99, text='PulseAudio sample rate', command=showsamplerate )
-    apply_btn.grid(row=1, column=6, sticky='E', columnspan=2, padx=3, pady=5)
+    apply_btn.grid(row=1, column=6, sticky='E', rowspan=2, columnspan=2, padx=3, pady=2)
 
 # PAGE2 Maincode
 
