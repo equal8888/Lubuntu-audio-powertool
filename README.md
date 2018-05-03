@@ -1,5 +1,5 @@
 ﻿## App for audio tweaks
-<img src="https://drive.google.com/uc?id=1PHA6vuP9LwTrxNBq_LOcz_NzLv33pgdZ" width="auto" height="200"/>
+<img src="https://drive.google.com/uc?id=1rc1VOeYE7tynZliLVu6sUqeqWavtIGvA" width="auto" height="200"/>
 <br>
  <strong>Manual</strong>
 <br>
