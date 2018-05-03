@@ -123,7 +123,7 @@ def main():
     page1 = ttk.Frame(nb)
     nb.add(page1, text='PulseAudio')
 
-    # page1 frame
+    # page1 main frame
     frame99 = tkinter.LabelFrame(page1)
     frame99.grid(row=1, column=2, sticky='NESW', padx=5, pady=5)
 
@@ -274,6 +274,9 @@ def main():
 
 # PAGE2 Maincode
 
+    # page2 main frame
+#    frame101 = tkinter.LabelFrame(page2)
+#    frame101.grid(row=1, column=2, sticky='NESW', padx=5, pady=5)
 
     root.mainloop()
 
