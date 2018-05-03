@@ -95,7 +95,7 @@ def showsamplerate(samplebutton):
 def main():
     root = tk.Tk()
     root.title("Audio Powertool")
-    root.minsize(width=752, height=268)
+    root.minsize(width=730, height=268)
 #    root.maxsize(width=740, height=225)
     root.geometry("715x220")
 
@@ -122,7 +122,7 @@ def main():
 
     # Defines and places the notebook widget
     nb = ttk.Notebook(root)
-    nb.grid(row=1, column=0, columnspan=50, rowspan=49, sticky='NESW')
+    nb.grid(row=1, column=1, columnspan=50, rowspan=49, sticky='NESW')
 
     # Adds tab 1 of the notebook
     page1 = ttk.Frame(nb)
@@ -145,16 +145,16 @@ def main():
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
 
-    label = Label(frame99, text="     Set bit depth     ")
+    label = Label(frame99, text=" Set bit depth ")
     label.grid(row=1, column=1)
 
-    select_bitdepth_1=Radiobutton(frame99, command=lambda: select_bitdepth_16(var), text='16 Bit', variable=var, value=16, width=12)
+    select_bitdepth_1=Radiobutton(frame99, command=lambda: select_bitdepth_16(var), text='16 Bit', variable=var, value=16, width=9)
     select_bitdepth_1.grid(row=2, column=1)
 
-    select_bitdepth_2=Radiobutton(frame99, command=lambda: select_bitdepth_24(var), text='24 Bit', variable=var, value=24, width=12)
+    select_bitdepth_2=Radiobutton(frame99, command=lambda: select_bitdepth_24(var), text='24 Bit', variable=var, value=24, width=9)
     select_bitdepth_2.grid(row=3, column=1)
 
-    select_bitdepth_3=Radiobutton(frame99, command=lambda: select_bitdepth_32(var), text='32 Bit', variable=var, value=32, width=12)
+    select_bitdepth_3=Radiobutton(frame99, command=lambda: select_bitdepth_32(var), text='32 Bit', variable=var, value=32, width=9)
     select_bitdepth_3.grid(row=4, column=1)
 
     # Separator1
@@ -162,7 +162,7 @@ def main():
 
     # Set primary sample rate
     label = Label(frame99, text="Primary Sample rate")
-    label.grid(row=6, column=1, columnspan = 2,)
+    label.grid(row=6, column=1, columnspan = 2)
 
     select_prisamplerate_1=Radiobutton(frame99, command=lambda: select_prisamplerate_44100(var1), text='44,100 Hz', variable=var1, value=14100, width=9)
     select_prisamplerate_1.grid(row=6, column=3)
