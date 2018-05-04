@@ -4,6 +4,9 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
 from tkinter import simpledialog
+import sys
+import csv # Read / Write csv
+import io # For string file save for csv
 
 import os
 import subprocess
@@ -111,15 +114,24 @@ def Preferences01():
     nb.add(page999, text='Preferences')
     nb.select(page999)
 
-def closeprefs():
-   nb.hide(page999)
+#def closeprefs():
+#   nb.hide(page999)
+
+def writeToFile():
+    nb.select(page1)
+    nb.hide(page999)
+    with open('Ubuntu-Audio-App.csv', 'w') as f:
+        w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
+        w.writerow([pswd.get()])
+
+# Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
 # Render main  window
 def main():
     root = tk.Tk()
     root.title("Audio Powertool")
     root.minsize(width=730, height=288)
-    #root.maxsize(width=730, height=288)
+    root.maxsize(width=730, height=288)
     root.geometry("715x220")
 
     # define var's
@@ -127,7 +139,8 @@ def main():
     var1 = IntVar()
     var2 = IntVar()
     var3 = IntVar()
-    pwd = StringVar()
+
+    global pswd
 
     # gives weight to the cells in the grid
     rows = 0
@@ -142,6 +155,7 @@ def main():
     nb = ttk.Notebook(root)
     nb.grid(row=1, column=1, columnspan=50, rowspan=49, sticky='NESW')
 
+    global page1
     # Adds tab 1 of the notebook
     page1 = ttk.Frame(nb)
     nb.add(page1, text='PulseAudio')
@@ -157,7 +171,6 @@ def main():
     # Adds tab 3 of the notebook
     global page999
     page999 = ttk.Frame(nb)
-
 
     # Menubar
     menubar = Menu(root)
@@ -319,11 +332,21 @@ def main():
     background_label = Label(frame300, bg="Green")
     background_label.place(width=800, height=100)
 
+# Password user input to csv file
+
+    Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5)
+
+    pswd=Entry(frame300, width=10)
+    pswd.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
+
+    b = Button(frame300, text='Submit', command=writeToFile)
+    b.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
+
 #   close button for now
-    apply_btn1=Button(frame300, text='ok / close', command=closeprefs )
-    apply_btn1.grid(row=3, column=2, columnspan=2, padx=5, pady=5)
+#    apply_btn1=Button(frame300, text='ok / close', command=closeprefs )
+#    apply_btn1.grid(row=2, column=2, columnspan=2, padx=5, pady=5)
 
     root.mainloop()
 
 if __name__ == '__main__':
-    main()
+        main()
