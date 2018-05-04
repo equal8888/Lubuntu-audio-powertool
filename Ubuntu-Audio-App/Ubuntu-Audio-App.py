@@ -1,14 +1,8 @@
-#!/usr/bin/env python
-#try:
-#    import Tkinter import *
-#    import Tkinter as tk
-#    import ttk
-#    import tkMessageBox
-#except ImportError:
-import tkinter as tk                # Set
-from tkinter import *               # Set
-from tkinter import ttk             # Set
-import tkinter.messagebox           # Set
+#!/usr/bin/python3
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
+import tkinter.messagebox
 from tkinter import simpledialog
 
 import os
