@@ -197,11 +197,11 @@ def main():
     select_bitdepth_1=Radiobutton(frame99, command=select_bitdepth_16, text='16 Bit', variable=var, value=16, width=9)
     select_bitdepth_1.grid(row=2, column=1, sticky='N')
 
-    select_bitdepth_2=Radiobutton(frame99, command=select_bitdepth_24, text='24 Bit', variable=var, value=24, width=9)
-    select_bitdepth_2.grid(row=3, column=1, sticky='N')
+    select_bitdepth_1=Radiobutton(frame99, command=select_bitdepth_24, text='24 Bit', variable=var, value=24, width=9)
+    select_bitdepth_1.grid(row=3, column=1, sticky='N')
 
-    select_bitdepth_3=Radiobutton(frame99, command=select_bitdepth_32, text='32 Bit', variable=var, value=32, width=9)
-    select_bitdepth_3.grid(row=4, column=1, sticky='N')
+    select_bitdepth_1=Radiobutton(frame99, command=select_bitdepth_32, text='32 Bit', variable=var, value=32, width=9)
+    select_bitdepth_1.grid(row=4, column=1, sticky='N')
 
     # Separator1
     ttk.Separator(frame99).grid(row=5, column=1, columnspan=11, sticky="ew")
@@ -213,17 +213,17 @@ def main():
     select_prisamplerate_1=Radiobutton(frame99, command=select_prisamplerate_44100, text='44,100 Hz', variable=var1, value=14100, width=9)
     select_prisamplerate_1.grid(row=6, column=3)
 
-    select_prisamplerate_2=Radiobutton(frame99, command=select_prisamplerate_48000, text='48,000 Hz', variable=var1, value=48000, width=9)
-    select_prisamplerate_2.grid(row=6, column=4)
+    select_prisamplerate_1=Radiobutton(frame99, command=select_prisamplerate_48000, text='48,000 Hz', variable=var1, value=48000, width=9)
+    select_prisamplerate_1.grid(row=6, column=4)
 
-    select_prisamplerate_3=Radiobutton(frame99, command=select_prisamplerate_88200, text='88,200 Hz', variable=var1, value=88200, width=9)
-    select_prisamplerate_3.grid(row=6, column=5)
+    select_prisamplerate_1=Radiobutton(frame99, command=select_prisamplerate_88200, text='88,200 Hz', variable=var1, value=88200, width=9)
+    select_prisamplerate_1.grid(row=6, column=5)
 
-    select_prisamplerate_4=Radiobutton(frame99, command=select_prisamplerate_96000, text='96,000 Hz', variable=var1, value=96000, width=9)
-    select_prisamplerate_4.grid(row=6, column=6)
+    select_prisamplerate_1=Radiobutton(frame99, command=select_prisamplerate_96000, text='96,000 Hz', variable=var1, value=96000, width=9)
+    select_prisamplerate_1.grid(row=6, column=6)
 
-    select_prisamplerate_5=Radiobutton(frame99, command=select_prisamplerate_192000, text='192,000 Hz', variable=var1, value=192000, width=9)
-    select_prisamplerate_5.grid(row=6, column=7)
+    select_prisamplerate_1=Radiobutton(frame99, command=select_prisamplerate_192000, text='192,000 Hz', variable=var1, value=192000, width=9)
+    select_prisamplerate_1.grid(row=6, column=7)
 
     # Set Secondary sample rate
     label = Label(frame99, text="Alternative Sample rate")
@@ -232,17 +232,17 @@ def main():
     select_secsamplerate_1=Radiobutton(frame99, text='44,100 Hz', variable=var2, command=select_altsamplerate_44100, value=14100, width=9)
     select_secsamplerate_1.grid(row=7, column=3)
 
-    select_secsamplerate_2=Radiobutton(frame99, text='48,000 Hz', variable=var2, command=select_altsamplerate_48000, value=48000, width=9)
-    select_secsamplerate_2.grid(row=7, column=4)
+    select_secsamplerate_1=Radiobutton(frame99, text='48,000 Hz', variable=var2, command=select_altsamplerate_48000, value=48000, width=9)
+    select_secsamplerate_1.grid(row=7, column=4)
 
-    select_secsamplerate_3=Radiobutton(frame99, text='88,200 Hz', variable=var2, command=select_altsamplerate_88200, value=88200, width=9)
-    select_secsamplerate_3.grid(row=7, column=5)
+    select_secsamplerate_1=Radiobutton(frame99, text='88,200 Hz', variable=var2, command=select_altsamplerate_88200, value=88200, width=9)
+    select_secsamplerate_1.grid(row=7, column=5)
 
-    select_secsamplerate_4=Radiobutton(frame99, text='96,000 Hz', variable=var2, command=select_altsamplerate_96000, value=96000, width=9)
-    select_secsamplerate_4.grid(row=7, column=6)
+    select_secsamplerate_1=Radiobutton(frame99, text='96,000 Hz', variable=var2, command=select_altsamplerate_96000, value=96000, width=9)
+    select_secsamplerate_1.grid(row=7, column=6)
 
-    select_secsamplerate_5=Radiobutton(frame99, text='192,000 Hz', variable=var2, command=select_altsamplerate_192000, value=192000, width=9)
-    select_secsamplerate_5.grid(row=7, column=7)
+    select_secsamplerate_1=Radiobutton(frame99, text='192,000 Hz', variable=var2, command=select_altsamplerate_192000, value=192000, width=9)
+    select_secsamplerate_1.grid(row=7, column=7)
 
     # Separator2
     ttk.Separator(frame99).grid(row=8, column=1, columnspan=11, sticky="ew")
@@ -254,38 +254,38 @@ def main():
     select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='default', variable=var3, command=select_prisamplerate_default, value=1, width=12)
     select_secsamplerate_1.grid(row=9, column=3)
 
-    select_secsamplerate_2=Radiobutton(frame99, indicatoron=0, text='fast', variable=var3, command=select_prisamplerate_optimised, value=2, width=12)
-    select_secsamplerate_2.grid(row=9, column=4)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='fast', variable=var3, command=select_prisamplerate_optimised, value=2, width=12)
+    select_secsamplerate_1.grid(row=9, column=4)
 
-    select_secsamplerate_3=Radiobutton(frame99, indicatoron=0, text='medium', variable=var3, command=select_prisamplerate_srcsincmediumquality, value=3, width=12)
-    select_secsamplerate_3.grid(row=9, column=5)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='medium', variable=var3, command=select_prisamplerate_srcsincmediumquality, value=3, width=12)
+    select_secsamplerate_1.grid(row=9, column=5)
 
-    select_secsamplerate_4=Radiobutton(frame99, indicatoron=0, text='best', variable=var3, command=select_prisamplerate_srcsincbestquality, value=4, width=12)
-    select_secsamplerate_4.grid(row=9, column=6)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='best', variable=var3, command=select_prisamplerate_srcsincbestquality, value=4, width=12)
+    select_secsamplerate_1.grid(row=9, column=6)
 
-    select_secsamplerate_5=Radiobutton(frame99, indicatoron=0, text='zero-orderhold', variable=var3, command=select_prisamplerate_srczeroorderhold, value=5, width=12)
-    select_secsamplerate_5.grid(row=9, column=7)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='zero-orderhold', variable=var3, command=select_prisamplerate_srczeroorderhold, value=5, width=12)
+    select_secsamplerate_1.grid(row=9, column=7)
 
-    select_secsamplerate_6=Radiobutton(frame99, indicatoron=0, text='src-linear', variable=var3, command=select_prisamplerate_srclinear, value=6, width=12)
-    select_secsamplerate_6.grid(row=10, column=5)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='src-linear', variable=var3, command=select_prisamplerate_srclinear, value=6, width=12)
+    select_secsamplerate_1.grid(row=10, column=5)
 
-    select_secsamplerate_7=Radiobutton(frame99, indicatoron=0, text='trivial', variable=var3, command=select_prisamplerate_trivial, value=7, width=12)
-    select_secsamplerate_7.grid(row=10, column=1)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='trivial', variable=var3, command=select_prisamplerate_trivial, value=7, width=12)
+    select_secsamplerate_1.grid(row=10, column=1)
 
-    select_secsamplerate_8=Radiobutton(frame99, indicatoron=0, text='speex-float-N', variable=var3, command=select_prisamplerate_speexfloatN, value=8, width=12)
-    select_secsamplerate_8.grid(row=10, column=2)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='speex-float-N', variable=var3, command=select_prisamplerate_speexfloatN, value=8, width=12)
+    select_secsamplerate_1.grid(row=10, column=2)
 
-    select_secsamplerate_9=Radiobutton(frame99, indicatoron=0, text='speex-fixed-N', variable=var3, command=select_prisamplerate_speexfixedN, value=9, width=12)
-    select_secsamplerate_9.grid(row=10, column=3)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='speex-fixed-N', variable=var3, command=select_prisamplerate_speexfixedN, value=9, width=12)
+    select_secsamplerate_1.grid(row=10, column=3)
 
-    select_secsamplerate_10=Radiobutton(frame99, indicatoron=0, text='ffmpeg', variable=var3, command=select_prisamplerate_ffmpeg, value=10, width=12)
-    select_secsamplerate_10.grid(row=10, column=4)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='ffmpeg', variable=var3, command=select_prisamplerate_ffmpeg, value=10, width=12)
+    select_secsamplerate_1.grid(row=10, column=4)
 
-    select_secsamplerate_11=Radiobutton(frame99, indicatoron=0, text='soxr-hq', variable=var3, command=select_prisamplerate_soxrhq, value=12, width=12)
-    select_secsamplerate_11.grid(row=10, column=6)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='soxr-hq', variable=var3, command=select_prisamplerate_soxrhq, value=12, width=12)
+    select_secsamplerate_1.grid(row=10, column=6)
 
-    select_secsamplerate_12=Radiobutton(frame99, indicatoron=0, text='soxr-vhq', variable=var3, command=select_prisamplerate_soxrvhq, value=13, width=12)
-    select_secsamplerate_12.grid(row=10, column=7)
+    select_secsamplerate_1=Radiobutton(frame99, indicatoron=0, text='soxr-vhq', variable=var3, command=select_prisamplerate_soxrvhq, value=13, width=12)
+    select_secsamplerate_1.grid(row=10, column=7)
 
     # Separator3 usb1button
     ttk.Separator(frame99).grid(row=11, column=1, columnspan=11, sticky="ew")
