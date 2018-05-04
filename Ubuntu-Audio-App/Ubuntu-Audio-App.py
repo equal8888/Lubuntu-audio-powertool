@@ -126,6 +126,23 @@ def writeToFile():
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
+# get passwd from csv
+class Getpsswd():
+    def __init__(self, filename):
+        with open(filename, "r") as f_input:
+            csv_input = csv.reader(f_input)
+            self.details = list(csv_input)
+
+    def get_col_row(self, col, row):
+        return self.details[row-1][col-1]
+
+data = Getpsswd("Ubuntu-Audio-App.csv")
+
+pwd = data.get_col_row(0, 0)
+cmd='ls'
+# password for subprocess sudo commands
+call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
 # Render main  window
 def main():
     root = tk.Tk()
