@@ -117,12 +117,17 @@ def Preferences01():
 
 #def closeprefs():
 #   nb.hide(page999)
+#        print(inputValue)
 
-def writeToFile():
+def writeToFile(filename):
     nb.hide(page999)
-    with open('/home/USER/Documents/gitfix/Ubuntu-Audio-App/Ubuntu-Audio-App.csv', 'w') as f:
-        w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
-        w.writerow([pswd.get()])
+    inputValue=inputsudopass1.get("1.0","end-1c")
+
+    path = os.path.dirname("Ubuntu-Audio-App/Ubuntu-Audio-App.csv")
+
+    with open(os.path.join(path, filename), "w") as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+        writer.writerow([inputValue])
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
@@ -158,13 +163,16 @@ def main():
     root.maxsize(width=730, height=288)
     root.geometry("715x220")
 
+    global inputsudopass1
+    global pswd
+
     # define var's
     var = IntVar()
     var1 = IntVar()
     var2 = IntVar()
     var3 = IntVar()
+#    inputsudopass1 = StringVar()
 
-    global pswd
 
     # gives weight to the cells in the grid
     rows = 0
@@ -344,7 +352,7 @@ def main():
 
 # Settings Maincode .close
 
-    # Settings main frame
+#    Settings main frame
 #    frame999 = tkinter.LabelFrame(page999)
 #    frame999.grid(row=1, column=2, sticky='NESW', padx=5, pady=5)
 
@@ -359,11 +367,19 @@ def main():
 
     Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5)
 
-    pswd=Entry(frame300, width=10)
-    pswd.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
+    inputsudopass1=Text(frame300, height=3, width=10)
+    inputsudopass1.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
 
-    b = Button(frame300, text='Submit', command=writeToFile)
-    b.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
+    buttonCommit=Button(frame300, height=1, width=10, text="Commit", command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
+    buttonCommit.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
+
+
+#    pswd=Input(frame300, width=10)
+#    pswd.grid(row=2, column=1, columnspan=2, padx=5, pady=5)     data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
+
+
+#    b = Button(frame300, text='Submit', command=writeToFile)
+#    b.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
 
 #   close button for now
 #    apply_btn1=Button(frame300, text='ok / close', command=closeprefs )
