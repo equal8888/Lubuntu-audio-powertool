@@ -9,6 +9,7 @@ import csv # Read / Write csv
 import io # For string file save for csv
 
 import os
+from os.path import expanduser
 import subprocess
 from subprocess import call
 
@@ -114,22 +115,25 @@ def Preferences01():
     nb.add(page999, text='Preferences')
     nb.select(page999)
 
-#def closeprefs():
-#   nb.hide(page999)
-
-def writeToFile():
-    nb.hide(page999)
-    with open('/home/USERNAME/Documents/Ubuntu-Audio-App/Ubuntu-Audio-App.csv', 'w') as f:
-        w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
-        w.writerow([pswd.get()])
+# def closeprefs():
+#     nb.hide(page999)
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
-# get passwd from csv $USER
+# Write to CSV file
+def writeToFile():
+    nb.hide(page999)
+    def __init__(self, filename):
+        path = expanduser("~/Documents/Ubuntu-Audio-App")
+        with open(os.path.join(path, filename)) as f:
+            w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
+            w.writerow([pswd.get()])
+
+# get passwd from CSV file
 class Getpsswd():
     def __init__(self, filename):
+        path = expanduser("~/Documents/Ubuntu-Audio-App")
 
-        path = '/home/USERNAME/Documents/Ubuntu-Audio-App'
         with open(os.path.join(path, filename)) as f_input:
             csv_input = csv.reader(f_input)
             self.details = list(csv_input)
@@ -137,15 +141,17 @@ class Getpsswd():
     def get_col_row(self, col, row):
         return self.details[row-1][col-1]
 
-# error handler
+# Getpsswd error handler
 try:
-    data = Getpsswd("Ubuntu-Audio-App.csv")
+    data = Getpsswd("Ubuntu-Audio-App.csv") # File name is here
     pswd = data.get_col_row(0, 0)
 except IndexError:
     pswd = 'null'
 
+# Run at start for now
 cmd='ls'
 call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
+
 
 # Render main  window
 def main():
