@@ -119,7 +119,7 @@ def Preferences01():
 
 def writeToFile():
     nb.hide(page999)
-    with open('Ubuntu-Audio-App.csv', 'w') as f:
+    with open('/home/USERNAME/Documents/Ubuntu-Audio-App/Ubuntu-Audio-App.csv', 'w') as f:
         w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
         w.writerow([pswd.get()])
 
@@ -128,10 +128,11 @@ def writeToFile():
 # get passwd from csv $USER
 class Getpsswd():
     def __init__(self, filename):
-            path = '/home/USERNAME/Documents/Ubuntu-Audio-App'
-            with open(os.path.join(path, filename)) as f_input:
-                csv_input = csv.reader(f_input)
-                self.details = list(csv_input)
+
+        path = '/home/USERNAME/Documents/Ubuntu-Audio-App'
+        with open(os.path.join(path, filename)) as f_input:
+            csv_input = csv.reader(f_input)
+            self.details = list(csv_input)
 
     def get_col_row(self, col, row):
         return self.details[row-1][col-1]
