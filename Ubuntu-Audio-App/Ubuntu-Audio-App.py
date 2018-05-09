@@ -160,9 +160,9 @@ except IndexError:
 cmd='ls'
 call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
 
-def clear_widget(event):
-    if password_box == password_box.focus_get() and password_box.get() == '     ':
-        password_box.delete(0, END)
+# def clear_widget(event):
+#    if password_box == password_box.focus_get() and password_box.get() == '     ':
+#        password_box.delete(0, END)
 
 def login(*event):
     writeToFile("Ubuntu-Audio-App.csv")
@@ -179,7 +179,7 @@ def main():
     root.geometry("715x220")
 
     global password_box
-    global inputsudopass1
+#    global inputsudopass1
     global pswd
 
     # define var's
