@@ -367,10 +367,10 @@ def main():
 
     Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5)
 
-    inputsudopass1=Text(frame300, height=3, width=10)
+    inputsudopass1=Text(frame300, height=1, width=20)
     inputsudopass1.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
 
-    buttonCommit=Button(frame300, height=1, width=10, text="Commit", command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
+    buttonCommit=Button(frame300, height=1, width=10, text="Apply !", command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
     buttonCommit.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
 
 
