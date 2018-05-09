@@ -128,7 +128,7 @@ def writeToFile():
 # get passwd from csv $USER
 class Getpsswd():
     def __init__(self, filename):
-            path = '/home/USERnameVaRhere/Documents/gitfix'
+            path = '/home/USERNAME/Documents/Ubuntu-Audio-App'
             with open(os.path.join(path, filename)) as f_input:
                 csv_input = csv.reader(f_input)
                 self.details = list(csv_input)
