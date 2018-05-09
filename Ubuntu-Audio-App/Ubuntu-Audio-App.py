@@ -115,24 +115,21 @@ def Preferences01():
     nb.add(page999, text='Preferences')
     nb.select(page999)
 
-# def closeprefs():
-#     nb.hide(page999)
+#def closeprefs():
+#   nb.hide(page999)
 
-# Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
-
-# Write to CSV file
 def writeToFile():
     nb.hide(page999)
-    def __init__(self, filename):
-        path = expanduser("~/Documents/Ubuntu-Audio-App")
-        with open(os.path.join(path, filename)) as f:
-            w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
-            w.writerow([pswd.get()])
+    with open('/home/USER/Documents/gitfix/Ubuntu-Audio-App/Ubuntu-Audio-App.csv', 'w') as f:
+        w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
+        w.writerow([pswd.get()])
+
+# Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
 # get passwd from CSV file
 class Getpsswd():
     def __init__(self, filename):
-        path = expanduser("~/Documents/Ubuntu-Audio-App")
+        path = os.path.dirname("Ubuntu-Audio-App/Ubuntu-Audio-App.csv")
 
         with open(os.path.join(path, filename)) as f_input:
             csv_input = csv.reader(f_input)
@@ -143,7 +140,7 @@ class Getpsswd():
 
 # Getpsswd error handler
 try:
-    data = Getpsswd("Ubuntu-Audio-App.csv") # File name is here
+    data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
     pswd = data.get_col_row(0, 0)
 except IndexError:
     pswd = 'null'
