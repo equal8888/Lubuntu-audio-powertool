@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
-from tkinter import simpledialog
+
 import sys
 import csv # Read / Write csv
 import io # For string file save for csv
@@ -118,7 +118,6 @@ def Preferences01():
 #   nb.hide(page999)
 
 def writeToFile():
-    nb.select(page1)
     nb.hide(page999)
     with open('Ubuntu-Audio-App.csv', 'w') as f:
         w=csv.writer(f) # ORIGINAL LINE -->  w=csv.writer(f, quoting=csv.QUOTE_ALL)
@@ -126,22 +125,26 @@ def writeToFile():
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
-# get passwd from csv
+# get passwd from csv $USER
 class Getpsswd():
     def __init__(self, filename):
-        with open(filename, "r") as f_input:
-            csv_input = csv.reader(f_input)
-            self.details = list(csv_input)
+            path = '/home/USERnameVaRhere/Documents/gitfix'
+            with open(os.path.join(path, filename)) as f_input:
+                csv_input = csv.reader(f_input)
+                self.details = list(csv_input)
 
     def get_col_row(self, col, row):
         return self.details[row-1][col-1]
 
-data = Getpsswd("Ubuntu-Audio-App.csv")
+# error handler
+try:
+    data = Getpsswd("Ubuntu-Audio-App.csv")
+    pswd = data.get_col_row(0, 0)
+except IndexError:
+    pswd = 'null'
 
-pwd = data.get_col_row(0, 0)
 cmd='ls'
-# password for subprocess sudo commands
-call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
 
 # Render main  window
 def main():
@@ -172,7 +175,6 @@ def main():
     nb = ttk.Notebook(root)
     nb.grid(row=1, column=1, columnspan=50, rowspan=49, sticky='NESW')
 
-    global page1
     # Adds tab 1 of the notebook
     page1 = ttk.Frame(nb)
     nb.add(page1, text='PulseAudio')
