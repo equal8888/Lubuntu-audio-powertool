@@ -5,11 +5,11 @@ from tkinter import ttk
 import tkinter.messagebox
 
 import sys
+# from termios import tcflush, TCIFLUSH # Clear cache
 import csv # Read / Write csv
 import io # For string file save for csv
 
 import os
-from os.path import expanduser
 import subprocess
 from subprocess import call
 
@@ -96,7 +96,7 @@ def Confirm():
 
 # samplerate button for now
 def showsamplerate():
-        subprocess.call('currentbitrate1=$(pacmd list-sinks | grep sample) && notify-send "$currentbitrate1"', shell=True)
+    subprocess.call('currentbitrate1=$(pacmd list-sinks | grep sample) && notify-send "$currentbitrate1"', shell=True)
 
 
 # Define menu pages
@@ -111,9 +111,15 @@ def close_window():
 def donothing():
    x = 0
 
+def EnterKey(event):
+    print("You hit return.")
+    writeToFile("Ubuntu-Audio-App.csv")
+#     inputsudopass1=Text(frame300, height=1, width=20)
+
 def Preferences01():
     nb.add(page999, text='Preferences')
     nb.select(page999)
+    password_box.delete(0, END)
 
 #def closeprefs():
 #   nb.hide(page999)
@@ -121,7 +127,7 @@ def Preferences01():
 
 def writeToFile(filename):
     nb.hide(page999)
-    inputValue=inputsudopass1.get("1.0","end-1c")
+    inputValue=password_box.get()
 
     path = os.path.dirname("Ubuntu-Audio-App/Ubuntu-Audio-App.csv")
 
@@ -154,6 +160,15 @@ except IndexError:
 cmd='ls'
 call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
 
+def clear_widget(event):
+    if password_box == password_box.focus_get() and password_box.get() == '     ':
+        password_box.delete(0, END)
+
+def login(*event):
+    writeToFile("Ubuntu-Audio-App.csv")
+#    print ('Password: ' + password_box.get())
+#    frame300.destroy()
+
 
 # Render main  window
 def main():
@@ -163,6 +178,7 @@ def main():
     root.maxsize(width=730, height=288)
     root.geometry("715x220")
 
+    global password_box
     global inputsudopass1
     global pswd
 
@@ -171,8 +187,8 @@ def main():
     var1 = IntVar()
     var2 = IntVar()
     var3 = IntVar()
-#    inputsudopass1 = StringVar()
 
+    password_box = StringVar()
 
     # gives weight to the cells in the grid
     rows = 0
@@ -365,13 +381,29 @@ def main():
 
 # Password user input to csv file
 
-    Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5)
+    Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='NS')
+# adds password entry widget and defines its properties
+    password_box = Entry(frame300, show='*')
+    password_box.insert(0, '     ')
+    password_box.bind('<Return>', login)
+    password_box.grid(row=2, column=1, sticky='NS')
 
-    inputsudopass1=Text(frame300, height=1, width=20)
-    inputsudopass1.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
 
-    buttonCommit=Button(frame300, height=1, width=10, text="Apply !", command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
-    buttonCommit.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
+# adds login button and defines its properties
+    login_btn = Button(frame300, text='Grant Access', command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
+    login_btn.bind('<Return>', login)
+    login_btn.grid(row=3, column=1, sticky='NESW')
+
+#    Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5)
+
+#    inputsudopass1=Text(frame300, height=3, width=20)
+#    inputsudopass1.bind('<Return>', EnterKey)
+#    inputsudopass1.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
+
+#    buttonCommit=Button(frame300, height=1, width=10, text="Apply !", command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
+#    buttonCommit.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
+
+    # If using Enter key
 
 
 #    pswd=Input(frame300, width=10)
