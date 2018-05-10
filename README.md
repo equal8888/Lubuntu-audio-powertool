@@ -34,7 +34,6 @@ On app root directory
 ```
 sudo chmod +x alsa-settings.sh
 
-sudo chmod +x default-settings.sh
+sudo chmod +x default-settings-pulseaudio.sh
 
 ```
-
