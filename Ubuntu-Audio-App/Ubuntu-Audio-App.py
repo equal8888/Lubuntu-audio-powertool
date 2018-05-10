@@ -12,7 +12,6 @@ import os
 import subprocess
 from subprocess import call
 
-
 # Bit depth Button functions
 def select_bitdepth_16():
     subprocess.call('currentbitrate=$(grep "default-sample-format" /etc/pulse/daemon.conf) && sudo sed -i "/${currentbitrate}/ c default-sample-format = s16le" /etc/pulse/daemon.conf', shell=True)
@@ -97,9 +96,7 @@ def Confirm():
 def showsamplerate():
     subprocess.call('currentbitrate1=$(pacmd list-sinks | grep sample) && notify-send "$currentbitrate1"', shell=True)
 
-
 # Define menu pages
-
 # About page
 def helpmenu01():
     tkinter.messagebox.showinfo("FAQ", "FAQ\n \nSet sample rate:\nSafe option is 48,000 Hz \n \nWarning: Setting sample rate too high will result resampling and you dont want that !")
@@ -349,9 +346,7 @@ def main():
     label = Label(frame101, text="ALSA Page is under development. Select PulseAudio from tab menu.")
     label.grid(row=1, column=1, rowspan = 3, padx=5, pady=5)
 
-
 # Settings Maincode
-
     # green frame
     frame300 = tkinter.LabelFrame(page999)
     frame300.grid(row=1, column=2, columnspan=7, rowspan=5, sticky='NESW')
