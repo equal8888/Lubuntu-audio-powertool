@@ -5,7 +5,6 @@ from tkinter import ttk
 import tkinter.messagebox
 
 import sys
-# from termios import tcflush, TCIFLUSH # Clear cache
 import csv # Read / Write csv
 import io # For string file save for csv
 
@@ -107,23 +106,14 @@ def helpmenu01():
 def close_window():
     top.destroy()
 
-# test calling
-def donothing():
-   x = 0
-
 def EnterKey(event):
     print("You hit return.")
     writeToFile("Ubuntu-Audio-App.csv")
-#     inputsudopass1=Text(frame300, height=1, width=20)
 
 def Preferences01():
     nb.add(page999, text='Preferences')
     nb.select(page999)
     password_box.delete(0, END)
-
-#def closeprefs():
-#   nb.hide(page999)
-#        print(inputValue)
 
 def writeToFile(filename):
     nb.hide(page999)
@@ -132,7 +122,7 @@ def writeToFile(filename):
     path = os.path.dirname("Ubuntu-Audio-App/Ubuntu-Audio-App.csv")
 
     with open(os.path.join(path, filename), "w") as csv_file:
-        writer = csv.writer(csv_file, delimiter=',')
+        writer = csv.writer(csv_file, lineterminator='\n')
         writer.writerow([inputValue])
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
@@ -153,22 +143,13 @@ class Getpsswd():
 try:
     data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
     pswd = data.get_col_row(0, 0)
+    cmd='ls'
+    call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
 except IndexError:
     pswd = 'null'
 
-# Run at start for now
-cmd='ls'
-call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
-
-# def clear_widget(event):
-#    if password_box == password_box.focus_get() and password_box.get() == '     ':
-#        password_box.delete(0, END)
-
 def login(*event):
     writeToFile("Ubuntu-Audio-App.csv")
-#    print ('Password: ' + password_box.get())
-#    frame300.destroy()
-
 
 # Render main  window
 def main():
@@ -366,11 +347,11 @@ def main():
     frame101 = tkinter.LabelFrame(page2)
     frame101.grid(row=1, column=2, sticky='NESW', padx=5, pady=5)
 
-# Settings Maincode .close
+    label = Label(frame101, text="ALSA Page is under development. Select PulseAudio from tab menu.")
+    label.grid(row=1, column=1, rowspan = 3, padx=5, pady=5)
 
-#    Settings main frame
-#    frame999 = tkinter.LabelFrame(page999)
-#    frame999.grid(row=1, column=2, sticky='NESW', padx=5, pady=5)
+
+# Settings Maincode
 
     # Blue frame
     frame300 = tkinter.LabelFrame(page999)
@@ -380,42 +361,16 @@ def main():
     background_label.place(width=800, height=100)
 
 # Password user input to csv file
-
     Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='NS')
-# adds password entry widget and defines its properties
+    # adds password entry widget and defines its properties
     password_box = Entry(frame300, show='*')
     password_box.insert(0, '     ')
     password_box.bind('<Return>', login)
     password_box.grid(row=2, column=1, sticky='NS')
-
-
-# adds login button and defines its properties
+    # adds login button and defines its properties
     login_btn = Button(frame300, text='Grant Access', command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
     login_btn.bind('<Return>', login)
     login_btn.grid(row=3, column=1, sticky='NESW')
-
-#    Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5)
-
-#    inputsudopass1=Text(frame300, height=3, width=20)
-#    inputsudopass1.bind('<Return>', EnterKey)
-#    inputsudopass1.grid(row=2, column=1, columnspan=2, padx=5, pady=5)
-
-#    buttonCommit=Button(frame300, height=1, width=10, text="Apply !", command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
-#    buttonCommit.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
-
-    # If using Enter key
-
-
-#    pswd=Input(frame300, width=10)
-#    pswd.grid(row=2, column=1, columnspan=2, padx=5, pady=5)     data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
-
-
-#    b = Button(frame300, text='Submit', command=writeToFile)
-#    b.grid(row=5, column=1, columnspan=2, padx=5, pady=5)
-
-#   close button for now
-#    apply_btn1=Button(frame300, text='ok / close', command=closeprefs )
-#    apply_btn1.grid(row=2, column=2, columnspan=2, padx=5, pady=5)
 
     root.mainloop()
 
