@@ -160,7 +160,6 @@ def main():
     root.geometry("715x220")
 
     global password_box
-#    global inputsudopass1
     global pswd
 
     # define var's
@@ -353,7 +352,7 @@ def main():
 
 # Settings Maincode
 
-    # Blue frame
+    # green frame
     frame300 = tkinter.LabelFrame(page999)
     frame300.grid(row=1, column=2, columnspan=7, rowspan=5, sticky='NESW')
 
