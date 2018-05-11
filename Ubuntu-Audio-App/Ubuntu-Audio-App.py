@@ -340,7 +340,7 @@ def main():
     apply_btn2.grid(row=12, column=6, columnspan=4, padx=5, pady=5)
 
 #   samplerate button for now (row=1, column=1)
-    apply_btn3=Button(frame99, text='Current PA sample rate', command=showsamplerate )
+    apply_btn3=Button(frame99, text='Show current PA sample rate', command=showsamplerate )
     apply_btn3.grid(row=1, column=6, sticky='E', rowspan=2, columnspan=2, padx=3, pady=2)
 
 # PAGE2 Maincode
