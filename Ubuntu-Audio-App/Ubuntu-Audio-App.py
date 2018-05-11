@@ -224,10 +224,9 @@ def main():
 
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
-    # Blue frame bit depth update
+    # bit depth text update
     label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font='bold')
     label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
-#    label.grid(row=2, column=2, padx=1, pady=5)
 
     label = Label(frame99, text=" Set bit depth ")
     label.grid(row=1, column=1, padx=1, pady=5)
