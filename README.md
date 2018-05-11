@@ -17,8 +17,6 @@ from terminal
 python3 Ubuntu-Audio-App.py
 ```
 
-user will be prompted for his password
-
 ## Troubleshoot
 
 chmod some file on app root directory
