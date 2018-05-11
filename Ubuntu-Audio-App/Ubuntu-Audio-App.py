@@ -10,6 +10,7 @@ import io # For string file save for csv
 
 import os
 import subprocess
+from subprocess import Popen, PIPE # Pass subprocess output to tkinter
 from subprocess import call
 
 # Bit depth Button functions
@@ -95,6 +96,13 @@ def Confirm():
 # samplerate button for now
 def showsamplerate():
     subprocess.call('currentbitrate1=$(pacmd list-sinks | grep sample) && notify-send "$currentbitrate1"', shell=True)
+#    print subprocess.check_output(["echo", "$currentbitrate1"])
+    showsamplerateoutput = subprocess.check_output(["(pacmd list-sinks | grep sample)"], shell=True)
+    bitdepthtextvariable.set (showsamplerateoutput)
+#    print('Current PA Settings: ', showsamplerateoutput)
+
+
+# 'notify-send "$currentbitrate1"'
 
 # Define menu pages
 # About page
@@ -158,6 +166,7 @@ def main():
 
     global password_box
     global pswd
+    global bitdepthtextvariable
 
     # define var's
     var = IntVar()
@@ -165,6 +174,7 @@ def main():
     var2 = IntVar()
     var3 = IntVar()
 
+    bitdepthtextvariable = StringVar()
     password_box = StringVar()
 
     # gives weight to the cells in the grid
@@ -221,6 +231,10 @@ def main():
 
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
+    # Blue frame bit depth update
+    label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font='bold')
+    label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
+#    label.grid(row=2, column=2, padx=1, pady=5)
 
     label = Label(frame99, text=" Set bit depth ")
     label.grid(row=1, column=1, padx=1, pady=5)
@@ -370,3 +384,8 @@ def main():
 
 if __name__ == '__main__':
         main()
+#    try:
+#        if len(sys.argv) > 1:
+#            print (sys.argv)
+#    finally:
+#        input("Press the enter to exit")
