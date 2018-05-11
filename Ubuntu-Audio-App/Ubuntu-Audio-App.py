@@ -10,7 +10,6 @@ import io # For string file save for csv
 
 import os
 import subprocess
-from subprocess import Popen, PIPE # Pass subprocess output to tkinter
 from subprocess import call
 
 # Bit depth Button functions
@@ -378,8 +377,3 @@ def main():
 
 if __name__ == '__main__':
         main()
-#    try:
-#        if len(sys.argv) > 1:
-#            print (sys.argv)
-#    finally:
-#        input("Press the enter to exit")
