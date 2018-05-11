@@ -21,14 +21,7 @@ user will be prompted for his password
 
 ## Troubleshoot
 
-Some buttons wont work ?
-
-```
-sudo apt-get install libnotify-bin
-
-```
-
-On app root directory
+chmod some file on app root directory
 
 
 ```
