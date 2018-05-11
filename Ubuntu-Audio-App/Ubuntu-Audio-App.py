@@ -116,7 +116,7 @@ def writeToFile(filename):
     nb.hide(page999)
     inputValue=password_box.get()
 
-    path = os.path.dirname("Ubuntu-Audio-App/Ubuntu-Audio-App.csv")
+    path = os.path.dirname("Ubuntu-Audio-App.csv")
 
     with open(os.path.join(path, filename), "w") as csv_file:
         writer = csv.writer(csv_file, lineterminator='\n')
@@ -127,7 +127,7 @@ def writeToFile(filename):
 # get passwd from CSV file
 class Getpsswd():
     def __init__(self, filename):
-        path = os.path.dirname("Ubuntu-Audio-App/Ubuntu-Audio-App.csv")
+        path = os.path.dirname("Ubuntu-Audio-App.csv")
 
         with open(os.path.join(path, filename)) as f_input:
             csv_input = csv.reader(f_input)
