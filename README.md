@@ -12,7 +12,7 @@ Tested on Lubuntu (16.04 LTS)
 
 ## Usage
 
-from terminal
+cd to app root directory and run
 ```
 python3 Ubuntu-Audio-App.py
 ```
