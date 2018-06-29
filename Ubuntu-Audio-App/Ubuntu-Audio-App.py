@@ -68,8 +68,6 @@ def main():
     root = tk.Tk()
     root.title("Audio Powertool")
     root.minsize(width=730, height=288)
-#    root.maxsize(width=730, height=288)
-    root.geometry("715x220")
 
     global password_box
     global pswd
