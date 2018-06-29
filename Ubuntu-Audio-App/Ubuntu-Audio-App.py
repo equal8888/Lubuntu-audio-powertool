@@ -137,9 +137,7 @@ def main():
 
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
-    # bit depth text update
-    label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font='bold')
-    label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
+
 
     label = Label(frame99, text=" Set bit depth ")
     label.grid(row=1, column=1, padx=1, pady=5)
@@ -337,7 +335,11 @@ def main():
     label = Label(frame99, text="Restarting services take few seconds")
     label.grid(row=12, column=3, columnspan = 3)
 
-#   samplerate button for now (row=1, column=1)
+# showsamplerate text update
+    label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font='bold')
+    label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
+
+#   samplerate button for now
     def showsamplerate():
         showsamplerateoutput = subprocess.check_output(["(pacmd list-sinks | grep sample)"], shell=True)
         bitdepthtextvariable.set (showsamplerateoutput)
