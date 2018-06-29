@@ -19,4 +19,12 @@ currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed
 pulseaudio --kill ; pulseaudio --start &&
 
 # Script finished
-echo "Pulseaudio: Default Settings !"
+echo "--------------------- Audio Powertool -----------------------" &&
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+printf "${GREEN} Pulseaudio${NC} Set to default !\n" &&
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+printf "${RED} Services${NC} Restarting (wait 5-10 seconds)\n" &&
+echo "-------------------------------------------------------------"
