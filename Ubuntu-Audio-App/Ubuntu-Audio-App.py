@@ -319,6 +319,8 @@ def main():
     frame98.grid(row=11, column=6, columnspan=2, sticky='NEW', \
                       padx=5, pady=5)
 
+
+
 #   default button for now
     def defaultpulsebutton():
         subprocess.call('defaultsettingspath=$(realpath --relative-base=$HOME default-settings-pulseaudio.sh) && realdefaultsettingspath="~/"$defaultsettingspath && eval $realdefaultsettingspath', shell=True)
@@ -329,7 +331,12 @@ def main():
     def restartpulse():
         subprocess.call('pulseaudio --kill ; pulseaudio --start', shell=True)
     apply_btn2=Button(frame99, text='Apply / Restart pulseaudio', command=restartpulse )
-    apply_btn2.grid(row=12, column=6, columnspan=4, padx=5, pady=5)
+    apply_btn2.grid(row=12, column=6, columnspan=5, padx=5, pady=5)
+
+# Text below app
+    label = Label(frame99, text="Restarting services take few seconds")
+    label.grid(row=12, column=3, columnspan = 3)
+
 
 #   samplerate button for now (row=1, column=1)
     def showsamplerate():
