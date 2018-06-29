@@ -337,13 +337,12 @@ def main():
     label = Label(frame99, text="Restarting services take few seconds")
     label.grid(row=12, column=3, columnspan = 3)
 
-
 #   samplerate button for now (row=1, column=1)
     def showsamplerate():
         showsamplerateoutput = subprocess.check_output(["(pacmd list-sinks | grep sample)"], shell=True)
         bitdepthtextvariable.set (showsamplerateoutput)
 
-    apply_btn3=Button(frame99, text='Test for possiple resampling', command=showsamplerate )
+    apply_btn3=Button(frame99, text='Test Output', command=showsamplerate )
     apply_btn3.grid(row=1, column=6, sticky='E', rowspan=2, columnspan=2, padx=3, pady=2)
 
 # PAGE2 Maincode
