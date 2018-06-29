@@ -336,7 +336,7 @@ def main():
     label.grid(row=12, column=3, columnspan = 3)
 
 # showsamplerate text update
-    label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font='bold')
+    label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font=('Helvetica', 12, 'bold'))
     label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
 
 #   samplerate button for now
