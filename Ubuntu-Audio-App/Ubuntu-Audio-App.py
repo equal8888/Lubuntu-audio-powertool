@@ -308,27 +308,26 @@ def main():
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
-# get passwd from CSV file
+# ----------------- Get password -----------------
     class Getpsswd():
         def __init__(self, filename):
-            path = os.path.dirname("Ubuntu-Audio-App.csv")
+            path = os.path.dirname("Ubuntu-Audio-App.csv") # os path
 
             with open(os.path.join(path, filename)) as f_input:
                 csv_input = csv.reader(f_input)
                 self.details = list(csv_input)
 
-    def get_col_row(self, col, row):
-        return self.details[row-1][col-1]
+        def get_col_row(self, col, row):
+            return self.details[row-1][col-1]
 
-# Getpsswd error handler
-#    try:
-#        data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
-#        pswd = data.get_col_row(0, 0)
-#        cmd='ls'
-#        call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
-#    except IndexError:
-#        pswd = 'null'
-
+    try:
+        data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from csv
+        pswd = data.get_col_row(0, 0)
+        cmd='ls'
+        call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
+    except IndexError:                          # if password not found
+        pswd = 'null'
+# ------------------------------------------------
     def login(*event):
         writeToFile("Ubuntu-Audio-App.csv")
 
