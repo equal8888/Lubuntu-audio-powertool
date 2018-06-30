@@ -162,12 +162,12 @@ def main():
 
     # Set Secondary sample rate
     label = Label(frame99, text="Resample method")
-    label.grid(row=9, column=1, columnspan = 2)
+    label.grid(row=9, column=1, columnspan = 2, pady=4) 
 
-    def select_prisamplerate_default():
-        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
+    def select_prisamplerate_speexfloatN():
+        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-N" /etc/pulse/daemon.conf', shell=True)
 
-    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='default', variable=var3, command=select_prisamplerate_default, value=1, width=12)
+    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='speex-float-N', variable=var3, command=select_prisamplerate_speexfloatN, value=8, width=12)
     select_resamplerate_1.grid(row=9, column=3)
 
     def select_prisamplerate_optimised():
@@ -200,17 +200,23 @@ def main():
     select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='src-linear', variable=var3, command=select_prisamplerate_srclinear, value=6, width=12)
     select_resamplerate_1.grid(row=10, column=5)
 
-    def select_prisamplerate_trivial():
-        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = trivial" /etc/pulse/daemon.conf', shell=True)
+    def select_stop_resampling():
+        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c ; resample-method = speex-float-1" /etc/pulse/daemon.conf', shell=True)
 
-    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='trivial', variable=var3, command=select_prisamplerate_trivial, value=7, width=12)
-    select_resamplerate_1.grid(row=10, column=1)
+    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='Stop Resampling', variable=var3, command=select_stop_resampling, value=7, width=25)
+    select_resamplerate_1.grid(row=10, column=1, columnspan=2) # columnspawn=2
 
-    def select_prisamplerate_speexfloatN():
-        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-N" /etc/pulse/daemon.conf', shell=True)
+#    def select_prisamplerate_trivial():
+#        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = trivial" /etc/pulse/daemon.conf', shell=True)
 
-    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='speex-float-N', variable=var3, command=select_prisamplerate_speexfloatN, value=8, width=12)
-    select_resamplerate_1.grid(row=10, column=2)
+#    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='trivial', variable=var3, command=select_prisamplerate_trivial, value=7, width=12)
+#    select_resamplerate_1.grid(row=10, column=1)
+
+#    def select_prisamplerate_speexfloatN():
+#        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-N" /etc/pulse/daemon.conf', shell=True)
+
+#    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='speex-float-N', variable=var3, command=select_prisamplerate_speexfloatN, value=8, width=12)
+#    select_resamplerate_1.grid(row=10, column=2)
 
     def select_prisamplerate_speexfixedN():
         subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-fixed-N" /etc/pulse/daemon.conf', shell=True)
@@ -280,7 +286,7 @@ def main():
     label = Label(frame101, text="ALSA Page is under development. Select PulseAudio from tab menu.")
     label.grid(row=1, column=1, rowspan = 3, padx=5, pady=5)
 
-# Preferences start here
+# PAGE Preferences
 
 # Close Window
     def close_window():
