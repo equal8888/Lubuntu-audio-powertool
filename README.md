@@ -1,8 +1,7 @@
-﻿## App for audio tweaks
-<img src="https://drive.google.com/uc?id=1rc1VOeYE7tynZliLVu6sUqeqWavtIGvA" width="auto" height="200"/>
-
+## App for audio tweaks
+<img src="https://drive.google.com/uc?id=1dZ4ZPrwCtNvj5mPGV1OACUt4DAI4EVBK" width="auto" height="200"/>
 <br>
- <strong>Current Development stage is somewhere between versions 0.4 & 0.5 </strong>
+ <strong>Current Development stage 0.4 - 0.5 </strong>
 <br>
 <br>
  <strong>Manual</strong>
@@ -29,4 +28,4 @@ chmod some file on app root directory
 
 sudo chmod +x default-settings-pulseaudio.sh
 
-```
+```﻿
