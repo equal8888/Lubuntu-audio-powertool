@@ -365,14 +365,14 @@ def main():
     background_label.place(width=800, height=100)
 
 # Password user input to csv file
-    Label(frame300, text='Sudo Password:').grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='NS')
+    Label(frame300, text='Sudo Password:\n( requires app restart )').grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='NS')
     # adds password entry widget and defines its properties
     password_box = Entry(frame300, show='*')
     password_box.insert(0, '     ')
     password_box.bind('<Return>', login)
     password_box.grid(row=2, column=1, sticky='NS')
     # adds login button and defines its properties
-    login_btn = Button(frame300, text='Grant Access', command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
+    login_btn = Button(frame300, text='authorize app', command=lambda: writeToFile("Ubuntu-Audio-App.csv"))
     login_btn.bind('<Return>', login)
     login_btn.grid(row=3, column=1, sticky='NESW')
 
