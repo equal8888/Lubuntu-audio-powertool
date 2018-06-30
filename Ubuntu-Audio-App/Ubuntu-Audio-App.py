@@ -62,7 +62,7 @@ def main():
     frame97 = tkinter.LabelFrame(frame99)
     frame97.grid(row=1, column=2, columnspan=7, rowspan=5, sticky='NESW')
 
-    background_label = Label(frame97, bg="blue")
+    background_label = Label(frame97, bg="black")
     background_label.place(width=800, height=100)
 
     label = Label(frame99, text=" Set bit depth ")
@@ -162,7 +162,7 @@ def main():
 
     # Set Secondary sample rate
     label = Label(frame99, text="Resample method")
-    label.grid(row=9, column=1, columnspan = 2, pady=4) 
+    label.grid(row=9, column=1, columnspan = 2, pady=4)
 
     def select_prisamplerate_speexfloatN():
         subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-N" /etc/pulse/daemon.conf', shell=True)
@@ -266,7 +266,7 @@ def main():
     label.grid(row=12, column=3, columnspan = 3)
 
 # showsamplerate text update
-    label = Label(frame99, textvariable=bitdepthtextvariable, fg='yellow', bg='blue', font=('Helvetica', 12, 'bold'))
+    label = Label(frame99, textvariable=bitdepthtextvariable, fg='grey', bg='black', font=('Monospace Regular', 11))
     label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
 
 #   samplerate button for now
@@ -275,7 +275,7 @@ def main():
         bitdepthtextvariable.set (showsamplerateoutput)
 
     apply_btn3=Button(frame99, text='Test Output', command=showsamplerate )
-    apply_btn3.grid(row=1, column=6, sticky='E', rowspan=2, columnspan=2, padx=3, pady=2)
+    apply_btn3.grid(row=1, column=6, sticky='N, E', rowspan=2, columnspan=2, padx=4, pady=7)
 
 # PAGE2 Maincode
 
