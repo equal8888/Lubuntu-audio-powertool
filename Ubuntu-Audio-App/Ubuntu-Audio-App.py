@@ -13,64 +13,11 @@ import subprocess
 from subprocess import call
 
 
-# Close Window
-def close_window():
-    top.destroy()
-
-# for now
-def EnterKey(event):
-    print("You hit return.")
-    writeToFile("Ubuntu-Audio-App.csv")
-
-def Preferences01():
-    nb.add(page999, text='Preferences')
-    nb.select(page999)
-    password_box.delete(0, END)
-
-def writeToFile(filename):
-    nb.hide(page999)
-    inputValue=password_box.get()
-
-    path = os.path.dirname("Ubuntu-Audio-App.csv")
-
-    with open(os.path.join(path, filename), "w") as csv_file:
-        writer = csv.writer(csv_file, lineterminator='\n')
-        writer.writerow([inputValue])
-
-# Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
-
-# get passwd from CSV file
-class Getpsswd():
-    def __init__(self, filename):
-        path = os.path.dirname("Ubuntu-Audio-App.csv")
-
-        with open(os.path.join(path, filename)) as f_input:
-            csv_input = csv.reader(f_input)
-            self.details = list(csv_input)
-
-    def get_col_row(self, col, row):
-        return self.details[row-1][col-1]
-
-# Getpsswd error handler
-try:
-    data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
-    pswd = data.get_col_row(0, 0)
-    cmd='ls'
-    call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
-except IndexError:
-    pswd = 'null'
-
-def login(*event):
-    writeToFile("Ubuntu-Audio-App.csv")
-
 # Render main  window
 def main():
     root = tk.Tk()
     root.title("Audio Powertool")
     root.minsize(width=730, height=288)
-
-    global password_box
-    global pswd
 
     # define var's
     var = IntVar()
@@ -89,7 +36,6 @@ def main():
         rows += 1
 
     # Defines and places the notebook widget
-    global nb
 
     nb = ttk.Notebook(root)
     nb.grid(row=1, column=1, columnspan=50, rowspan=49, sticky='NESW')
@@ -110,25 +56,6 @@ def main():
     global page999
     page999 = ttk.Frame(nb)
 
-    # Menubar
-    menubar = Menu(root)
-    filemenu = Menu(menubar, tearoff=0)
-    filemenu.add_separator()
-    filemenu.add_command(label="Exit", command=root.quit)
-    menubar.add_cascade(label="File", menu=filemenu)
-
-    editmenu = Menu(menubar, tearoff=0)
-    editmenu.add_command(label="preferences", command=Preferences01)
-    menubar.add_cascade(label="Edit", menu=editmenu)
-
-    helpmenu = Menu(menubar, tearoff=0)
-    def helpmenu01():
-        tkinter.messagebox.showinfo("FAQ", "PulseAudio\n \nSet sample rate:\nFool proof option is 48,000 Hz \n")
-    helpmenu.add_command(label="FAQ", command=helpmenu01)
-    menubar.add_cascade(label="Help", menu=helpmenu)
-
-    root.config(menu=menubar)
-
     # PAGE1 Maincode
 
     # Blue frame
@@ -137,7 +64,6 @@ def main():
 
     background_label = Label(frame97, bg="blue")
     background_label.place(width=800, height=100)
-
 
     label = Label(frame99, text=" Set bit depth ")
     label.grid(row=1, column=1, padx=1, pady=5)
@@ -317,8 +243,6 @@ def main():
     frame98.grid(row=11, column=6, columnspan=2, sticky='NEW', \
                       padx=5, pady=5)
 
-
-
 #   default button for now
     def defaultpulsebutton():
         subprocess.call('defaultsettingspath=$(realpath --relative-base=$HOME default-settings-pulseaudio.sh) && realdefaultsettingspath="~/"$defaultsettingspath && eval $realdefaultsettingspath', shell=True)
@@ -356,8 +280,78 @@ def main():
     label = Label(frame101, text="ALSA Page is under development. Select PulseAudio from tab menu.")
     label.grid(row=1, column=1, rowspan = 3, padx=5, pady=5)
 
-# Settings Maincode
-    # green frame
+# Preferences start here
+
+# Close Window
+    def close_window():
+        top.destroy()
+
+# for now
+    def EnterKey(event):
+        print("You hit return.")
+        writeToFile("Ubuntu-Audio-App.csv")
+
+    def Preferences01():
+        nb.add(page999, text='Preferences')
+        nb.select(page999)
+        password_box.delete(0, END)
+
+    def writeToFile(filename):
+        nb.hide(page999)
+        inputValue=password_box.get()
+
+        path = os.path.dirname("Ubuntu-Audio-App.csv")
+
+        with open(os.path.join(path, filename), "w") as csv_file:
+            writer = csv.writer(csv_file, lineterminator='\n')
+            writer.writerow([inputValue])
+
+# Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
+
+# get passwd from CSV file
+    class Getpsswd():
+        def __init__(self, filename):
+            path = os.path.dirname("Ubuntu-Audio-App.csv")
+
+            with open(os.path.join(path, filename)) as f_input:
+                csv_input = csv.reader(f_input)
+                self.details = list(csv_input)
+
+    def get_col_row(self, col, row):
+        return self.details[row-1][col-1]
+
+# Getpsswd error handler
+#    try:
+#        data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from Ubuntu-Audio-App.csv
+#        pswd = data.get_col_row(0, 0)
+#        cmd='ls'
+#        call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
+#    except IndexError:
+#        pswd = 'null'
+
+    def login(*event):
+        writeToFile("Ubuntu-Audio-App.csv")
+
+# Menubar
+    menubar = Menu(root)
+    filemenu = Menu(menubar, tearoff=0)
+    filemenu.add_separator()
+    filemenu.add_command(label="Exit", command=root.quit)
+    menubar.add_cascade(label="File", menu=filemenu)
+
+    editmenu = Menu(menubar, tearoff=0)
+    editmenu.add_command(label="preferences", command=Preferences01)
+    menubar.add_cascade(label="Edit", menu=editmenu)
+
+    helpmenu = Menu(menubar, tearoff=0)
+    def helpmenu01():
+        tkinter.messagebox.showinfo("FAQ", "PulseAudio\n \nSet sample rate:\nFool proof option is 48,000 Hz \n")
+    helpmenu.add_command(label="FAQ", command=helpmenu01)
+    menubar.add_cascade(label="Help", menu=helpmenu)
+
+    root.config(menu=menubar)
+
+# green frame
     frame300 = tkinter.LabelFrame(page999)
     frame300.grid(row=1, column=2, columnspan=7, rowspan=5, sticky='NESW')
 
