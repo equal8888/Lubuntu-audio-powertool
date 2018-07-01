@@ -12,7 +12,6 @@ import os
 import subprocess
 from subprocess import call
 
-
 # Render main  window
 def main():
     root = tk.Tk()
@@ -36,7 +35,6 @@ def main():
         rows += 1
 
     # Defines and places the notebook widget
-
     nb = ttk.Notebook(root)
     nb.grid(row=1, column=1, columnspan=50, rowspan=49, sticky='NESW')
 
@@ -206,18 +204,6 @@ def main():
     select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='Stop Resampling', variable=var3, command=select_stop_resampling, value=7, width=25)
     select_resamplerate_1.grid(row=10, column=1, columnspan=2) # columnspawn=2
 
-#    def select_prisamplerate_trivial():
-#        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = trivial" /etc/pulse/daemon.conf', shell=True)
-
-#    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='trivial', variable=var3, command=select_prisamplerate_trivial, value=7, width=12)
-#    select_resamplerate_1.grid(row=10, column=1)
-
-#    def select_prisamplerate_speexfloatN():
-#        subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-float-N" /etc/pulse/daemon.conf', shell=True)
-
-#    select_resamplerate_1=Radiobutton(frame99, indicatoron=0, text='speex-float-N', variable=var3, command=select_prisamplerate_speexfloatN, value=8, width=12)
-#    select_resamplerate_1.grid(row=10, column=2)
-
     def select_prisamplerate_speexfixedN():
         subprocess.call('currentresamplerate=$(grep "resample-method" /etc/pulse/daemon.conf) && sudo sed -i "/${currentresamplerate}/ c resample-method = speex-fixed-N" /etc/pulse/daemon.conf', shell=True)
 
@@ -324,7 +310,7 @@ def main():
                 self.details = list(csv_input)
 
         def get_col_row(self, col, row):
-            return self.details[row-1][col-1]
+            return self.details[row-0][col-0]
 
     try:
         data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from csv
@@ -334,8 +320,6 @@ def main():
     except IndexError:                          # if password not found
         pswd = 'null'
 # ------------------------------------------------
-    def login(*event):
-        writeToFile("Ubuntu-Audio-App.csv")
 
 # Menubar
     menubar = Menu(root)
@@ -349,8 +333,10 @@ def main():
     menubar.add_cascade(label="Edit", menu=editmenu)
 
     helpmenu = Menu(menubar, tearoff=0)
+
     def helpmenu01():
         tkinter.messagebox.showinfo("FAQ", "PulseAudio\n \nSet sample rate:\nFool proof option is 48,000 Hz \n")
+
     helpmenu.add_command(label="FAQ", command=helpmenu01)
     menubar.add_cascade(label="Help", menu=helpmenu)
 
@@ -364,6 +350,9 @@ def main():
     background_label.place(width=800, height=100)
 
 # Password user input to csv file
+    def login(*event):
+        writeToFile("Ubuntu-Audio-App.csv")
+
     Label(frame300, text='Sudo Password:\n( requires app restart )').grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='NS')
     # adds password entry widget and defines its properties
     password_box = Entry(frame300, show='*')
