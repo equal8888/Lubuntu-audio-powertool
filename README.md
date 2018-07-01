@@ -25,7 +25,5 @@ chmod some file on app root directory
 
 
 ```
-
 sudo chmod +x default-settings-pulseaudio.sh
-
 ```﻿
