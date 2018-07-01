@@ -252,10 +252,9 @@ def main():
     label.grid(row=12, column=3, columnspan = 3)
 
 # showsamplerate text update
-    label = Label(frame99, textvariable=bitdepthtextvariable, fg='grey', bg='black', font=('Monospace Regular', 11))
-    label.grid(row=1, column=1, sticky='E', rowspan=7, columnspan=7, padx=3, pady=2)
+    label = Label(frame97, textvariable=bitdepthtextvariable, fg='grey', bg='black', font=('Monospace Regular', 11))
+    label.grid(row=1, column=1, sticky='W', pady=3)
 
-#   samplerate button for now
     def showsamplerate():
         showsamplerateoutput = subprocess.check_output(["(pacmd list-sinks | grep sample)"], shell=True)
         bitdepthtextvariable.set (showsamplerateoutput)
@@ -300,7 +299,7 @@ def main():
 
 # Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
 
-# ----------------- Get password -----------------
+# Get password
     class Getpsswd():
         def __init__(self, filename):
             path = os.path.dirname("Ubuntu-Audio-App.csv") # os path
@@ -319,7 +318,6 @@ def main():
         call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
     except IndexError:                          # if password not found
         pswd = 'null'
-# ------------------------------------------------
 
 # Menubar
     menubar = Menu(root)
