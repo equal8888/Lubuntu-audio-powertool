@@ -1,4 +1,4 @@
-## App for audio tweaks
+## App for audio tweaks (This isnt a real app !!! doesnt work on other peoples setup !!!)
 <img src="https://drive.google.com/uc?id=1dZ4ZPrwCtNvj5mPGV1OACUt4DAI4EVBK" width="auto" height="200"/>
 <br>
  <strong>Current Development stage 0.4 - 0.5 </strong>
