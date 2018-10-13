@@ -16,8 +16,8 @@ python3 Ubuntu-Audio-App.py
 
 ## Troubleshoot
 
-chmod some file on app root directory
+chmod some files on app root directory
 ```
-sudo chmod +x default-settings-pulseaudio.sh
+sudo chmod +x  Ubuntu-Audio-App/*
 ```
 
