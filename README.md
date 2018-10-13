@@ -4,8 +4,6 @@
  <strong>Current Development stage 0.4 - 0.5 </strong>
 <br>
 <br>
- <strong>Manual</strong>
-<br>
 Tested on Lubuntu (16.04 LTS)
 <br>
 
