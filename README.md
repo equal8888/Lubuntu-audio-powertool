@@ -9,9 +9,9 @@ Tested on Lubuntu (16.04 LTS)
 
 ## Usage
 
-cd to app root directory and run
+first cd to app root directory and AFTER THAT run
 ```
-python3 Ubuntu-Audio-App.py
+./Ubuntu-Audio-App.py
 ```
 
 ## Prerequisites
