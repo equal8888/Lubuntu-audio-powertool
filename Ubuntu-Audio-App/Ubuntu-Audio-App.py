@@ -378,7 +378,7 @@ def main():
 
     Label(frame300, text='Sudo Password:\n( requires app restart )').grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='NS')
     # adds password entry widget and defines its properties
-    password_box = Entry(frame300, show='*')
+    password_box = Entry(frame300) # Hiding password while typing is not user friendly feature, for that I have cut it from now --> show='*'
     password_box.insert(0, '     ')
     password_box.bind('<Return>', login)
     password_box.grid(row=2, column=1, sticky='NS')
