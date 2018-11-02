@@ -339,10 +339,11 @@ def main():
     try:
         data = Getpsswd("Ubuntu-Audio-App.csv") # Get password from csv
         pswd = data.get_col_row(0, 0)
-        cmd='ls'
-        call('echo {} | sudo -S {}'.format(pswd, cmd), shell=True)
+        command='clear && echo "--------------------- Audio Powertool -----------------------"'
+        subprocess.call('echo {} | sudo -S {}'.format(pswd, command), shell=True);
     except IndexError:                          # if password not found
-        pswd = 'null'
+        pswd = "null"
+        subprocess.call('clear && echo "--------------------- Audio Powertool -----------------------" && echo " Warning: Password not set !" && echo " Set sudo password from the Preferences menu and restart !"'.format(), shell=True);
 
 # Menubar
     menubar = Menu(root)
