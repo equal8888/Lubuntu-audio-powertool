@@ -14,6 +14,16 @@ cd to app root directory and run
 python3 Ubuntu-Audio-App.py
 ```
 
+## Prerequisites
+
+this should cover everything
+```
+sudo apt-get install python3-tk
+```
+```
+sudo apt-get install xterm
+```
+
 ## Troubleshoot
 
 chmod some files on app root directory
