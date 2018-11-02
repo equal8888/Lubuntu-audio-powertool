@@ -292,9 +292,17 @@ def main():
     os.system('xterm -into %d -geometry 119x88 -sb &' % wid)
 
 	# Run  command from button --> Currently opens a new terminal on top of old one =/
-    wid = terminalframe.winfo_id()
-    Terminal_btn01 = Button(frame301, text="Run command from button: 'ls' --> Note to self opens a new terminal on top of old one =/", command=lambda: os.system('xterm -into %d -geometry 119x88 -sb -e "ls $home; $SHELL" &' % wid))
+    Terminal_btn01 = Button(frame301, text="Test Command: 'ls'", command=lambda: os.system('xterm -into %d -geometry 119x88 -sb -e "ls $home; $SHELL" &' % wid))
     Terminal_btn01.grid(row=2,column=1,columnspan=2,padx=5,pady=5,sticky='sw')
+	# Info txt
+    label = Label(frame301, text="Bug/Feature: opens a new terminal on top of old one =/")
+    label.grid(row=2,column=2,columnspan=2)
+
+	# Quic and dirty fix (Manual)
+    def DirtyFix():
+        subprocess.call('sudo killall xterm', shell=True)
+    DirtyFixbtn=Button(frame301, text='Dirty fix: Kill all xterms', command=DirtyFix )
+    DirtyFixbtn.grid(row=2,column=2,columnspan=2,padx=5,pady=5,sticky='es')
 
 # PAGE Preferences
 
