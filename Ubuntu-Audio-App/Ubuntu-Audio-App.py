@@ -16,8 +16,8 @@ from subprocess import call
 def main():
     root = tk.Tk()
     root.title("Audio Powertool")
-    root.minsize(width=730, height=288)
-
+    root.minsize(width=731, height=293)
+    root.maxsize(width=731, height=293)
     # define var's
     var = IntVar()
     var1 = IntVar()
@@ -50,7 +50,11 @@ def main():
     page2 = ttk.Frame(nb)
     nb.add(page2, text='ALSA')
 
-    # Adds tab 3 of the notebook
+	# Adds tab 3 of the notebook
+    page3 = ttk.Frame(nb)
+    nb.add(page3, text='Terminal')
+
+    # Adds Preferences tab of the notebook
     global page999
     page999 = ttk.Frame(nb)
 
@@ -270,6 +274,27 @@ def main():
 
     label = Label(frame101, text="ALSA Page is under development. Select PulseAudio from tab menu.")
     label.grid(row=1, column=1, rowspan = 3, padx=5, pady=5)
+
+# PAGE3 Maincode
+
+    # Define Frames
+    frame301 = tkinter.LabelFrame(page3)
+    frame301.grid(row=1, column=2, sticky='NESW', padx=5, pady=5)
+
+    Aroundterminalframe = tkinter.LabelFrame(frame301)
+    Aroundterminalframe.grid(row=1, column=2, sticky='NESW')
+
+    terminalframe = Label(Aroundterminalframe,fg='grey',bg='black',height=13,width=88)
+    terminalframe.grid(row=1,column=1,sticky='sw')
+
+	# Terminal
+    wid = terminalframe.winfo_id()
+    os.system('xterm -into %d -geometry 119x88 -sb &' % wid)
+
+	# Run  command from button --> Currently opens a new terminal on top of old one =/
+    wid = terminalframe.winfo_id()
+    Terminal_btn01 = Button(frame301, text="Run command from button: 'ls' --> Note to self opens a new terminal on top of old one =/", command=lambda: os.system('xterm -into %d -geometry 119x88 -sb -e "ls $home; $SHELL" &' % wid))
+    Terminal_btn01.grid(row=2,column=1,columnspan=2,padx=5,pady=5,sticky='sw')
 
 # PAGE Preferences
 
