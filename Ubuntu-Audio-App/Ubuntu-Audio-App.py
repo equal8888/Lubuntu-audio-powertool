@@ -8,7 +8,9 @@ import sys
 import csv # Read / Write csv
 import io # For string file save for csv
 
-import os
+import os              #used to call system.
+import os.path         #used to check the system path.
+from os import system as EmbedTerminal
 import subprocess
 from subprocess import call
 
@@ -287,21 +289,43 @@ def main():
     terminalframe = Label(Aroundterminalframe,fg='grey',bg='black',height=13,width=88)
     terminalframe.grid(row=1,column=1,sticky='sw')
 
+# ----------------- xterm  -----------------
+
+    f=Frame(root)
+    Label(f,text="/dev/pts/").pack(side=LEFT)
+    tty_index = Entry(f, width=3)
+    tty_index.insert(0, "1")
+    tty_index.pack(side=LEFT)
+    Label(f,text="Command:").pack(side=LEFT)
+    e = Entry(f)
+    e.pack(side=LEFT,fill=X,expand=1)
+
 	# Terminal
     wid = terminalframe.winfo_id()
-    os.system('xterm -into %d -geometry 119x88 -sb &' % wid)
+    EmbedTerminal('xterm -into %d -geometry 160x50 -sb -e "tty; sh" &' % wid)
 
-	# Run  command from button --> Currently opens a new terminal on top of old one =/
-    Terminal_btn01 = Button(frame301, text="Test Command: 'ls'", command=lambda: os.system('xterm -into %d -geometry 119x88 -sb -e "ls $home; $SHELL" &' % wid))
+# ----------------- Send Command from button to xterm -----------------
+
+	# I finally figured out these arguments
+    def ToTerminal(*args):
+        command="ls"
+        tty="/dev/pts/%s" % tty_index.get()
+        EmbedTerminal("%s <%s >%s 2> %s" % (command,tty,tty,tty))
+
+	# Press Button
+    Terminal_btn01 = Button(frame301,text="Command: ls", command=ToTerminal)
     Terminal_btn01.grid(row=2,column=1,columnspan=2,padx=5,pady=5,sticky='sw')
+
+# ----------------------------------------------------------------------
+
 	# Info txt
-    label = Label(frame301, text="Bug/Feature: opens a new terminal on top of old one =/")
+    label = Label(frame301, text="If terminal is not '/dev/pts/1' Click button Kill xterm and restart app -->")
     label.grid(row=2,column=2,columnspan=2)
 
 	# Quic and dirty fix (Manual)
     def DirtyFix():
         subprocess.call('sudo killall xterm', shell=True)
-    DirtyFixbtn=Button(frame301, text='Dirty fix: Kill all xterms', command=DirtyFix )
+    DirtyFixbtn=Button(frame301, text='Kill xterm', command=DirtyFix )
     DirtyFixbtn.grid(row=2,column=2,columnspan=2,padx=5,pady=5,sticky='es')
 
 # PAGE Preferences
