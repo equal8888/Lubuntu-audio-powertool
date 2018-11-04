@@ -1,4 +1,4 @@
-## This isnt a real app !!!
+## This isnt a real app !!! but I made a readme for it anyways 😉
 <img src="https://drive.google.com/uc?id=1dZ4ZPrwCtNvj5mPGV1OACUt4DAI4EVBK" width="auto" height="200"/>
 <br>
  <strong>Current Development stage 0.4 - 0.5 </strong>
