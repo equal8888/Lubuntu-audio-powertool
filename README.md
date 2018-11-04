@@ -29,7 +29,7 @@ sudo apt install libnotify-bin
 
 ## Troubleshoot
 
-1) Type sudo password manually to file "AppMemo.csv" on app root dir
+1) Add sudo password manually to file "AppMemo.csv" on app root dir
 
 2) chmod some files on app root directory
 ```
