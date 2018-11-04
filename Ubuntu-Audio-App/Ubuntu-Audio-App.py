@@ -231,7 +231,7 @@ def gui():
 
 	# Terminal
     wid = terminalframe.winfo_id()
-    os.system('sudo xterm -into %d -geometry 119x88 -sb &' % wid)
+    os.system('xterm -into %d -geometry 119x88 -sb &' % wid)
 
 	# This can do untill I make something useful =/
     DirtyFixbtn=Button(frame301,text='Kill xterm',command=DirtyFix)
@@ -299,7 +299,9 @@ vPabitdepth=StringVar() 	# PulseAudio BithDepth
 vPaPriRate=StringVar() 		# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 		# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 			# PulseAudio Resample method
+
 tPswd=StringVar() 			# App Password
+treadPswd=StringVar() 		# Read Password
 
 bitdepthtextvariable=StringVar()
 password_box=StringVar()
@@ -328,6 +330,10 @@ def PaRe():
 def Pswd():
     selection="You selected "+str(tPswd.get())
     print(tPswd.get())
+
+def readPswd():
+    selection="You selected "+str(treadPswd.get())
+    print(treadPswd.get())
 #    label.config(text = selection)
 
 # End ----------
@@ -370,7 +376,6 @@ def EnterKey():
 def Preferences01():
     nb.add(page99,text='Preferences')
     nb.select(page99)
-#    password_box.delete(0, END)
 
 # End ----------
 
@@ -378,7 +383,6 @@ def Preferences01():
 
 def writeToFile():
     nb.hide(page99)
-
     conf=open(passwordfile,"w")
     conf.write(tPswd.get())
     conf.close()
@@ -386,7 +390,12 @@ def writeToFile():
 # End ----------
 
 # ---------- Read Password from file ----------
-# Coming soon 😘
+
+with open(passwordfile) as f:
+    file_content = f.read().rstrip("\n")
+    readPswd=(file_content)
+    subprocess.call('echo {} | sudo -S ls'.format(readPswd),shell=True);
+
 # End ----------
 
 # def login event
