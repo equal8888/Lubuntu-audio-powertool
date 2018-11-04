@@ -29,7 +29,9 @@ sudo apt install libnotify-bin
 
 ## Troubleshoot
 
-chmod some files on app root directory
+1) Type sudo password manually to file "AppMemo.csv" on app root dir
+
+2) chmod some files on app root directory
 ```
 sudo chmod +x  Ubuntu-Audio-App/*
 ```
