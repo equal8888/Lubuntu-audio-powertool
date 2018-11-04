@@ -184,7 +184,10 @@ def gui():
 
 # ---------- Default & Apply PA Button ----------
 
-    apply_btn1=Button(page1,text='Default Pulseaudio settings',command=defaultpulsebutton)
+# ---------- Note to self ----------
+# Rewrite also Default Button 😘
+
+    apply_btn1=Button(page1,text='Default (Button wont work)',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,columnspan=2,padx=5,pady=5)
 
     apply_btn2=Button(page1,text='Apply & Restart pulseaudio',command=applyPA)
@@ -226,7 +229,6 @@ def gui():
 # ----------------- xterm  -----------------
 # ------------------------------------------
 
-
 	# Terminal
     wid = terminalframe.winfo_id()
     os.system('sudo xterm -into %d -geometry 119x88 -sb &' % wid)
@@ -264,22 +266,19 @@ def gui():
 
 # ----------------- Preferences Page -----------------
 
-# ---------- Note to self ----------
-# fix this 😘
-
     frame300=tkinter.LabelFrame(page99)
     frame300.grid(row=1,column=2,columnspan=7,rowspan=5,sticky='NESW')
 
     Label(frame300,text='Sudo Password:\n( requires app restart )').grid(row=1,column=1,columnspan=2,padx=5,pady=5,sticky='NS')
-    # adds password entry widget and defines its properties
-    password_box=Entry(frame300) # Hiding password while typing is not user friendly feature, for that I have cut it from now --> show='*'
+
+    password_box=Entry(frame300, width=26, textvariable=tPswd)
     password_box.insert(0,'')
-    password_box.bind('<Return>',login)
     password_box.grid(row=2,column=1,sticky='NS')
-    # adds login button and defines its properties
-    login_btn=Button(frame300,text='authorize app',command=lambda:writeToFile("AppMemo.csv"))
-    login_btn.bind('<Return>',login)
-    login_btn.grid(row=3,column=1,sticky='NESW')
+
+    # Adds password box button and defines its properties
+    password_box_btn=Button(frame300,text='authorize app',command=writeToFile)
+    password_box_btn.bind('<Return>',EnterKey)
+    password_box_btn.grid(row=3,column=1,sticky='NESW')
 
     top.mainloop()
 
@@ -292,6 +291,7 @@ HOMEDIR=os.path.expanduser('~')
 #binds the logfile and conf file to home foler path.audiopowertool:
 logplace=HOMEDIR+'/.audiopowertoolmanager.log'
 configfile=HOMEDIR+'/.audiopowertool.conf'
+passwordfile=HOMEDIR+'/appmemo.csv'
 depfile=HOMEDIR+"/.depfile.dat"
 
 # ---------- Variables ----------
@@ -299,6 +299,7 @@ vPabitdepth=StringVar() 	# PulseAudio BithDepth
 vPaPriRate=StringVar() 		# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 		# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 			# PulseAudio Resample method
+tPswd=StringVar() 			# App Password
 
 bitdepthtextvariable=StringVar()
 password_box=StringVar()
@@ -308,7 +309,6 @@ password_box=StringVar()
 def Pabitdepth():
     selection="You selected "+str(vPabitdepth.get())
     print(vPabitdepth.get())
-#    label.config(text = selection)
 
 def PaPriRate():
     selection="You selected "+str(vPaPriRate.get())
@@ -323,6 +323,11 @@ def PaAltRate():
 def PaRe():
     selection="You selected "+str(vPaRe.get())
     print(vPaRe.get())
+#    label.config(text = selection)
+
+def Pswd():
+    selection="You selected "+str(tPswd.get())
+    print(tPswd.get())
 #    label.config(text = selection)
 
 # End ----------
@@ -345,69 +350,58 @@ def applyPA():
 
     subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPabitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
 
-#   Show samlerate
+# Show samlerate
 def showsamplerate():
-    showsamplerateoutput=subprocess.check_output(["(pacmd list-sinks | grep sample)"],shell=True)
+    showsamplerateoutput=subprocess.check_output('pacmd list-sinks | grep sample',shell=True)
     bitdepthtextvariable.set(showsamplerateoutput)
 
-# preferences
+# End ----------
+
+# ---------- Preferences ----------
 # Close Window
 def close_window():
     top.destroy()
 
-# for now
-def EnterKey(event):
-    print("You hit return.")
-    writeToFile("AppMemo.csv")
+# for now (propably does nothing anyway)
+def EnterKey():
+    print('Audio Powertool: "Enter" not supported, yet')
+#    writeToFile("appmemo.csv")
 
 def Preferences01():
     nb.add(page99,text='Preferences')
     nb.select(page99)
 #    password_box.delete(0, END)
 
-def writeToFile(filename):
+# End ----------
+
+# ---------- Write Password to file ----------
+
+def writeToFile():
     nb.hide(page99)
-    inputValue=password_box.get()
 
-    path=os.path.dirname("AppMemo.csv")
+    conf=open(passwordfile,"w")
+    conf.write(tPswd.get())
+    conf.close()
 
-    with open(os.path.join(path,filename),"w")as csv_file:
-        writer=csv.writer(csv_file,lineterminator='\n')
-        writer.writerow([inputValue])
+# End ----------
 
-# Memo: writerow(1)  CSV COMMANDS from https://docs.python.org/3.2/library/csv.html
-
-# Get password
-class Getpsswd():
-    def __init__(self,filename):
-        path=os.path.dirname("AppMemo.csv") # os path
-
-        with open(os.path.join(path,filename))as f_input:
-            csv_input=csv.reader(f_input)
-            self.details=list(csv_input)
-
-    def get_col_row(self,col,row):
-        return self.details[row-0][col-0]
-try:
-    data=Getpsswd("AppMemo.csv") # Get password from csv
-    pswd=data.get_col_row(0, 0)
-    command='clear && echo "--------------------- Audio Powertool -----------------------"'
-    subprocess.call('echo {} | sudo -S {}'.format(pswd,command),shell=True);
-except IndexError:                          # if password not found
-    pswd="null"
-    subprocess.call('clear && echo "--------------------- Audio Powertool -----------------------" && echo " Warning: Password not set !" && echo " Set sudo password from the Preferences menu and restart !"'.format(),shell=True);
+# ---------- Read Password from file ----------
+# Coming soon 😘
+# End ----------
 
 # def login event
 def login(*event):
-    writeToFile("AppMemo.csv")
+    writeToFile("appmemo.csv")
 
-#checks the current time and prints it on the screen.
+# checks the current time and prints it on the terminal (propably on wrong terminal)
 def print_time():
      now=datetime.datetime.now()
      chour=str(now.hour)+ ":"
      cmin=str(now.minute)
      print("\nFinished at: " +chour+cmin)
 
+# ---------- Note to self ----------
+# all code below from here needs fixing etc 😘
 
 #installs the required dependencyes when called.
 def installdep():
@@ -491,14 +485,18 @@ if os.path.exists(configfile):
             conf.close()
             break
 
-#creates a default conf file if it does not exists.
+#creates a default files if it does not exists.
 else :
-    print("No conf file found!\nTaking Default...")
+    print("Frist Time Boot!\nSetting up defaults")
     time.sleep(1)
     notifycmd ="notify-send 'Audio Powertool:' 'Commands Finished'"
     logcmd="| tee -a ~/.aptmanager.log"
     conf=open(configfile,"w")
     conf.write("")
+    conf.close()
+
+    conf=open(passwordfile,"w")
+    conf.write("-      EMPTY      -")
     conf.close()
 
     conf=open(configfile,"a")
