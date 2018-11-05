@@ -7,9 +7,6 @@ from tkinter import *  					# the GUI toolkit.
 from tkinter import ttk					# dd the tabs
 import tkinter.messagebox   			# Self explanatory
 
-import os
-import os.path
-
 import csv 								# Read / Write csv
 import io 								# For string file save for csv
 
@@ -215,7 +212,7 @@ def main():
     menubar.add_cascade(label="File",menu=filemenu)
 
     editmenu=Menu(menubar,tearoff=0)
-    editmenu.add_command(label="Config",command=Config01)
+    editmenu.add_command(label="Config",) # No config menu
     menubar.add_cascade(label="Edit",menu=editmenu)
 
     helpmenu=Menu(menubar,tearoff=0)
@@ -224,7 +221,7 @@ def main():
 # move this 😘
 
     def helpmenu01():
-        tkinter.messagebox.showinfo("About Audio Powertool: ","Developed by equal8888 \n \nThe main purpose of this app is to teach my self")
+        tkinter.messagebox.showinfo("About Audio Powertool: ","Developed by equal8888 \n \nI have no idea what's supposed to read here")
 
     helpmenu.add_command(label="About",command=helpmenu01)
     menubar.add_cascade(label="Help",menu=helpmenu)
@@ -245,11 +242,19 @@ vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 					# PulseAudio Resample method
 
 bitdepthtextvariable=StringVar() 	# Show Samplerate
-password_box=StringVar()
 
 # End ----------
 
-# ---------- Radiobutton Data ----------
+# ---------- Set Default Values for Variable ----------
+
+vPabitdepth.set('default-sample-format = s24le')
+vPaPriRate.set('default-sample-rate = 48000')
+vPaAltRate.set('alternate-sample-rate = 44100')
+vPaRe.set('; resample-method = speex-float-1')
+
+# End ----------
+
+# ---------- Print Radiobutton Data ----------
 
 def Pabitdepth():
     print(vPabitdepth.get())
@@ -267,12 +272,18 @@ def PaRe():
 
 # ---------- Button Commands ----------
 
-# Default button
+# Default button.
 def defaultpulsebutton():
-    subprocess.call('./default-settings-pulseaudio.sh',shell=True)
+    vPabitdepth.set('default-sample-format = s24le')
+    vPaPriRate.set('default-sample-rate = 48000')
+    vPaAltRate.set('alternate-sample-rate = 44100')
+    vPaRe.set('; resample-method = speex-float-1')
+    print(vPabitdepth.get())
+    print(vPaPriRate.get())
+    print(vPaAltRate.get())
+    print(vPaRe.get())
 
 # Apply PA Button
-
 def applyPA():
     CvPabitdepth=(vPabitdepth.get())
     CvPaPriRate=(vPaPriRate.get())
@@ -288,19 +299,7 @@ def showsamplerate():
 
 # Close Window
 def close_window():
-    top.destroy()
-
-# for now (propably does nothing anyway)
-def EnterKey():
-    print('Audio Powertool: "Enter" not supported, yet')
-
-def Config01():
-    nb.add(page99,text='Config')
-    nb.select(page99)
-
-# def login event
-def login(*event):
-    writeToFile("appmemo.csv")
+    root.destroy()
 
 # End ----------
 
