@@ -9,7 +9,7 @@ Tested on Lubuntu (16.04 LTS)
 
 ## Usage
 
-run command from terminal
+first cd to app root directory and AFTER THAT run command
 ```
 ./Ubuntu-Audio-App.py
 ```
