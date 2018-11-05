@@ -9,7 +9,6 @@ import tkinter.messagebox   			# Self explanatory
 
 import os
 import os.path
-from os import system as EmbedTerminal 	# renaming for EmbedTerminal
 
 import time
 import datetime     	   				# used to get the current time.
@@ -28,8 +27,8 @@ def gui():
 
 # ---------- Define MainFrame ----------
     mainFrame.master.title("Audio Powertool")
-    mainFrame.master.minsize(width=731,height=293)
-    mainFrame.master.maxsize(width=731,height=293)
+    mainFrame.master.minsize(width=728,height=294)
+    mainFrame.master.maxsize(width=728,height=294)
 
 # End ----------
 
@@ -179,9 +178,6 @@ def gui():
     # Separator3
     ttk.Separator(page1).grid(row=11,column=1,columnspan=11,sticky="ew")
 
-    frame98=tkinter.LabelFrame(page1,borderwidth=3)
-    frame98.grid(row=11,column=6,columnspan=2,sticky='NEW',padx=5, pady=5)
-
 # ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
@@ -227,20 +223,19 @@ def gui():
     terminalframe.grid(row=1,column=1,sticky='sw')
 
 # ----------------- xterm  -----------------
-# ------------------------------------------
 
 	# Terminal
     wid = terminalframe.winfo_id()
-    os.system('xterm -into %d -geometry 119x88 -sb &' % wid)
+    os.system('sudo xterm -into %d -geometry 119x88 -sb &' % wid)
 
 	# This can do untill I make something useful =/
     DirtyFixbtn=Button(frame301,text='Kill xterm',command=DirtyFix)
     DirtyFixbtn.grid(row=2,column=2,columnspan=2,padx=5,pady=5,sticky='es')
 
+# End ----------
 
-# ---------------------------
+# ----------------- Menubar  -----------------
 
-# Menubar
     menubar=Menu(mainFrame.master)
     filemenu=Menu(menubar,tearoff=0)
     filemenu.add_separator()
@@ -248,7 +243,7 @@ def gui():
     menubar.add_cascade(label="File",menu=filemenu)
 
     editmenu=Menu(menubar,tearoff=0)
-    editmenu.add_command(label="preferences",command=Preferences01)
+    editmenu.add_command(label="Config",command=Config01)
     menubar.add_cascade(label="Edit",menu=editmenu)
 
     helpmenu=Menu(menubar,tearoff=0)
@@ -257,14 +252,16 @@ def gui():
 # move this 😘
 
     def helpmenu01():
-        tkinter.messagebox.showinfo("FAQ","Bla Bla Bla\n")
+        tkinter.messagebox.showinfo("About Audio Powertool: ","Developed by equal8888 \n \nThe main purpose of this app is to teach my self")
 
-    helpmenu.add_command(label="FAQ",command=helpmenu01)
+    helpmenu.add_command(label="About",command=helpmenu01)
     menubar.add_cascade(label="Help",menu=helpmenu)
 
     mainFrame.master.config(menu=menubar)
 
-# ----------------- Preferences Page -----------------
+# End ----------
+
+# ----------------- Config Page -----------------
 
     frame300=tkinter.LabelFrame(page99)
     frame300.grid(row=1,column=2,columnspan=7,rowspan=5,sticky='NESW')
@@ -282,29 +279,34 @@ def gui():
 
     top.mainloop()
 
+# End ----------
+# End -----
 
-# -----------------------------------------------------------
-# -----------------------------------------------------------
+# ---------------------------------------------
+# ---------- Set home folder & Files ----------
 
-# set home folder.
 HOMEDIR=os.path.expanduser('~')
-#binds the logfile and conf file to home foler path.audiopowertool:
 logplace=HOMEDIR+'/.audiopowertoolmanager.log'
 configfile=HOMEDIR+'/.audiopowertool.conf'
 passwordfile=HOMEDIR+'/appmemo.csv'
 depfile=HOMEDIR+"/.depfile.dat"
 
+# End ----------
+
 # ---------- Variables ----------
-vPabitdepth=StringVar() 	# PulseAudio BithDepth
-vPaPriRate=StringVar() 		# PulseAudio Primary Samplerate
-vPaAltRate=StringVar() 		# PulseAudio Alternative Samplerate
-vPaRe=StringVar() 			# PulseAudio Resample method
 
-tPswd=StringVar() 			# App Password
-treadPswd=StringVar() 		# Read Password
+vPabitdepth=StringVar() 			# PulseAudio BithDepth
+vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
+vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
+vPaRe=StringVar() 					# PulseAudio Resample method
 
-bitdepthtextvariable=StringVar()
+tPswd=StringVar() 					# Write Password
+treadPswd=StringVar() 				# Read Password
+
+bitdepthtextvariable=StringVar() 	# Show Samplerate
 password_box=StringVar()
+
+# End ----------
 
 # ---------- Radiobutton Data ----------
 
@@ -327,9 +329,14 @@ def PaRe():
     print(vPaRe.get())
 #    label.config(text = selection)
 
+# End ----------
+
+# ---------- Password Data ----------
+
 def Pswd():
     selection="Selected "+str(tPswd.get())
     print(tPswd.get())
+#    label.config(text = selection)
 
 def readPswd():
     selection="Selected "+str(treadPswd.get())
@@ -337,6 +344,8 @@ def readPswd():
 #    label.config(text = selection)
 
 # End ----------
+
+# ---------- Button Commands ----------
 
 # Kill xterm
 def DirtyFix():
@@ -348,7 +357,7 @@ def DirtyFix():
 def defaultpulsebutton():
     subprocess.call('./default-settings-pulseaudio.sh',shell=True)
 
-# ---------- Apply PA Button ----------
+# Apply PA Button
 
 def applyPA():
     CvPabitdepth=(vPabitdepth.get())
@@ -363,9 +372,6 @@ def showsamplerate():
     showsamplerateoutput=subprocess.check_output('pacmd list-sinks | grep sample',shell=True)
     bitdepthtextvariable.set(showsamplerateoutput)
 
-# End ----------
-
-# ---------- Preferences ----------
 # Close Window
 def close_window():
     top.destroy()
@@ -375,11 +381,24 @@ def EnterKey():
     print('Audio Powertool: "Enter" not supported, yet')
 #    writeToFile("appmemo.csv")
 
-def Preferences01():
-    nb.add(page99,text='Preferences')
+def Config01():
+    nb.add(page99,text='Config')
     nb.select(page99)
 
+# def login event
+def login(*event):
+    writeToFile("appmemo.csv")
+
 # End ----------
+
+# ---------- Time Feature ----------
+
+# checks the current time and prints it on the terminal (propably on wrong terminal)
+def print_time():
+     now=datetime.datetime.now()
+     chour=str(now.hour)+ ":"
+     cmin=str(now.minute)
+     print("\nFinished at: " +chour+cmin)
 
 # ---------- Write Password to file ----------
 
@@ -396,23 +415,12 @@ def writeToFile():
 with open(passwordfile) as f:
     file_content = f.read().rstrip("\n")
     readPswd=(file_content)
-    subprocess.call('echo {} | sudo -S ls'.format(readPswd),shell=True);
+    subprocess.call('echo {} | sudo -S clear && echo "--------------------- Audio Powertool -----------------------"'.format(readPswd),shell=True);
 
 # End ----------
 
-# def login event
-def login(*event):
-    writeToFile("appmemo.csv")
-
-# checks the current time and prints it on the terminal (propably on wrong terminal)
-def print_time():
-     now=datetime.datetime.now()
-     chour=str(now.hour)+ ":"
-     cmin=str(now.minute)
-     print("\nFinished at: " +chour+cmin)
-
 # ---------- Note to self ----------
-# all code below from here needs fixing etc 😘
+# all code below from here needs checking etc 😘
 
 #installs the required dependencyes when called.
 def installdep():
@@ -517,18 +525,17 @@ else :
     conf.write("EOF")
     conf.close()
 
-
-#checks if something exists in path (aka installed), if not, depntfound is executed.
+# checks if something exists in path (aka installed), if not, depntfound is executed.
 for dir in os.environ['PATH'].split(':'):
         prog=os.path.join(dir,"notify-send")
 
-        #checks if depfile.dat exists in home folder.
+#checks if depfile.dat exists in home folder.
         if os.path.exists(depfile):
             notifycmd=""
             os.system("clear")
             gui()
 
-        #checks if file exist (this determines if depntfound() is called.)
+#checks if file exist (this determines if depntfound() is called.)
         if os.path.exists(prog):
             gui()
 
