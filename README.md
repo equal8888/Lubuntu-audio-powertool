@@ -20,12 +20,6 @@ this should cover everything
 ```
 sudo apt-get install python3-tk
 ```
-```
-sudo apt-get install xterm
-```
-```
-sudo apt install libnotify-bin
-```
 
 ## Troubleshoot
 
