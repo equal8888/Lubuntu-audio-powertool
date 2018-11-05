@@ -25,6 +25,6 @@ sudo apt-get install python3-tk
 
 chmod some files on app root directory
 ```
-sudo chmod +x  Ubuntu-Audio-App/*
+chmod +x  Ubuntu-Audio-App/*
 ```
 
