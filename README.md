@@ -11,7 +11,7 @@ Tested on Lubuntu (16.04 LTS)
 
 first cd to app root directory and AFTER THAT run command
 ```
-./Ubuntu-Audio-App.py
+sudo ./Ubuntu-Audio-App.py
 ```
 
 ## Prerequisites
