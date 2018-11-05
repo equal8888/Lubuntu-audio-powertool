@@ -10,18 +10,16 @@ import tkinter.messagebox   			# Self explanatory
 import os
 import os.path
 
-import time
-import datetime     	   				# used to get the current time.
-import readline
-
 import csv 								# Read / Write csv
 import io 								# For string file save for csv
 
 import subprocess						# for pulseaudio config (for now)
 from subprocess import call				# Might be useless
 
+# Render main  window
 top = Tk()
-def gui():
+def main():
+
     mainFrame=Frame(top,relief="sunken",border=1)
     Description=Label(mainFrame,text="Audio Powertool:")
 
@@ -31,7 +29,6 @@ def gui():
     mainFrame.master.maxsize(width=728,height=294)
 
 # End ----------
-
 
 # ---------- Note to self ----------
 # get rid of the globals 😘
@@ -50,9 +47,6 @@ def gui():
 
     page2=ttk.Frame(nb)
     nb.add(page2,text='ALSA')
-
-    page3=ttk.Frame(nb)
-    nb.add(page3,text='Terminal')
 
     # Adds Settings tab of the notebook
 
@@ -181,9 +175,9 @@ def gui():
 # ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
-# Rewrite also Default Button 😘
+# Rewrite Default Button 😘
 
-    apply_btn1=Button(page1,text='Default (Button wont work)',command=defaultpulsebutton)
+    apply_btn1=Button(page1,text='Default',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,columnspan=2,padx=5,pady=5)
 
     apply_btn2=Button(page1,text='Apply & Restart pulseaudio',command=applyPA)
@@ -209,28 +203,6 @@ def gui():
 
     label=Label(frame101,text="Nothing here, yet")
     label.grid(row=1,column=1,rowspan=3,padx=5,pady=5)
-
-# PAGE3 Maincode
-
-    # Define Frames
-    frame301=tkinter.LabelFrame(page3)
-    frame301.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
-
-    Aroundterminalframe=tkinter.LabelFrame(frame301)
-    Aroundterminalframe.grid(row=1,column=2,sticky='NESW')
-
-    terminalframe=Label(Aroundterminalframe,fg='grey',bg='black',height=13,width=88)
-    terminalframe.grid(row=1,column=1,sticky='sw')
-
-# ----------------- xterm  -----------------
-
-	# Terminal
-    wid = terminalframe.winfo_id()
-    os.system('sudo xterm -into %d -geometry 119x88 -sb &' % wid)
-
-	# This can do untill I make something useful =/
-    DirtyFixbtn=Button(frame301,text='Kill xterm',command=DirtyFix)
-    DirtyFixbtn.grid(row=2,column=2,columnspan=2,padx=5,pady=5,sticky='es')
 
 # End ----------
 
@@ -260,38 +232,10 @@ def gui():
     mainFrame.master.config(menu=menubar)
 
 # End ----------
-
-# ----------------- Config Page -----------------
-
-    frame300=tkinter.LabelFrame(page99)
-    frame300.grid(row=1,column=2,columnspan=7,rowspan=5,sticky='NESW')
-
-    Label(frame300,text='Sudo Password:\n( requires app restart )').grid(row=1,column=1,columnspan=2,padx=5,pady=5,sticky='NS')
-
-    password_box=Entry(frame300, width=26, textvariable=tPswd)
-    password_box.insert(0,'')
-    password_box.grid(row=2,column=1,sticky='NS')
-
-    # Adds password box button and defines its properties
-    password_box_btn=Button(frame300,text='OK',command=writeToFile)
-    password_box_btn.bind('<Return>',EnterKey)
-    password_box_btn.grid(row=3,column=1,sticky='NESW')
-
     top.mainloop()
 
 # End ----------
 # End -----
-
-# ---------------------------------------------
-# ---------- Set home folder & Files ----------
-
-HOMEDIR=os.path.expanduser('~')
-logplace=HOMEDIR+'/.audiopowertoolmanager.log'
-configfile=HOMEDIR+'/.audiopowertool.conf'
-passwordfile=HOMEDIR+'/appmemo.csv'
-depfile=HOMEDIR+"/.depfile.dat"
-
-# End ----------
 
 # ---------- Variables ----------
 
@@ -299,9 +243,6 @@ vPabitdepth=StringVar() 			# PulseAudio BithDepth
 vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 					# PulseAudio Resample method
-
-tPswd=StringVar() 					# Write Password
-treadPswd=StringVar() 				# Read Password
 
 bitdepthtextvariable=StringVar() 	# Show Samplerate
 password_box=StringVar()
@@ -311,47 +252,20 @@ password_box=StringVar()
 # ---------- Radiobutton Data ----------
 
 def Pabitdepth():
-    selection="Selected "+str(vPabitdepth.get())
     print(vPabitdepth.get())
 
 def PaPriRate():
-    selection="Selected "+str(vPaPriRate.get())
     print(vPaPriRate.get())
-#    label.config(text = selection)
 
 def PaAltRate():
-    selection="Selected "+ str(vPaAltRate.get())
     print(vPaAltRate.get())
-#    label.config(text = selection)
 
 def PaRe():
-    selection="Selected "+str(vPaRe.get())
     print(vPaRe.get())
-#    label.config(text = selection)
-
-# End ----------
-
-# ---------- Password Data ----------
-
-def Pswd():
-    selection="Selected "+str(tPswd.get())
-    print(tPswd.get())
-#    label.config(text = selection)
-
-def readPswd():
-    selection="Selected "+str(treadPswd.get())
-    print(treadPswd.get())
-#    label.config(text = selection)
 
 # End ----------
 
 # ---------- Button Commands ----------
-
-# Kill xterm
-def DirtyFix():
-#    subprocess.call('sudo killall xterm',shell=True)
-    os.system("sudo killall xterm")
-
 
 # Default button
 def defaultpulsebutton():
@@ -379,7 +293,6 @@ def close_window():
 # for now (propably does nothing anyway)
 def EnterKey():
     print('Audio Powertool: "Enter" not supported, yet')
-#    writeToFile("appmemo.csv")
 
 def Config01():
     nb.add(page99,text='Config')
@@ -391,152 +304,7 @@ def login(*event):
 
 # End ----------
 
-# ---------- Time Feature ----------
+    root.mainloop()
 
-# checks the current time and prints it on the terminal (propably on wrong terminal)
-def print_time():
-     now=datetime.datetime.now()
-     chour=str(now.hour)+ ":"
-     cmin=str(now.minute)
-     print("\nFinished at: " +chour+cmin)
-
-# ---------- Write Password to file ----------
-
-def writeToFile():
-    nb.hide(page99)
-    conf=open(passwordfile,"w")
-    conf.write(tPswd.get())
-    conf.close()
-
-# End ----------
-
-# ---------- Read Password from file ----------
-
-with open(passwordfile) as f:
-    file_content = f.read().rstrip("\n")
-    readPswd=(file_content)
-    subprocess.call('echo {} | sudo -S clear && echo "--------------------- Audio Powertool -----------------------"'.format(readPswd),shell=True);
-
-# End ----------
-
-# ---------- Note to self ----------
-# all code below from here needs checking etc 😘
-
-#installs the required dependencyes when called.
-def installdep():
-    os.system("clear")
-    os.system("sudo apt-get install xterm | sudo apt install libnotify-bin")
-    sevFrame.destroy()
-
-#called if log must be enabled.
-def logsetyes():
-    logcmd="| tee -a ~/.aptmanager.log"
-    conf=open(configfile,"w")
-    conf.write("")
-    conf.close()
-
-    conf=open(configfile,"a")
-    conf.write("log=enabled\n")
-    conf.close()
-    fifthFrame.destroy()
-    notifysetyesButton.pack(pady = 10)
-    notifysetnoButton.pack(pady = 10)
-
-
-#called if log must be disabled.
-def logsetno():
-    global notifysetyesButton
-    global notifysetnoButton
-    logcmd=""
-    conf=open(configfile,"w")
-    conf.write("")
-    conf.close()
-
-    conf=open(configfile,"a")
-    conf.write("log=disabled\n")
-    conf.close()
-    fifthFrame.destroy()
-    notifysetyesButton.pack(pady=10)
-    notifysetnoButton.pack(pady=10)
-
-#asks the user for dependency installation.
-def depntfound():
-   print("A required dependency is not installed.")
-   ask_user=raw_input("1 to Install It.\n2 to Continue Without It\n3 Don'nt bother Me Again.\n?1/2/3: ")
-
-   if ask_user=="1":
-       os.system("sudo apt-get install xterm | sudo apt install libnotify-bin | tee -a ~/.aptmanager.log")
-       print("Done.")
-       raw_input("Press <enter> to continue.")
-       os.system("clear")
-
-
-# sets the string that is passed to bash to "" to avoid command not found errors.
-   if ask_user=="2":
-       notifycmd=""
-       print("Audio Powertool will continue, but with out the embedded Terminal")
-       raw_input("Press <enter> to continue.")
-       os.system("clear")
-
-   if ask_user=="3":
-       dep_pref=open(depfile,"w")
-       dep_pref.close()
-       os.system("clear")
-
-   else:
-       os.system("clear")
-       depntfound()
-
-#reads conf file and sets the respective variables.
-if os.path.exists(configfile):
-
-    conf=open(configfile,"r")
-    while True:
-        line=conf.readline()
-
-        if"log=disabled"in line:
-            logcmd=""
-
-        elif"log=enabled"in line:
-            logcmd="| tee -a ~/.aptmanager.log"
-
-        if"EOF"in line:
-            conf.close()
-            break
-
-#creates a default files if it does not exists.
-else :
-    print("Frist Time Boot!\nSetting up defaults")
-    time.sleep(1)
-    notifycmd ="notify-send 'Audio Powertool:' 'Commands Finished'"
-    logcmd="| tee -a ~/.aptmanager.log"
-    conf=open(configfile,"w")
-    conf.write("")
-    conf.close()
-
-    conf=open(passwordfile,"w")
-    conf.write("-      EMPTY      -")
-    conf.close()
-
-    conf=open(configfile,"a")
-    conf.write("log=enabled\n")
-
-    conf.write("notification=enabled\n")
-    conf.write("EOF")
-    conf.close()
-
-# checks if something exists in path (aka installed), if not, depntfound is executed.
-for dir in os.environ['PATH'].split(':'):
-        prog=os.path.join(dir,"notify-send")
-
-#checks if depfile.dat exists in home folder.
-        if os.path.exists(depfile):
-            notifycmd=""
-            os.system("clear")
-            gui()
-
-#checks if file exist (this determines if depntfound() is called.)
-        if os.path.exists(prog):
-            gui()
-
-depntfound()
+if __name__ == '__main__':
+    main()
