@@ -4,7 +4,7 @@
  <strong>Current Development stage 0.4 </strong> 😔
 <br>
 <br>
-Tested on Lubuntu (16.04 LTS) This is a software mixer. don't set sample rate to "maximum option available", that will do audio resampling and you don't want that! App will reconfigure pulseaudio daemon.conf file
+Tested on Lubuntu (16.04 LTS) Don't set sample rate to "maximum option available", that will do audio resampling and you don't want that! App will reconfigure pulseaudio daemon.conf file
 <br>
 
 ## Usage
