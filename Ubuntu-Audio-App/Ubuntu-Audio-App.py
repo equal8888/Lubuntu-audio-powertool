@@ -5,6 +5,7 @@
 
 from tkinter import *  					# the GUI toolkit.
 from tkinter import ttk					# dd the tabs
+import tkinter.messagebox   			# Self explanatory
 
 import csv 								# Read / Write csv
 import io 								# For string file save for csv
