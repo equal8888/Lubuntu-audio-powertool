@@ -146,7 +146,7 @@ def main():
     vPaRezeroOrderhold=Radiobutton(page1,indicatoron=0,text='zero-orderhold',variable=vPaRe,value='resample-method = src-zero-order-hold',command=PaRe,width=12)
     vPaRezeroOrderhold.grid(row=9, column=7)
 
-    vPaReStopResampling=Radiobutton(page1,indicatoron=0,text='Stop Resampling',variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=25)
+    vPaReStopResampling=Radiobutton(page1,indicatoron=0,text='Default Resampling',variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=25)
     vPaReStopResampling.grid(row=10,column=1,columnspan=2)
 
 #    vPaReresamplemethod=Radiobutton(page1,indicatoron=0,text='???',variable=vPaRe,value='resample-method = speex-fixed-N',command=PaRe,width=12)
@@ -174,7 +174,7 @@ def main():
 # ---------- Note to self ----------
 # Rewrite Default Button 😘
 
-    apply_btn1=Button(page1,text='Default',command=defaultpulsebutton)
+    apply_btn1=Button(page1,text='Default Values',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,columnspan=2,padx=5,pady=5)
 
     apply_btn2=Button(page1,text='Apply & Restart pulseaudio',command=applyPA)
@@ -221,7 +221,7 @@ def main():
 # move this 😘
 
     def helpmenu01():
-        tkinter.messagebox.showinfo("About Audio Powertool: ","Developed by equal8888 \n \nI have no idea what's supposed to read here")
+        tkinter.messagebox.showinfo("About Audio Powertool: ","Dont set sample rate to 'maximum option available' \n \nthat will do audio resampling and you dont want that!\n \n App will reconfigure pulseaudio daemon.conf file")
 
     helpmenu.add_command(label="About",command=helpmenu01)
     menubar.add_cascade(label="Help",menu=helpmenu)
@@ -247,12 +247,10 @@ bitdepthtextvariable=StringVar() 	# Show Samplerate
 
 # ---------- Set Default Values for Variable ----------
 
-vPabitdepth.set('default-sample-format = s24le')
-vPaPriRate.set('default-sample-rate = 48000')
-vPaAltRate.set('alternate-sample-rate = 44100')
+vPabitdepth.set('; default-sample-format = s16le')
+vPaPriRate.set('; default-sample-rate = 44100')
+vPaAltRate.set('; alternate-sample-rate = 48000')
 vPaRe.set('; resample-method = speex-float-1')
-
-# End ----------
 
 # ---------- Print Radiobutton Data ----------
 
@@ -274,9 +272,9 @@ def PaRe():
 
 # Default button.
 def defaultpulsebutton():
-    vPabitdepth.set('default-sample-format = s24le')
-    vPaPriRate.set('default-sample-rate = 48000')
-    vPaAltRate.set('alternate-sample-rate = 44100')
+    vPabitdepth.set('; default-sample-format = s16le')
+    vPaPriRate.set('; default-sample-rate = 44100')
+    vPaAltRate.set('; alternate-sample-rate = 48000')
     vPaRe.set('; resample-method = speex-float-1')
     print(vPabitdepth.get())
     print(vPaPriRate.get())
