@@ -141,8 +141,8 @@ def gui():
     label=Label(page1,text="Resample method")
     label.grid(row=9,column=1,columnspan = 2,pady=4)
 
-    vPaRespeexfloatN=Radiobutton(page1,indicatoron=0,text='speexfloat-N',variable=vPaRe,value='resample-method = speex-float-N',command=PaRe,width=12)
-    vPaRespeexfloatN.grid(row=9,column=3)
+#    vPaRespeexfloatN=Radiobutton(page1,indicatoron=0,text='???',variable=vPaRe,value='resample-method = speex-float-N',command=PaRe,width=12)
+#    vPaRespeexfloatN.grid(row=9,column=3)
 
     vPaRespeexfloat10=Radiobutton(page1,indicatoron=0,text='speexfloat-10',variable=vPaRe,value='resample-method = speex-float-10',command=PaRe,width=12)
     vPaRespeexfloat10.grid(row=9,column=4)
@@ -159,8 +159,8 @@ def gui():
     vPaReStopResampling=Radiobutton(page1,indicatoron=0,text='Stop Resampling',variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=25)
     vPaReStopResampling.grid(row=10,column=1,columnspan=2)
 
-    vPaReresamplemethod=Radiobutton(page1,indicatoron=0,text='resample-method',variable=vPaRe,value='resample-method = speex-fixed-N',command=PaRe,width=12)
-    vPaReresamplemethod.grid(row=10,column=3)
+#    vPaReresamplemethod=Radiobutton(page1,indicatoron=0,text='???',variable=vPaRe,value='resample-method = speex-fixed-N',command=PaRe,width=12)
+#    vPaReresamplemethod.grid(row=10,column=3)
 
     vPaReffmpeg=Radiobutton(page1,indicatoron=0,text='ffmpeg',variable=vPaRe,value='resample-method = ffmpeg',command=PaRe,width=12)
     vPaReffmpeg.grid(row=10,column=4)
@@ -276,7 +276,7 @@ def gui():
     password_box.grid(row=2,column=1,sticky='NS')
 
     # Adds password box button and defines its properties
-    password_box_btn=Button(frame300,text='authorize app',command=writeToFile)
+    password_box_btn=Button(frame300,text='OK',command=writeToFile)
     password_box_btn.bind('<Return>',EnterKey)
     password_box_btn.grid(row=3,column=1,sticky='NESW')
 
@@ -309,30 +309,30 @@ password_box=StringVar()
 # ---------- Radiobutton Data ----------
 
 def Pabitdepth():
-    selection="You selected "+str(vPabitdepth.get())
+    selection="Selected "+str(vPabitdepth.get())
     print(vPabitdepth.get())
 
 def PaPriRate():
-    selection="You selected "+str(vPaPriRate.get())
+    selection="Selected "+str(vPaPriRate.get())
     print(vPaPriRate.get())
 #    label.config(text = selection)
 
 def PaAltRate():
-    selection="You selected "+ str(vPaAltRate.get())
+    selection="Selected "+ str(vPaAltRate.get())
     print(vPaAltRate.get())
 #    label.config(text = selection)
 
 def PaRe():
-    selection="You selected "+str(vPaRe.get())
+    selection="Selected "+str(vPaRe.get())
     print(vPaRe.get())
 #    label.config(text = selection)
 
 def Pswd():
-    selection="You selected "+str(tPswd.get())
+    selection="Selected "+str(tPswd.get())
     print(tPswd.get())
 
 def readPswd():
-    selection="You selected "+str(treadPswd.get())
+    selection="Selected "+str(treadPswd.get())
     print(treadPswd.get())
 #    label.config(text = selection)
 
@@ -340,7 +340,9 @@ def readPswd():
 
 # Kill xterm
 def DirtyFix():
-    subprocess.call('sudo killall xterm',shell=True)
+#    subprocess.call('sudo killall xterm',shell=True)
+    os.system("sudo killall xterm")
+
 
 # Default button
 def defaultpulsebutton():
