@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 from tkinter import *  					# the GUI toolkit.
 from tkinter import ttk					# Define Pages and Separators
-import tkinter.messagebox   			# Self explanatory
+import tkinter.messagebox   			# Messagebox About page
 
 import subprocess						# for pulseaudio config
 
 top = Tk()
 def main():
 
+# ---------- Define MainFrame ----------
+
     mainFrame=Frame(top,relief="sunken",border=1)
     Description=Label(mainFrame,text="Audio Powertool:")
 
-# ---------- Define MainFrame ----------
     mainFrame.master.title("Audio Powertool")
     mainFrame.master.minsize(width=715,height=260)
     mainFrame.master.maxsize(width=715,height=260)
@@ -253,10 +254,8 @@ def main():
     mainFrame.master.config(menu=menubar)
 
 # End ----------
-    top.mainloop()
 
-# End ----------
-# End -----
+    top.mainloop()
 
 # ---------- Variable Config ----------
 
@@ -317,7 +316,6 @@ def defaultpulsebutton():
     print ("Default: Press Apply")
 
 
-
 # Apply PA Button
 def applyPA():
     CvPaBitdepth=(vPaBitdepth.get())
@@ -334,7 +332,9 @@ def applyPA():
 # that's why here is this workaround. 😘
 def showsamplerate():
     showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],shell=True);
-    ShvPaOut.set((showsamplerateoutput[1:31]))
+    ShvPaOut.set(showsamplerateoutput[1:31])
+
+# End ----------
 
 # Close Window
 def close_window():
