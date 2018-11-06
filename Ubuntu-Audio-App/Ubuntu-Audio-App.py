@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 from tkinter import *  					# the GUI toolkit.
-from tkinter import ttk					# Define Pages
+from tkinter import ttk					# Define Pages and Separators
 import tkinter.messagebox   			# Self explanatory
 
 import subprocess						# for pulseaudio config
 
-# Render main  window (I have a feeling this is not the way)
 top = Tk()
 def main():
 
@@ -14,8 +13,8 @@ def main():
 
 # ---------- Define MainFrame ----------
     mainFrame.master.title("Audio Powertool")
-    mainFrame.master.minsize(width=728,height=294)
-    mainFrame.master.maxsize(width=728,height=294)
+    mainFrame.master.minsize(width=715,height=260)
+    mainFrame.master.maxsize(width=715,height=260)
 
 # End ----------
 
@@ -39,29 +38,49 @@ def main():
 
     # frame
     frame1=tkinter.LabelFrame(page1)
-    frame1.grid(row=1,column=2,columnspan=7,rowspan=5,sticky='NESW')
+    frame1.grid(row=1,column=2,columnspan=7,rowspan=5,sticky='nesw')
 
 	# Set the black background on app
     background_label=Label(frame1,bg="black")
-    background_label.place(width=800,height=100)
+    background_label.place(width=800,height=84)
+
+# ---------- Show Info ----------
+
+# show current PA output from button
+    label=Label(frame1,textvariable=ShvPaOut,fg='white',bg='black',font=('Monospace Regular',11))
+    label.grid(row=2,column=3,sticky='nes')
+
+# Bitdepth Samplerate
+    label=Label(frame1,textvariable=vPaBitdepth,fg='grey',bg='black',font=('Monospace Regular',11))
+    label.grid(row=2,column=1,sticky='nsw')
+
+# Primary Samplerate
+    label=Label(frame1,textvariable=vPaPriRate,fg='grey',bg='black',font=('Monospace Regular',11))
+    label.grid(row=0,column=1,sticky='nsw')
+
+# Alternative Samplerate
+    label=Label(frame1,textvariable=vPaAltRate,fg='grey',bg='black',font=('Monospace Regular',11))
+    label.grid(row=1,column=1,sticky='nsw')
+
+# End ----------
 
 	# Label Resample method
-    label=Label(page1,text=" Set bit depth ")
-    label.grid(row=1,column=1,padx=1,pady=5)
+    label=Label(page1,text="  Set bit depth  ")
+    label.grid(row=1,column=1,sticky='nsw')
 
 # ---------- BithDepth Radio Buttons ----------
 
-	# Set the BithDepth value to 16 Bit for variable vPabitdepth
-    RadBit16=Radiobutton(page1,text='16 Bit',variable=vPabitdepth,value='default-sample-format = s16le',command=Pabitdepth,width=9)
-    RadBit16.grid(row=2,column=1,sticky='N')
+	# Set the BithDepth value to 16 Bit for variable vPaBitdepth
+    RadBit16=Radiobutton(page1,text='16 Bit',variable=vPaBitdepth,value='default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16.grid(row=2,column=1,sticky='nsw')
 
-    # Set the BithDepth value to 24 Bit for variable vPabitdepth
-    RadBit24=Radiobutton(page1,text='24 Bit',variable=vPabitdepth,value='default-sample-format = s24le',command=Pabitdepth,width=9)
-    RadBit24.grid(row=3,column=1,sticky='N')
+    # Set the BithDepth value to 24 Bit for variable vPaBitdepth
+    RadBit24=Radiobutton(page1,text='24 Bit',variable=vPaBitdepth,value='default-sample-format = s24le',command=Pabitdepth,width=9)
+    RadBit24.grid(row=3,column=1,sticky='nsw')
 
-    # Set the BithDepth value to 32 Bit for variable vPabitdepth
-    RadBit32=Radiobutton(page1,text='32 Bit',variable=vPabitdepth,value='default-sample-format = s32le',command=Pabitdepth,width=9)
-    RadBit32.grid(row=4,column=1,sticky='N')
+    # Set the BithDepth value to 32 Bit for variable vPaBitdepth
+    RadBit32=Radiobutton(page1,text='32 Bit',variable=vPaBitdepth,value='default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32.grid(row=4,column=1,sticky='nsw')
 
 # End ----------
 
@@ -74,23 +93,23 @@ def main():
     label=Label(page1,text="Primary Sample rate")
     label.grid(row=6,column=1,columnspan=2)
 
-	# Set the BithDepth value to 44,100 Hz for variable vPabitdepth
+	# Set the BithDepth value to 44,100 Hz for variable vPaBitdepth
     RadPriRate44100=Radiobutton(page1,text='44,100 Hz',variable=vPaPriRate,value='default-sample-rate = 44100',command=PaPriRate,width=9)
     RadPriRate44100.grid(row=6,column=3)
 
-	# Set the BithDepth value to 48,000 Hz for variable vPabitdepth
+	# Set the BithDepth value to 48,000 Hz for variable vPaBitdepth
     RadPriRate48000=Radiobutton(page1,text='48,000 Hz',variable=vPaPriRate,value='default-sample-rate = 48000',command=PaPriRate,width=9)
     RadPriRate48000.grid(row=6,column=4)
 
-	# Set the BithDepth value to 88,200 Hz for variable vPabitdepth
+	# Set the BithDepth value to 88,200 Hz for variable vPaBitdepth
     RadPriRate88200=Radiobutton(page1,text='88,200 Hz',variable=vPaPriRate,value='default-sample-rate = 88200',command=PaPriRate,width=9)
     RadPriRate88200.grid(row=6,column=5)
 
-	# Set the BithDepth value to 96,000 Hz for variable vPabitdepth
+	# Set the BithDepth value to 96,000 Hz for variable vPaBitdepth
     RadPriRate96000=Radiobutton(page1,text='96,000 Hz',variable=vPaPriRate,value='default-sample-rate = 96000',command=PaPriRate,width=9)
     RadPriRate96000.grid(row=6,column=6)
 
-	# Set the BithDepth value to 192,000 Hz for variable vPabitdepth
+	# Set the BithDepth value to 192,000 Hz for variable vPaBitdepth
     RadPriRate192000=Radiobutton(page1,text='192,000 Hz',variable=vPaPriRate,value='default-sample-rate = 192000',command=PaPriRate,width=9)
     RadPriRate192000.grid(row=6,column=7)
 
@@ -198,13 +217,10 @@ def main():
     label=Label(page1,text="Restarting services take few seconds")
     label.grid(row=12,column=3,columnspan=3)
 
-# showsamplerate text on the app
-    label=Label(frame1,textvariable=bitdepthtextvariable,fg='grey',bg='black',font=('Monospace Regular',11))
-    label.grid(row=1,column=1,sticky='W',pady=3)
 
 # Button Show Samplerate
-    apply_btn3=Button(page1,text='Show Current PA Output',command=showsamplerate)
-    apply_btn3.grid(row=1,column=6,sticky='N, E',rowspan=2,columnspan=2,padx=4,pady=7)
+    apply_btn3=Button(frame1,text='Show Current PA Output (Click to refresh)',command=showsamplerate)
+    apply_btn3.grid(row=0,column=3,sticky='ne')
 
  # PAGE2 Maincode
 
@@ -231,12 +247,6 @@ def main():
 
     helpmenu=Menu(menubar,tearoff=0)
 
-# ---------- Note to self ----------
-# move this 😘
-
-    def helpmenu01():
-        tkinter.messagebox.showinfo("About Audio Powertool: ","Dont set sample rate to 'maximum option available' \n \nthat will do audio resampling and you dont want that!\n \n App will reconfigure pulseaudio daemon.conf file")
-
     helpmenu.add_command(label="About",command=helpmenu01)
     menubar.add_cascade(label="Help",menu=helpmenu)
 
@@ -248,28 +258,29 @@ def main():
 # End ----------
 # End -----
 
-# ---------- Variables ----------
+# ---------- Variable Config ----------
 
-vPabitdepth=StringVar() 			# PulseAudio BithDepth
+vPaBitdepth=StringVar() 			# PulseAudio BithDepth
 vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 					# PulseAudio Resample method
 
-bitdepthtextvariable=StringVar() 	# Show Samplerate
+ShvPaOut=StringVar() 				# Show Current PA output
 
 # End ----------
 
 # ---------- Set some Values for Variable on app startup ----------
 
-vPabitdepth.set('default-sample-format = s24le') 		# PulseAudio BithDepth
+vPaBitdepth.set('default-sample-format = s24le') 		# PulseAudio BithDepth
 vPaPriRate.set('default-sample-rate = 48000') 			# PulseAudio Primary Samplerate
 vPaAltRate.set('alternate-sample-rate = 44100') 		# PulseAudio Alternative Samplerate
 vPaRe.set('; resample-method = speex-float-1') 			# PulseAudio Resample method
+ShvPaOut.set('')										# Show Current PA output
 
 # ---------- Print Variable Data ----------
 
 def Pabitdepth():
-    print(vPabitdepth.get())
+    print(vPaBitdepth.get())
 
 def PaPriRate():
     print(vPaPriRate.get())
@@ -280,38 +291,50 @@ def PaAltRate():
 def PaRe():
     print(vPaRe.get())
 
+def PaOut():
+    print(ShvPaOut.get())
+
 # End ----------
 
 # ---------- Button Commands ----------
 
-# Set some values for app startup
+def helpmenu01():
+    tkinter.messagebox.showinfo("About Audio Powertool: ","Dont set sample rate to 'maximum option available' \n \nthat will do audio resampling and you dont want that!\n \n App will reconfigure pulseaudio daemon.conf file")
+
+# Default button
 def defaultpulsebutton():
-    vPabitdepth.set('; default-sample-format = s16le')
+# Set new values for variables
+    vPaBitdepth.set('; default-sample-format = s16le')
     vPaPriRate.set('; default-sample-rate = 44100')
     vPaAltRate.set('; alternate-sample-rate = 48000')
     vPaRe.set('; resample-method = speex-float-1')
-# Print the default values on terminal
-    print(vPabitdepth.get())
+# Show variables
+    print(vPaBitdepth.get())
     print(vPaPriRate.get())
     print(vPaAltRate.get())
     print(vPaRe.get())
     print ("-----------------------------")
-    print ("Audio Powertool: Press Apply")
+    print ("Default: Press Apply")
+
 
 
 # Apply PA Button
 def applyPA():
-    CvPabitdepth=(vPabitdepth.get())
+    CvPaBitdepth=(vPaBitdepth.get())
     CvPaPriRate=(vPaPriRate.get())
     CvPaAltRate=(vPaAltRate.get())
     CvPaRe=(vPaRe.get())
 
-    subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPabitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
+    subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
 
-# Show samlerate
+# The current PulseAudio output setting is passed to variable
+
+# ---------- Note ----------
+# the output string has a "/n" in the end
+# that's why here is this workaround. 😘
 def showsamplerate():
-    showsamplerateoutput=subprocess.check_output('pacmd list-sinks | grep sample',shell=True)
-    bitdepthtextvariable.set(showsamplerateoutput)
+    showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],shell=True);
+    ShvPaOut.set((showsamplerateoutput[1:31]))
 
 # Close Window
 def close_window():
