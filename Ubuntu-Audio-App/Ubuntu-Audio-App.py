@@ -233,7 +233,7 @@ def main():
 
 
 # Button Show Samplerate
-    apply_btn3=Button(frame1,text='Show Current PA Output (Manua refresh)',command=showsamplerate)
+    apply_btn3=Button(frame1,text='Show Current PA Output (Manual refresh)',command=showsamplerate)
     apply_btn3.grid(row=0,column=3)
 
  # PAGE2 Maincode
