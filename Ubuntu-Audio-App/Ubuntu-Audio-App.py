@@ -42,7 +42,7 @@ def main():
     frame0.grid(row=0,column=0,columnspan=9,rowspan=2,sticky='nesw')
     # frame
     frame1=tkinter.LabelFrame(frame0,bg="black")
-    frame1.grid(row=0,rowspan=4,column=1)
+    frame1.grid(row=0,rowspan=5,column=1)
 
 	# Set the black background on app
     frame2=Label(frame1,bg="white")
@@ -79,22 +79,26 @@ def main():
 # End ----------
 
 	# Label Resample method rowspan=4
-    label=Label(frame0,text="  Set Bit Depth  ")
+    label=Label(frame0,text="  Bit Depth  ")
     label.grid(row=0,column=0,sticky='nsw')
 
 # ---------- BithDepth Radio Buttons ----------
 
+	# Set the BithDepth value to Default for variable vPaBitdepth
+    RadBit16=Radiobutton(frame0,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16.grid(row=1,column=0,sticky='nsw')
+
 	# Set the BithDepth value to 16 Bit for variable vPaBitdepth
     RadBit16=Radiobutton(frame0,text='16 Bit',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=9)
-    RadBit16.grid(row=1,column=0,sticky='nsw')
+    RadBit16.grid(row=2,column=0,sticky='nsw')
 
     # Set the BithDepth value to 24 Bit for variable vPaBitdepth
     RadBit24=Radiobutton(frame0,text='24 Bit',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=9)
-    RadBit24.grid(row=2,column=0,sticky='nsw')
+    RadBit24.grid(row=3,column=0,sticky='nsw')
 
     # Set the BithDepth value to 32 Bit for variable vPaBitdepth
     RadBit32=Radiobutton(frame0,text='32 Bit',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
-    RadBit32.grid(row=3,column=0,sticky='nsw')
+    RadBit32.grid(row=4,column=0,sticky='nsw')
 
 # End ----------
 
@@ -107,25 +111,25 @@ def main():
     label=Label(page1,text="Primary Sample rate")
     label.grid(row=6,column=1,columnspan=2)
 
+	# Set the BithDepth value to default for variable vPaBitdepth
+    RadPriRateDefault=Radiobutton(page1,text='Default',variable=vPaPriRate,value='; default-sample-rate = 44100',command=PaPriRate,width=9)
+    RadPriRateDefault.grid(row=6,column=3)
+
 	# Set the BithDepth value to 44,100 Hz for variable vPaBitdepth
     RadPriRate44100=Radiobutton(page1,text='44,100 Hz',variable=vPaPriRate,value='  default-sample-rate = 44100',command=PaPriRate,width=9)
-    RadPriRate44100.grid(row=6,column=3)
+    RadPriRate44100.grid(row=6,column=4)
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaBitdepth
     RadPriRate48000=Radiobutton(page1,text='48,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 48000',command=PaPriRate,width=9)
-    RadPriRate48000.grid(row=6,column=4)
+    RadPriRate48000.grid(row=6,column=5)
 
 	# Set the BithDepth value to 88,200 Hz for variable vPaBitdepth
     RadPriRate88200=Radiobutton(page1,text='88,200 Hz',variable=vPaPriRate,value='  default-sample-rate = 88200',command=PaPriRate,width=9)
-    RadPriRate88200.grid(row=6,column=5)
+    RadPriRate88200.grid(row=6,column=6)
 
 	# Set the BithDepth value to 96,000 Hz for variable vPaBitdepth
     RadPriRate96000=Radiobutton(page1,text='96,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 96000',command=PaPriRate,width=9)
-    RadPriRate96000.grid(row=6,column=6)
-
-	# Set the BithDepth value to 192,000 Hz for variable vPaBitdepth
-#    RadPriRate192000=Radiobutton(page1,text='192,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 192000',command=PaPriRate,width=9)
-#    RadPriRate192000.grid(row=6,column=7)
+    RadPriRate96000.grid(row=6,column=7)
 
 # End ----------
 
@@ -135,9 +139,9 @@ def main():
     label=Label(page1,text="Alternative Sample rate")
     label.grid(row=7,column=1,columnspan = 2)
 
-	# Set the BithDepth value to 44,100 Hz for variable vPaAltRate
-#    RadAltRate44100=Radiobutton(page1,text='44,100 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 44100',command=PaAltRate,width=9)
-#    RadAltRate44100.grid(row=7,column=3)
+	# Set the BithDepth value to default for variable vPaAltRate
+    RadAltRateDefault=Radiobutton(page1,text='Default',variable=vPaAltRate,value='; alternate-sample-rate = 48000',command=PaAltRate,width=9)
+    RadAltRateDefault.grid(row=7,column=3)
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaAltRate
     RadAltRate48000=Radiobutton(page1,text='48,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=9)
@@ -233,7 +237,7 @@ def main():
 
 
 # Button Show Samplerate
-    apply_btn3=Button(frame1,text='Show Current PA Output (Manual refresh)',command=showsamplerate)
+    apply_btn3=Button(frame1,text='Show Current PA Output (Click to refresh)',command=showsamplerate)
     apply_btn3.grid(row=0,column=3)
 
  # PAGE2 Maincode
