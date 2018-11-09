@@ -225,10 +225,10 @@ def main():
 # Make Default Button and
 # Apply Button disable it self for few seconds after button press 😘
 
-    apply_btn1=Button(frame3,text='Default Values',command=defaultpulsebutton)
+    apply_btn1=Button(frame3,text='Default Settings',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,padx=5,pady=5)
 
-    apply_btn1=Button(frame3,text='Recommended Values',command=recommendedpulsebutton)
+    apply_btn1=Button(frame3,text='Recommended Settings',command=recommendedpulsebutton)
     apply_btn1.grid(row=12,column=3,padx=5,pady=5)
 
     apply_btn2=Button(frame3,text='Apply & Restart pulseaudio',command=applyPA)
