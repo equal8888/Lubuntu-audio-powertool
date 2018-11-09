@@ -225,11 +225,14 @@ def main():
     # Separator3
     ttk.Separator(page1).grid(row=11,column=0,columnspan=11,sticky="ew")
 
-	# Set the Buttons (Default Settings, User Profile 01, Apply)
+	# Set the Buttons (Default Settings)
     frame5=Label(page1)
     frame5.grid(row=12,column=0,columnspan=11,sticky='nesw')
 
 
+	# Set the Apply Button 
+    frame6=Label(page1)
+    frame6.grid(row=12,column=6,columnspan=11,sticky='nesw')
 # ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
@@ -239,17 +242,14 @@ def main():
     apply_btn1=Button(frame5,text='Default Settings',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,padx=5,pady=5)
 
-    apply_btn1=Button(frame5,text='User Profile 01',command=userpulsebutton)
-    apply_btn1.grid(row=12,column=3,padx=5,pady=5)
-
-    apply_btn2=Button(frame5,text='Apply & Restart pulseaudio',command=applyPA)
-    apply_btn2.grid(row=12,column=6,padx=15,pady=5,sticky='e')
+    apply_btn2=Button(frame6,text='Apply & Restart pulseaudio',command=applyPA)
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='e')
 
 # End ----------
 
 # Text below app
-    label=Label(frame5,text="Press apply for changes to take effect")
-    label.grid(row=12,column=4,padx=5)
+    label=Label(frame6,text="Press apply for changes to take effect")
+    label.grid(row=1,column=0,padx=5)
 
 
 # Button Show Samplerate
@@ -349,23 +349,6 @@ def defaultpulsebutton():
     print ("-----------------------------")
 
 # End ----------
-
-# Recommended values button
-def userpulsebutton():
-# Set new values for variables
-    vPaBitdepth.set('  default-sample-format = s24le')
-    vPaPriRate.set('  default-sample-rate = 48000')
-    vPaAltRate.set('  alternate-sample-rate = 96000')
-    vPaRe.set('; resample-method = speex-float-1')
-# Show variables
-    print ("-----------------------------")
-    print(vPaBitdepth.get())
-    print(vPaPriRate.get())
-    print(vPaAltRate.get())
-    print(vPaRe.get())
-    print ("-----------------------------")
-# End ----------
-
 
 # Apply PA Button
 def applyPA():
