@@ -27,11 +27,11 @@ def main():
 
 	# Page 1 PulseAudio
     page1=ttk.Frame(nb)
-    nb.add(page1,text='PulseAudio (SOFTWARE Mixer)')
+    nb.add(page1,text='PulseAudio (Software Mixer)')
 
 	# Page 2 ALSA
     page2=ttk.Frame(nb)
-    nb.add(page2,text='ALSA (HARDWARE Mixer)')
+    nb.add(page2,text='ALSA (Hardware Mixer)')
 
 # End ----------
 
