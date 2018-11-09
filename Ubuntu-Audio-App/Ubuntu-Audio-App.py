@@ -27,7 +27,7 @@ def main():
 
 	# Page 1 PulseAudio
     page1=ttk.Frame(nb)
-    nb.add(page1,text='PulseAudio')
+    nb.add(page1,text='PulseAudio (SOFTWARE Mixer)')
 
 	# Page 2 ALSA
     page2=ttk.Frame(nb)
@@ -79,7 +79,7 @@ def main():
 # End ----------
 
 	# Label Resample method rowspan=4
-    label=Label(frame0,text="  Set bit depth  ")
+    label=Label(frame0,text="  Set Bit Depth  ")
     label.grid(row=0,column=0,sticky='nsw')
 
 # ---------- BithDepth Radio Buttons ----------
@@ -124,8 +124,8 @@ def main():
     RadPriRate96000.grid(row=6,column=6)
 
 	# Set the BithDepth value to 192,000 Hz for variable vPaBitdepth
-    RadPriRate192000=Radiobutton(page1,text='192,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 192000',command=PaPriRate,width=9)
-    RadPriRate192000.grid(row=6,column=7)
+#    RadPriRate192000=Radiobutton(page1,text='192,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 192000',command=PaPriRate,width=9)
+#    RadPriRate192000.grid(row=6,column=7)
 
 # End ----------
 
@@ -136,8 +136,8 @@ def main():
     label.grid(row=7,column=1,columnspan = 2)
 
 	# Set the BithDepth value to 44,100 Hz for variable vPaAltRate
-    RadAltRate44100=Radiobutton(page1,text='44,100 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 44100',command=PaAltRate,width=9)
-    RadAltRate44100.grid(row=7,column=3)
+#    RadAltRate44100=Radiobutton(page1,text='44,100 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 44100',command=PaAltRate,width=9)
+#    RadAltRate44100.grid(row=7,column=3)
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaAltRate
     RadAltRate48000=Radiobutton(page1,text='48,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=9)
@@ -284,8 +284,8 @@ ShvPaOut=StringVar() 				# Show Current PA output
 # ---------- Set some Values for Variable on app startup ----------
 
 vPaBitdepth.set('  default-sample-format = s24le') 		# PulseAudio BithDepth
-vPaPriRate.set('  default-sample-rate = 48000') 			# PulseAudio Primary Samplerate
-vPaAltRate.set('  alternate-sample-rate = 44100') 		# PulseAudio Alternative Samplerate
+vPaPriRate.set('  default-sample-rate = 44100') 		# PulseAudio Primary Samplerate
+vPaAltRate.set('  alternate-sample-rate = 48000') 		# PulseAudio Alternative Samplerate
 vPaRe.set('; resample-method = speex-float-1') 			# PulseAudio Resample method
 ShvPaOut.set('')										# Show Current PA output
 
@@ -311,7 +311,7 @@ def PaOut():
 # ---------- Button Commands ----------
 
 def helpmenu01():
-    tkinter.messagebox.showinfo("About Audio Powertool: ","Dont set sample rate to 'maximum option available' \n \nthat will do audio resampling and you dont want that!\n \n App will reconfigure pulseaudio daemon.conf file")
+    tkinter.messagebox.showinfo("About Audio Powertool: ","PulseAudio is only a SOFTWARE MIXER' \n \nDont set the Samplerate to Maximum option available\n \nthat will do audio resampling and you dont want that!\n \n App will reconfigure pulseaudio daemon.conf file")
 
 # Default button
 def defaultpulsebutton():
@@ -344,6 +344,8 @@ def applyPA():
 def showsamplerate():
     showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],shell=True);
     ShvPaOut.set(showsamplerateoutput[1:31])
+# Show the command also on terminal -->
+    subprocess.call('pacmd list-sinks | grep sample', shell=True)
 
 # End ----------
 
