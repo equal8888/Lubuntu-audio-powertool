@@ -38,7 +38,7 @@ def main():
 # -------------------- Tab 1 (PulseAudio) --------------------
 
 
-    frame0=tkinter.LabelFrame(page1)
+    frame0=tkinter.LabelFrame(page1,bd=1)
     frame0.grid(row=0,column=0,columnspan=9,rowspan=2,sticky='nesw')
     # frame
     frame1=tkinter.LabelFrame(frame0,bg="black")
@@ -104,119 +104,128 @@ def main():
 
 # ---------- Primary Samplerate Radio Buttons ----------
 
+    frame3=Label(page1)
+    frame3.grid(row=5,column=0,columnspan=8,sticky='nesw')
+
+    frame4=Label(frame3)
+    frame4.grid(row=5,column=0,columnspan=8,sticky='nesw')
+
 	# Label
-    label=Label(page1,text="Primary Sample rate")
-    label.grid(row=6,column=1,columnspan=2)
+    label=Label(frame4,text="Primary Sample rate")
+    label.grid(row=1,column=1)
 
 	# Set the BithDepth value to default for variable vPaBitdepth
-    RadPriRateDefault=Radiobutton(page1,text='Default',variable=vPaPriRate,value='; default-sample-rate = 44100',command=PaPriRate,width=9)
-    RadPriRateDefault.grid(row=6,column=3)
+    RadPriRateDefault=Radiobutton(frame4,text='Default',variable=vPaPriRate,value='; default-sample-rate = 44100',command=PaPriRate,width=9)
+    RadPriRateDefault.grid(row=1,column=2)
 
 	# Set the BithDepth value to 44,100 Hz for variable vPaBitdepth
-    RadPriRate44100=Radiobutton(page1,text='44,100 Hz',variable=vPaPriRate,value='  default-sample-rate = 44100',command=PaPriRate,width=9)
-    RadPriRate44100.grid(row=6,column=4)
+    RadPriRate44100=Radiobutton(frame4,text='44,100 Hz',variable=vPaPriRate,value='  default-sample-rate = 44100',command=PaPriRate,width=9)
+    RadPriRate44100.grid(row=1,column=3)
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaBitdepth
-    RadPriRate48000=Radiobutton(page1,text='48,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 48000',command=PaPriRate,width=9)
-    RadPriRate48000.grid(row=6,column=5)
+    RadPriRate48000=Radiobutton(frame4,text='48,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 48000',command=PaPriRate,width=9)
+    RadPriRate48000.grid(row=1,column=4)
 
 	# Set the BithDepth value to 88,200 Hz for variable vPaBitdepth
-    RadPriRate88200=Radiobutton(page1,text='88,200 Hz',variable=vPaPriRate,value='  default-sample-rate = 88200',command=PaPriRate,width=9)
-    RadPriRate88200.grid(row=6,column=6)
+    RadPriRate88200=Radiobutton(frame4,text='88,200 Hz',variable=vPaPriRate,value='  default-sample-rate = 88200',command=PaPriRate,width=9)
+    RadPriRate88200.grid(row=1,column=5)
 
 	# Set the BithDepth value to 96,000 Hz for variable vPaBitdepth
-    RadPriRate96000=Radiobutton(page1,text='96,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 96000',command=PaPriRate,width=9)
-    RadPriRate96000.grid(row=6,column=7)
+    RadPriRate96000=Radiobutton(frame4,text='96,000 Hz',variable=vPaPriRate,value='  default-sample-rate = 96000',command=PaPriRate,width=9)
+    RadPriRate96000.grid(row=1,column=6)
 
 # End ----------
 
 # ---------- Alternative Samplerate Radio Buttons ----------
 
 	# Label
-    label=Label(page1,text="Alternative Sample rate")
-    label.grid(row=7,column=1,columnspan = 2)
+    label=Label(frame4,text="Alternative Sample rate")
+    label.grid(row=2,column=1)
 
 	# Set the BithDepth value to default for variable vPaAltRate
-    RadAltRateDefault=Radiobutton(page1,text='Default',variable=vPaAltRate,value='; alternate-sample-rate = 48000',command=PaAltRate,width=9)
-    RadAltRateDefault.grid(row=7,column=3)
+    RadAltRateDefault=Radiobutton(frame4,text='Default',variable=vPaAltRate,value='; alternate-sample-rate = 48000',command=PaAltRate,width=9)
+    RadAltRateDefault.grid(row=2,column=2)
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaAltRate
-    RadAltRate48000=Radiobutton(page1,text='48,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=9)
-    RadAltRate48000.grid(row=7,column=4)
+    RadAltRate48000=Radiobutton(frame4,text='48,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=9)
+    RadAltRate48000.grid(row=2,column=3)
 
 	# Set the BithDepth value to 88,200 Hz for variable vPaAltRate
-    RadAltRate48000=Radiobutton(page1,text='88,200 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 88200',command=PaAltRate,width=9)
-    RadAltRate48000.grid(row=7,column=5)
+    RadAltRate48000=Radiobutton(frame4,text='88,200 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 88200',command=PaAltRate,width=9)
+    RadAltRate48000.grid(row=2,column=4)
 
 	# Set the BithDepth value to 96,000 Hz for variable vPaAltRate
-    RadAltRate96000=Radiobutton(page1,text='96,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 96000',command=PaAltRate,width=9)
-    RadAltRate96000.grid(row=7,column=6)
+    RadAltRate96000=Radiobutton(frame4,text='96,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 96000',command=PaAltRate,width=9)
+    RadAltRate96000.grid(row=2,column=5)
 
 	# Set the BithDepth value to 192,000 Hz for variable vPaAltRate
-    RadAltRate192000=Radiobutton(page1,text='192,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 192000',command=PaAltRate,width=9)
-    RadAltRate192000.grid(row=7,column=7)
+    RadAltRate192000=Radiobutton(frame4,text='192,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 192000',command=PaAltRate,width=9)
+    RadAltRate192000.grid(row=2,column=6)
 
 # End ----------
 
     # Separator-2
-    ttk.Separator(page1).grid(row=8,column=1,columnspan=11,sticky="ew")
+    ttk.Separator(page1).grid(row=8,column=0,columnspan=11,sticky="ew")
 
 # ---------- Resample method Radio Buttons ----------
+    frame5=Label(page1)
+    frame5.grid(row=9,column=0,columnspan=8,sticky='nesw')
+
 
     # Label Resample method
-    label=Label(page1,text="Resample method")
-    label.grid(row=9,column=1,columnspan = 2,pady=4)
+    label=Label(frame5,text="Resample method")
+    label.grid(row=1,column=1,pady=4)
 
 #    vPaRespeexfloatN=Radiobutton(page1,indicatoron=0,text='???',variable=vPaRe,value='resample-method = speex-float-N',command=PaRe,width=12)
 #    vPaRespeexfloatN.grid(row=9,column=3)
 
 	# Set the Resample value to speexfloat-10 for variable vPaRe
-    vPaRespeexfloat10=Radiobutton(page1,indicatoron=0,text='speexfloat-10',variable=vPaRe,value='  resample-method = speex-float-10',command=PaRe,width=12)
-    vPaRespeexfloat10.grid(row=9,column=4)
+    vPaRespeexfloat10=Radiobutton(frame5,indicatoron=0,text='speexfloat-10',variable=vPaRe,value='  resample-method = speex-float-10',command=PaRe,width=12)
+    vPaRespeexfloat10.grid(row=1,column=4)
 
 	# Set the Resample value to medium for variable vPaRe
-    vPaRemedium=Radiobutton(page1,indicatoron=0,text='medium',variable=vPaRe,value='  resample-method = src-sinc-medium-quality',command=PaRe,width=12)
-    vPaRemedium.grid(row=9,column=5)
+    vPaRemedium=Radiobutton(frame5,indicatoron=0,text='medium',variable=vPaRe,value='  resample-method = src-sinc-medium-quality',command=PaRe,width=12)
+    vPaRemedium.grid(row=1,column=5)
 
 	# Set the Resample value to best for variable vPaRe
-    vPaRebest=Radiobutton(page1,indicatoron=0,text='best',variable=vPaRe,value='  resample-method = src-sinc-best-quality',command=PaRe,width=12)
-    vPaRebest.grid(row=9,column=6)
+    vPaRebest=Radiobutton(frame5,indicatoron=0,text='best',variable=vPaRe,value='  resample-method = src-sinc-best-quality',command=PaRe,width=12)
+    vPaRebest.grid(row=1,column=6)
 
 	# Set the Resample value to zero-orderhold for variable vPaRe
-    vPaRezeroOrderhold=Radiobutton(page1,indicatoron=0,text='zero-orderhold',variable=vPaRe,value='  resample-method = src-zero-order-hold',command=PaRe,width=12)
-    vPaRezeroOrderhold.grid(row=9, column=7)
+    vPaRezeroOrderhold=Radiobutton(frame5,indicatoron=0,text='zero-orderhold',variable=vPaRe,value='  resample-method = src-zero-order-hold',command=PaRe,width=12)
+    vPaRezeroOrderhold.grid(row=1, column=7)
 
 	# Set the Resample value to Default Resampling for variable vPaRe
-    vPaReStopResampling=Radiobutton(page1,indicatoron=0,text='Default Resampling',variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=25)
-    vPaReStopResampling.grid(row=10,column=1,columnspan=2)
+    vPaReStopResampling=Radiobutton(frame5,indicatoron=0,text='Default Resampling',variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=25)
+    vPaReStopResampling.grid(row=2,column=1,columnspan=2)
 
 #    vPaReresamplemethod=Radiobutton(page1,indicatoron=0,text='???',variable=vPaRe,value='resample-method = speex-fixed-N',command=PaRe,width=12)
 #    vPaReresamplemethod.grid(row=10,column=3)
 
 	# Set the Resample value to ffmpeg for variable vPaRe
-    vPaReffmpeg=Radiobutton(page1,indicatoron=0,text='ffmpeg',variable=vPaRe,value='  resample-method = ffmpeg',command=PaRe,width=12)
-    vPaReffmpeg.grid(row=10,column=4)
+    vPaReffmpeg=Radiobutton(frame5,indicatoron=0,text='ffmpeg',variable=vPaRe,value='  resample-method = ffmpeg',command=PaRe,width=12)
+    vPaReffmpeg.grid(row=2,column=4)
 
 	# Set the Resample value to src-linear for variable vPaRe
-    vPaResrclinear=Radiobutton(page1,indicatoron=0,text='src-linear',variable=vPaRe,value='  resample-method = src-linear',command=PaRe,width=12)
-    vPaResrclinear.grid(row=10,column=5)
+    vPaResrclinear=Radiobutton(frame5,indicatoron=0,text='src-linear',variable=vPaRe,value='  resample-method = src-linear',command=PaRe,width=12)
+    vPaResrclinear.grid(row=2,column=5)
 
 	# Set the Resample value to soxr-hq for variable vPaRe
-    vPaResoxrhq=Radiobutton(page1,indicatoron=0,text='soxr-hq',variable=vPaRe,value='  resample-method = soxr-hq',command=PaRe,width=12)
-    vPaResoxrhq.grid(row=10,column=6)
+    vPaResoxrhq=Radiobutton(frame5,indicatoron=0,text='soxr-hq',variable=vPaRe,value='  resample-method = soxr-hq',command=PaRe,width=12)
+    vPaResoxrhq.grid(row=2,column=6)
 
 	# Set the Resample value to soxr-vhq for variable vPaRe
-    vPaResoxrvhq=Radiobutton(page1,indicatoron=0,text='soxr-vhq',variable=vPaRe,value='  resample-method = soxr-vhq',command=PaRe,width=12)
-    vPaResoxrvhq.grid(row=10,column=7)
+    vPaResoxrvhq=Radiobutton(frame5,indicatoron=0,text='soxr-vhq',variable=vPaRe,value='  resample-method = soxr-vhq',command=PaRe,width=12)
+    vPaResoxrvhq.grid(row=2,column=7)
 
 # End ----------
 
     # Separator3
-    ttk.Separator(page1).grid(row=11,column=1,columnspan=11,sticky="ew")
+    ttk.Separator(page1).grid(row=11,column=0,columnspan=11,sticky="ew")
 
 	# Set the black background on app
-    frame3=Label(page1)
-    frame3.grid(row=12,column=0,columnspan=11,sticky='nesw')
+    frame5=Label(page1)
+    frame5.grid(row=12,column=0,columnspan=11,sticky='nesw')
 
 
 # ---------- Default & Apply PA Button ----------
@@ -225,19 +234,19 @@ def main():
 # Make Default Button and
 # Apply Button disable it self for few seconds after button press 😘
 
-    apply_btn1=Button(frame3,text='Default Settings',command=defaultpulsebutton)
+    apply_btn1=Button(frame5,text='Default Settings',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,padx=5,pady=5)
 
-    apply_btn1=Button(frame3,text='Recommended Settings',command=recommendedpulsebutton)
+    apply_btn1=Button(frame5,text='Recommended Settings',command=recommendedpulsebutton)
     apply_btn1.grid(row=12,column=3,padx=5,pady=5)
 
-    apply_btn2=Button(frame3,text='Apply & Restart pulseaudio',command=applyPA)
+    apply_btn2=Button(frame5,text='Apply & Restart pulseaudio',command=applyPA)
     apply_btn2.grid(row=12,column=6,padx=5,pady=5,sticky='e')
 
 # End ----------
 
 # Text below app bg="black",fg='white',
-    label=Label(frame3,text="Apply for changes to take effect")
+    label=Label(frame5,text="Apply for changes to take effect")
     label.grid(row=12,column=4)
 
 
