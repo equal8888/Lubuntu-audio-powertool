@@ -31,7 +31,7 @@ def main():
 
 	# Page 2 ALSA
     page2=ttk.Frame(nb)
-    nb.add(page2,text='ALSA')
+    nb.add(page2,text='ALSA (HARDWARE Mixer)')
 
 # End ----------
 
@@ -101,9 +101,6 @@ def main():
     RadBit32.grid(row=4,column=0,sticky='nsw')
 
 # End ----------
-
-    # Separator-1
-    ttk.Separator(page1).grid(row=5,column=1,columnspan=11,sticky="ew")
 
 # ---------- Primary Samplerate Radio Buttons ----------
 
@@ -217,23 +214,31 @@ def main():
     # Separator3
     ttk.Separator(page1).grid(row=11,column=1,columnspan=11,sticky="ew")
 
+	# Set the black background on app
+    frame3=Label(page1)
+    frame3.grid(row=12,column=0,columnspan=11,sticky='nesw')
+
+
 # ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
-# Default Button and
-# Apply Button should to disable it self for few seconds after button press 😘
+# Make Default Button and
+# Apply Button disable it self for few seconds after button press 😘
 
-    apply_btn1=Button(page1,text='Default Values',command=defaultpulsebutton)
-    apply_btn1.grid(row=12,column=1,columnspan=2,padx=5,pady=5)
+    apply_btn1=Button(frame3,text='Default Values',command=defaultpulsebutton)
+    apply_btn1.grid(row=12,column=1,padx=5,pady=5)
 
-    apply_btn2=Button(page1,text='Apply & Restart pulseaudio',command=applyPA)
-    apply_btn2.grid(row=12,column=6,columnspan=5,padx=5,pady=5)
+    apply_btn1=Button(frame3,text='Recommended Values',command=recommendedpulsebutton)
+    apply_btn1.grid(row=12,column=3,padx=5,pady=5)
+
+    apply_btn2=Button(frame3,text='Apply & Restart pulseaudio',command=applyPA)
+    apply_btn2.grid(row=12,column=6,padx=5,pady=5,sticky='e')
 
 # End ----------
 
-# Text below app
-    label=Label(page1,text="Restarting services take few seconds")
-    label.grid(row=12,column=3,columnspan=3)
+# Text below app bg="black",fg='white',
+    label=Label(frame3,text="press apply for changes to take effect")
+    label.grid(row=12,column=4)
 
 
 # Button Show Samplerate
@@ -315,7 +320,7 @@ def PaOut():
 # ---------- Button Commands ----------
 
 def helpmenu01():
-    tkinter.messagebox.showinfo("About Audio Powertool: ","PulseAudio is only a SOFTWARE MIXER' \n \nDont set the Samplerate to Maximum option available\n \nthat will do audio resampling and you dont want that!\n \n App will reconfigure pulseaudio daemon.conf file")
+    tkinter.messagebox.showinfo("About Audio Powertool: ","PulseAudio is only a SOFTWARE MIXER' \n \nDont set the Samplerate to Maximum option available\n \nthat will do audio resampling and you dont want that!")
 
 # Default button
 def defaultpulsebutton():
@@ -330,6 +335,26 @@ def defaultpulsebutton():
     print(vPaPriRate.get())
     print(vPaAltRate.get())
     print(vPaRe.get())
+    print ("-----------------------------")
+
+# End ----------
+
+# Recommended values button
+def recommendedpulsebutton():
+# Set new values for variables
+    vPaBitdepth.set('  default-sample-format = s24le')
+    vPaPriRate.set('  default-sample-rate = 44100')
+    vPaAltRate.set('  alternate-sample-rate = 48000')
+    vPaRe.set('; resample-method = speex-float-1')
+# Show variables
+    print ("-----------------------------")
+    print(vPaBitdepth.get())
+    print(vPaPriRate.get())
+    print(vPaAltRate.get())
+    print(vPaRe.get())
+    print ("-----------------------------")
+# End ----------
+
 
 # Apply PA Button
 def applyPA():
