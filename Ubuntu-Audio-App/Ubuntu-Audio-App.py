@@ -237,7 +237,7 @@ def main():
 # End ----------
 
 # Text below app bg="black",fg='white',
-    label=Label(frame3,text="press apply for changes to take effect")
+    label=Label(frame3,text="Apply for changes to take effect")
     label.grid(row=12,column=4)
 
 
