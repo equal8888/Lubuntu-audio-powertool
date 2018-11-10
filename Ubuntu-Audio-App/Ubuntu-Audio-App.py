@@ -230,7 +230,7 @@ def main():
     frame5.grid(row=12,column=0,columnspan=11,sticky='nesw')
 
 
-	# Set the Apply Button 
+	# Set the Apply Button
     frame6=Label(page1)
     frame6.grid(row=12,column=6,columnspan=11,sticky='nesw')
 # ---------- Default & Apply PA Button ----------
@@ -359,16 +359,12 @@ def applyPA():
 
     subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
 
-# The current PulseAudio output setting is passed to variable
+# The current PulseAudio output setting is passed to variable and printed to terminal
 
-# ---------- Note ----------
-# the output string has a "/n" in the end
-# that's why here is this workaround. 😘
 def showsamplerate():
-    showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],shell=True);
-    ShvPaOut.set(showsamplerateoutput[1:31])
-# Show the command also on terminal -->
-    subprocess.call('pacmd list-sinks | grep sample', shell=True)
+    showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True).strip();
+    ShvPaOut.set(showsamplerateoutput)
+    print (ShvPaOut.get())
 
 # End ----------
 
