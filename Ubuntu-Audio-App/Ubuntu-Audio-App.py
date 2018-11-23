@@ -149,19 +149,19 @@ def main():
     RadAltRateDefault.grid(row=2,column=2)
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaAltRate
-    RadAltRate48000=Radiobutton(frame4,text='48,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=9)
+    RadAltRate48000=Radiobutton(frame4,text='44,100 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 44100',command=PaAltRate,width=9)
     RadAltRate48000.grid(row=2,column=3)
 
 	# Set the BithDepth value to 88,200 Hz for variable vPaAltRate
-    RadAltRate48000=Radiobutton(frame4,text='88,200 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 88200',command=PaAltRate,width=9)
+    RadAltRate48000=Radiobutton(frame4,text='48,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=9)
     RadAltRate48000.grid(row=2,column=4)
 
 	# Set the BithDepth value to 96,000 Hz for variable vPaAltRate
-    RadAltRate96000=Radiobutton(frame4,text='96,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 96000',command=PaAltRate,width=9)
+    RadAltRate96000=Radiobutton(frame4,text='88,200 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 88200',command=PaAltRate,width=9)
     RadAltRate96000.grid(row=2,column=5)
 
 	# Set the BithDepth value to 192,000 Hz for variable vPaAltRate
-    RadAltRate192000=Radiobutton(frame4,text='192,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 192000',command=PaAltRate,width=9)
+    RadAltRate192000=Radiobutton(frame4,text='96,000 Hz',variable=vPaAltRate,value='  alternate-sample-rate = 96000',command=PaAltRate,width=9)
     RadAltRate192000.grid(row=2,column=6)
 
 # End ----------
