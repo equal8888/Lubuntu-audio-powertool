@@ -1,4 +1,4 @@
-## This isnt a real app !!! but I made a readme for it anyways 😉
+## This isnt a real app !!! Non working ALSA repo 😉
 <img src="https://drive.google.com/uc?id=1SUkGyXMAlLDD6wMpfgIOYbf75QFv_0mi" width="auto" height="200"/>
 <br>
  <strong>Current Development stage 0.4 </strong> 😔
@@ -27,4 +27,3 @@ chmod some files on app root directory
 ```
 chmod +x  Ubuntu-Audio-App/*
 ```
-
