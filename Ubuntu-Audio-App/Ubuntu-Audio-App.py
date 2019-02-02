@@ -265,41 +265,57 @@ def main():
 
     # page2 frame
     frame102=tkinter.LabelFrame(frame101,bg="black")
-    frame102.grid(row=0,rowspan=5,column=1)
-
+    frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
 
 	# Label Resample method rowspan=4
-    label=Label(frame101,text="  Default Device  ")
-    label.grid(row=0,column=0,sticky='nsw')
+    label=Label(frame101,text="  Set Device  ")
+    label.grid(row=0,column=0,padx=5,pady=5,sticky='nesw')
 
-# ---------- Default Device ----------
+    # page2 blackframe
+#    frame1=tkinter.LabelFrame(frame0,bg="black")
+#    frame1.grid(row=0,rowspan=5,column=1)
 
-	# Set the device value to Default for variable ALSA Device
-    RadBit16=Radiobutton(frame101,text='Default',variable=vADefDev,value='  default',command=ADefDev,width=9)
-    RadBit16.grid(row=1,column=0,sticky='nsw')
+    # ---------- Show Device Info ----------
 
-	# Set the device value to 1 for variable ALSA Device
-    RadBit16=Radiobutton(frame101,text='1',variable=vADefDev,value='  1',command=ADefDev,width=9)
+    # Show Devices list
+    label=Label(frame102,textvariable=vADefDevList,fg='grey',bg='black',font=('Monospace Regular',11))
+    label.grid(row=0,column=1,sticky='esw')
+    # End ----------
+
+    # Button Show Devices
+    apply_btn3=Button(frame101,text='Show Device List',command=showalsadevices)
+    apply_btn3.grid(row=0,column=1,padx=5,pady=5,sticky='nesw')
+
+# ---------- ALSA Device Select ----------
+
+	# Set the device value to 0 for variable ALSA Device
+    RadBit16=Radiobutton(frame101,text='0   -->',variable=vADefDev,value='0',command=ADefDev,width=9)
     RadBit16.grid(row=2,column=0,sticky='nsw')
 
-	# Set the device value to 2 for variable ALSA Device
-    RadBit24=Radiobutton(frame101,text='2',variable=vADefDev,value='  2',command=ADefDev,width=9)
+	# Set the device value to 1 for variable ALSA Device
+    RadBit24=Radiobutton(frame101,text='1   -->',variable=vADefDev,value='1',command=ADefDev,width=9)
     RadBit24.grid(row=3,column=0,sticky='nsw')
 
-	# Set the device value to 3 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='3',variable=vADefDev,value='  3',command=ADefDev,width=9)
+	# Set the device value to 2 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='2   -->',variable=vADefDev,value='2',command=ADefDev,width=9)
     RadBit32.grid(row=4,column=0,sticky='nsw')
 
-	# Set the device value to 4 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='4',variable=vADefDev,value='  4',command=ADefDev,width=9)
+	# Set the device value to 3 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='3   -->',variable=vADefDev,value='3',command=ADefDev,width=9)
     RadBit32.grid(row=5,column=0,sticky='nsw')
 
-	# Set the device value to 5 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='5',variable=vADefDev,value='  5',command=ADefDev,width=9)
+	# Set the device value to 4 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='4   -->',variable=vADefDev,value='4',command=ADefDev,width=9)
     RadBit32.grid(row=6,column=0,sticky='nsw')
+
+	# Set the device value to 5 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='5   -->',variable=vADefDev,value='5',command=ADefDev,width=9)
+    RadBit32.grid(row=7,column=0,sticky='nsw')
 
 # End ----------
 
+    apply_btn2=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
+    apply_btn2.grid(row=8,column=0,columnspan=2,padx=5,pady=5,sticky='nesw')
 
 # ----------------- Menubar  -----------------
 
@@ -336,6 +352,7 @@ ShvPaOut=StringVar() 				# Show Current PA output
 
 # ALSA
 vADefDev=StringVar() 			    # ALSA Default Device
+vADefDevList=StringVar() 		        # ALSA device name list
 
 # End ----------
 
@@ -349,7 +366,8 @@ vPaRe.set('; resample-method = speex-float-1') 			# PulseAudio Resample method
 ShvPaOut.set('')										# Show Current PA output
 
 # ALSA
-vADefDev.set('1') 		# ALSA Default Device
+vADefDev.set('NULL') 		# ALSA Default Device
+vADefDevList.set('') 		# ALSA Default name list
 
 # ---------- Print Variable Data ----------
 
@@ -408,12 +426,24 @@ def applyPA():
     subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
 
 # The current PulseAudio output setting is passed to variable and printed to terminal
-
 def showsamplerate():
     showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True).strip();
     ShvPaOut.set(showsamplerateoutput)
     print (ShvPaOut.get())
+# End ----------
 
+# Apply ALSA Button
+def applyAL():
+    cADefDev=(vADefDev.get())
+    cADefDev=(vADefDev.get())
+    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | sudo alsa force-reload'.format(cADefDev,cADefDev),shell=True);
+
+
+# The current ALSA device list is passed to variable and printed to terminal
+def showalsadevices():
+    showalsadeviceslist=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
+    vADefDevList.set(showalsadeviceslist)
+    print (vADefDevList.get())
 # End ----------
 
 # Close Window
