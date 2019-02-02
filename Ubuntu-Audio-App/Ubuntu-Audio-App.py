@@ -37,14 +37,15 @@ def main():
 
 # -------------------- Tab 1 (PulseAudio) --------------------
 
-
+    # page1 main frame
     frame0=tkinter.LabelFrame(page1,bd=1)
     frame0.grid(row=0,column=0,columnspan=9,rowspan=2,sticky='nesw')
-    # frame
+
+    # page1 frame
     frame1=tkinter.LabelFrame(frame0,bg="black")
     frame1.grid(row=0,rowspan=5,column=1)
 
-	# Set the black background on app
+	# Set the black background page 1
     frame2=Label(frame1,bg="white")
     frame2.grid(row=3,column=3,sticky='nes')
 #	(row=2,column=3,sticky='nes')
@@ -256,16 +257,49 @@ def main():
     apply_btn3=Button(frame1,text='Show Current PA Output (Click to refresh)',command=showsamplerate)
     apply_btn3.grid(row=0,column=3)
 
- # PAGE2 Maincode
+# -------------------- Tab 2 (ALSA) --------------------
 
     # page2 main frame
     frame101=tkinter.LabelFrame(page2)
     frame101.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
 
-    label=Label(frame101,text="Nothing here, yet")
-    label.grid(row=1,column=1,rowspan=3,padx=5,pady=5)
+    # page2 frame
+    frame102=tkinter.LabelFrame(frame101,bg="black")
+    frame102.grid(row=0,rowspan=5,column=1)
+
+
+	# Label Resample method rowspan=4
+    label=Label(frame101,text="  Default Device  ")
+    label.grid(row=0,column=0,sticky='nsw')
+
+# ---------- Default Device ----------
+
+	# Set the device value to Default for variable ALSA Device
+    RadBit16=Radiobutton(frame101,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16.grid(row=1,column=0,sticky='nsw')
+
+	# Set the device value to 1 for variable ALSA Device
+    RadBit16=Radiobutton(frame101,text='1',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16.grid(row=2,column=0,sticky='nsw')
+
+	# Set the device value to 2 for variable ALSA Device
+    RadBit24=Radiobutton(frame101,text='2',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=9)
+    RadBit24.grid(row=3,column=0,sticky='nsw')
+
+	# Set the device value to 3 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='3',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32.grid(row=4,column=0,sticky='nsw')
+
+	# Set the device value to 4 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='4',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32.grid(row=5,column=0,sticky='nsw')
+
+	# Set the device value to 5 for variable ALSA Device
+    RadBit32=Radiobutton(frame101,text='5',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32.grid(row=6,column=0,sticky='nsw')
 
 # End ----------
+
 
 # ----------------- Menubar  -----------------
 
