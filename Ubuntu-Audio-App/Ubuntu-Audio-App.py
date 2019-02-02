@@ -275,27 +275,27 @@ def main():
 # ---------- Default Device ----------
 
 	# Set the device value to Default for variable ALSA Device
-    RadBit16=Radiobutton(frame101,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16=Radiobutton(frame101,text='Default',variable=vADefDev,value='  default',command=ADefDev,width=9)
     RadBit16.grid(row=1,column=0,sticky='nsw')
 
 	# Set the device value to 1 for variable ALSA Device
-    RadBit16=Radiobutton(frame101,text='1',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16=Radiobutton(frame101,text='1',variable=vADefDev,value='  1',command=ADefDev,width=9)
     RadBit16.grid(row=2,column=0,sticky='nsw')
 
 	# Set the device value to 2 for variable ALSA Device
-    RadBit24=Radiobutton(frame101,text='2',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=9)
+    RadBit24=Radiobutton(frame101,text='2',variable=vADefDev,value='  2',command=ADefDev,width=9)
     RadBit24.grid(row=3,column=0,sticky='nsw')
 
 	# Set the device value to 3 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='3',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32=Radiobutton(frame101,text='3',variable=vADefDev,value='  3',command=ADefDev,width=9)
     RadBit32.grid(row=4,column=0,sticky='nsw')
 
 	# Set the device value to 4 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='4',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32=Radiobutton(frame101,text='4',variable=vADefDev,value='  4',command=ADefDev,width=9)
     RadBit32.grid(row=5,column=0,sticky='nsw')
 
 	# Set the device value to 5 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='5',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32=Radiobutton(frame101,text='5',variable=vADefDev,value='  5',command=ADefDev,width=9)
     RadBit32.grid(row=6,column=0,sticky='nsw')
 
 # End ----------
@@ -326,6 +326,7 @@ def main():
 
 # ---------- Variable Config ----------
 
+# PulseAudio
 vPaBitdepth=StringVar() 			# PulseAudio BithDepth
 vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
@@ -333,18 +334,26 @@ vPaRe=StringVar() 					# PulseAudio Resample method
 
 ShvPaOut=StringVar() 				# Show Current PA output
 
+# ALSA
+vADefDev=StringVar() 			    # ALSA Default Device
+
 # End ----------
 
 # ---------- Set some Values for Variable on app startup ----------
 
+# PulseAudio
 vPaBitdepth.set('  default-sample-format = s24le') 		# PulseAudio BithDepth
 vPaPriRate.set('  default-sample-rate = 44100') 		# PulseAudio Primary Samplerate
 vPaAltRate.set('  alternate-sample-rate = 48000') 		# PulseAudio Alternative Samplerate
 vPaRe.set('; resample-method = speex-float-1') 			# PulseAudio Resample method
 ShvPaOut.set('')										# Show Current PA output
 
+# ALSA
+vADefDev.set('1') 		# ALSA Default Device
+
 # ---------- Print Variable Data ----------
 
+# PulseAudio
 def Pabitdepth():
     print(vPaBitdepth.get())
 
@@ -359,6 +368,11 @@ def PaRe():
 
 def PaOut():
     print(ShvPaOut.get())
+
+# ALSA
+def ADefDev():
+    print(vADefDev.get())
+
 
 # End ----------
 
