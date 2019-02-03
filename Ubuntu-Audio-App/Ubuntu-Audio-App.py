@@ -326,7 +326,7 @@ def main():
     menubar.add_cascade(label="File",menu=filemenu)
 
     editmenu=Menu(menubar,tearoff=0)
-    editmenu.add_command(label="Config",) # No config menu
+    editmenu.add_command(label="Config",state=DISABLED) # No config menu
     menubar.add_cascade(label="Edit",menu=editmenu)
 
     helpmenu=Menu(menubar,tearoff=0)
@@ -366,7 +366,7 @@ vPaRe.set('; resample-method = speex-float-1') 			# PulseAudio Resample method
 ShvPaOut.set('')										# Show Current PA output
 
 # ALSA
-vADefDev.set('NULL') 		# ALSA Default Device
+vADefDev.set('0') 		# ALSA Default Device
 vADefDevList.set('') 		# ALSA Default name list
 
 # ---------- Print Variable Data ----------
