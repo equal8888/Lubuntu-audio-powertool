@@ -427,9 +427,14 @@ def applyPA():
 
 # The current PulseAudio output setting is passed to variable and printed to terminal
 def showsamplerate():
-    showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True).strip();
-    ShvPaOut.set(showsamplerateoutput)
-    print (ShvPaOut.get())
+    try:
+        showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip();
+        ShvPaOut.set(showsamplerateoutput)
+        print (ShvPaOut.get())
+
+    except subprocess.CalledProcessError as err:
+        print ("No PulseAudio Detected")
+        response = err.returncode
 # End ----------
 
 # Apply ALSA Button
@@ -446,10 +451,12 @@ def showalsadevices():
     print (vADefDevList.get())
 # End ----------
 
+# Run at start for now to be 100% that --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
+subprocess.call('[ -f /etc/asound.conf ] && echo "---------------" || echo "defaults.pcm.card 1\ndefaults.ctl.card 1" > /etc/asound.conf', shell=True)
+
 # Close Window
 def close_window():
     root.destroy()
-
 # End ----------
 
     root.mainloop()
