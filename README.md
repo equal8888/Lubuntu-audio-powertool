@@ -1,10 +1,12 @@
 ## ALSA repo 😉
 <img src="https://drive.google.com/uc?id=1SUkGyXMAlLDD6wMpfgIOYbf75QFv_0mi" width="auto" height="200"/>
 <br>
- <strong>Current Development stage 0.57 </strong> 😔
+ <strong>Current Development stage 0.5 </strong> 😔
 <br>
 <br>
-Tested on Lubuntu (16.04 LTS)
+Tested on 64-bit Lubuntu (16.04.3 LTS) Link -->
+<br>
+http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04.3-desktop-amd64.iso
 <br>
 
 ## Usage
