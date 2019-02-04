@@ -433,8 +433,8 @@ def showsamplerate():
         print (ShvPaOut.get())
 
     except subprocess.CalledProcessError as err:
-        ShvPaOut.set("No Running PulseAudio Detected !")
-        print ("   No Running PulseAudio Detected !")
+        ShvPaOut.set("No PA Detected. Use ALSA its better")
+        print ("   No PulseAudio Detected. Use ALSA its better !")
         response = err.returncode
 # End ----------
 
