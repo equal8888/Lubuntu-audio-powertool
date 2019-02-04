@@ -260,20 +260,19 @@ def main():
 # -------------------- Tab 2 (ALSA) --------------------
 
     # page2 main frame
+
     frame101=tkinter.LabelFrame(page2,text="ALSA Soundcard")
     frame101.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
 
-    # page2 frame
-    frame102=tkinter.LabelFrame(frame101,bg="black")
-    frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
+# ---------- ALSA Soundcard ----------
 
-	# Label Resample method rowspan=4
+    # text Set Device:
     label=Label(frame101,text="Set Device:",font='bold')
     label.grid(row=0,column=0,padx=5,pady=5,sticky='nesw')
 
-    # page2 blackframe
-#    frame1=tkinter.LabelFrame(frame0,bg="black")
-#    frame1.grid(row=0,rowspan=5,column=1)
+    # Black frame
+    frame102=tkinter.LabelFrame(frame101,bg="black")
+    frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
 
     # ---------- Show Device Info ----------
 
@@ -286,7 +285,7 @@ def main():
     apply_btn3=Button(frame101,text='Find Soundcards',command=showalsadevices)
     apply_btn3.grid(row=0,column=1,padx=5,pady=5,sticky='nesw')
 
-# ---------- ALSA Device Select ----------
+    # ---------- ALSA Device Select ----------
 
 	# Set the device value to 0 for variable ALSA Device
     RadBit16=Radiobutton(frame101,text='0   -->',variable=vADefDev,value='0',command=ADefDev,width=9)
@@ -314,8 +313,13 @@ def main():
 
 # End ----------
 
+# ---------- ALSA Manual Config ----------
+
+# End ----------
+
     apply_btn2=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
-    apply_btn2.grid(row=8,column=0,columnspan=2,padx=5,pady=5,sticky='nesw')
+    apply_btn2.grid(row=8,column=0,columnspan=4,padx=5,pady=5,sticky='nesw')
+
 
 # ----------------- Menubar  -----------------
 
@@ -359,14 +363,14 @@ vADefDevList=StringVar() 		    # ALSA device name list
 # ---------- Set some Values for Variable on app startup ----------
 
 # PulseAudio
-vPaBitdepth.set('  default-sample-format = s24le') 		# PulseAudio BithDepth
-vPaPriRate.set('  default-sample-rate = 44100') 		# PulseAudio Primary Samplerate
-vPaAltRate.set('  alternate-sample-rate = 48000') 		# PulseAudio Alternative Samplerate
-vPaRe.set('; resample-method = speex-float-1') 			# PulseAudio Resample method
-ShvPaOut.set('')										# Show Current PA output
+vPaBitdepth.set('; default-sample-format = s16le')      # PulseAudio BithDepth
+vPaPriRate.set('; default-sample-rate = 44100')         # PulseAudio Primary Samplerate
+vPaAltRate.set('; alternate-sample-rate = 48000')       # PulseAudio Alternative Samplerate
+vPaRe.set('; resample-method = speex-float-1')          #PulseAudio Resample method
+ShvPaOut.set('')                                        # Show Current PA output
 
 # ALSA
-vADefDev.set('0') 		# ALSA Default Device
+vADefDev.set('0') 		    # ALSA Default Device
 vADefDevList.set('') 		# ALSA Default name list
 
 # ---------- Print Variable Data ----------
