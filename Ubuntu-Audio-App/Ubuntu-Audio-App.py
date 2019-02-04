@@ -48,6 +48,8 @@ def main():
 	# Set the black background page 1
     frame2=Label(frame1,bg="white")
     frame2.grid(row=3,column=3,sticky='nes')
+#	(row=2,column=3,sticky='nes')
+#    background_label.place(width=800,height=84)
 
 # ---------- Show Info ----------
 
@@ -224,7 +226,7 @@ def main():
     # Separator3
     ttk.Separator(page1).grid(row=11,column=0,columnspan=11,sticky="ew")
 
-	# Set the Buttons
+	# Set the Buttons (Default Settings)
     frame5=Label(page1)
     frame5.grid(row=12,column=0,columnspan=11,sticky='nesw')
 
@@ -232,8 +234,7 @@ def main():
 	# Set the Apply Button
     frame6=Label(page1)
     frame6.grid(row=12,column=6,columnspan=11,sticky='nesw')
-
-# ----------------- Apply (PulseAudio)  -----------------
+# ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
 # Make Default Button and
@@ -245,22 +246,21 @@ def main():
     apply_btn2=Button(frame6,text='Apply & Restart pulseaudio',command=applyPA)
     apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='e')
 
-    # Text below app
+# End ----------
+
+# Text below app
     label=Label(frame6,text="Press apply for changes to take affect        ")
     label.grid(row=1,column=0,padx=5)
 
 
-    # Button Show Samplerate
+# Button Show Samplerate
     apply_btn3=Button(frame1,text='Show Current PA Output (Click to refresh)',command=showsamplerate)
     apply_btn3.grid(row=0,column=3)
-
-# End ----------
-
 
 # -------------------- Tab 2 (ALSA) --------------------
 
     # page2 main frame
-    frame101=tkinter.LabelFrame(page2)
+    frame101=tkinter.LabelFrame(page2,text="ALSA Soundcard")
     frame101.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
 
     # page2 frame
@@ -268,20 +268,23 @@ def main():
     frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
 
 	# Label Resample method rowspan=4
-    label=Label(frame101,text="Default:",font='bold')
+    label=Label(frame101,text="Set Device:",font='bold')
     label.grid(row=0,column=0,padx=5,pady=5,sticky='nesw')
 
-# ---------- Show Device Info ----------
+    # page2 blackframe
+#    frame1=tkinter.LabelFrame(frame0,bg="black")
+#    frame1.grid(row=0,rowspan=5,column=1)
+
+    # ---------- Show Device Info ----------
 
     # Show Devices list
     label=Label(frame102,textvariable=vADefDevList,fg='grey',bg='black',font=('Monospace Regular',11))
     label.grid(row=0,column=1,sticky='esw')
+    # End ----------
 
-    # Button Show Devices Find your desired card
-    apply_btn4=Button(frame101,text='Find Soundcard',command=showalsadevices)
-    apply_btn4.grid(row=0,column=1,padx=5,pady=5,sticky='nsw')
-
-# End ----------
+    # Button Show Devices
+    apply_btn3=Button(frame101,text='Find Soundcards',command=showalsadevices)
+    apply_btn3.grid(row=0,column=1,padx=5,pady=5,sticky='nesw')
 
 # ---------- ALSA Device Select ----------
 
@@ -311,12 +314,8 @@ def main():
 
 # End ----------
 
-# ----------------- Apply (ALSA)  -----------------
-
-    apply_btn5=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
-    apply_btn5.grid(row=8,column=0,columnspan=2,padx=5,pady=5,sticky='nesw')
-
-# End ----------
+    apply_btn2=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
+    apply_btn2.grid(row=8,column=0,columnspan=2,padx=5,pady=5,sticky='nesw')
 
 # ----------------- Menubar  -----------------
 
@@ -397,11 +396,10 @@ def ADefDev():
 
 # ---------- Button Commands ----------
 
-# About page
 def helpmenu01():
-    tkinter.messagebox.showinfo("About Audio Powertool: ","We all like music =) Developed for easy management")
+    tkinter.messagebox.showinfo("About Audio Powertool: ","PulseAudio is only a SOFTWARE MIXER' \n \nDont set the Samplerate to Maximum option available\n \nthat will do audio resampling and you dont want that!")
 
-# Default PulseAudio button
+# Default button
 def defaultpulsebutton():
 # Set new values for variables
     vPaBitdepth.set('; default-sample-format = s16le')
@@ -435,9 +433,9 @@ def showsamplerate():
         print (ShvPaOut.get())
 
     except subprocess.CalledProcessError as err:
+        ShvPaOut.set("No Running PulseAudio Detected !")
         print ("   No Running PulseAudio Detected !")
         response = err.returncode
-
 # End ----------
 
 # Apply ALSA Button
@@ -452,7 +450,6 @@ def showalsadevices():
     showalsadeviceslist=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
     vADefDevList.set(showalsadeviceslist)
     print (vADefDevList.get())
-
 # End ----------
 
 # Run at start for now to be 100% that --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
