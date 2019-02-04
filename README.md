@@ -27,8 +27,7 @@ sudo apt-get install python3-tk
 
 1) Cannot run the app.
 <br>
-install "python3-tk" and
-chmod some files on app root directory
+install "python3-tk" and chmod some files on app root directory
 ```
 sudo apt-get install python3-tk
 chmod +x  Ubuntu-Audio-App/*
