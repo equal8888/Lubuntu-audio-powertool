@@ -280,34 +280,34 @@ def main():
     # End ----------
 
     # Button Show Devices
-    apply_btn3=Button(frame101,text='Find Soundcards',command=showalsadevices)
-    apply_btn3.grid(row=0,column=1,padx=5,pady=5,sticky='nesw')
+    FindAL=Button(frame101,text='Find Soundcards',command=showalsadevices)
+    FindAL.grid(row=0,column=1,padx=5,pady=5,sticky='nesw')
 
     # ---------- ALSA Device Select ----------
 
 	# Set the device value to 0 for variable ALSA Device
-    RadBit16=Radiobutton(frame101,text='0   -->',variable=vADefDev,value='0',command=ADefDev,width=9)
-    RadBit16.grid(row=2,column=0,sticky='nsw')
+    RadALDEV0=Radiobutton(frame101,text='0   -->',variable=vADefDev,value='0',command=ADefDev,width=9)
+    RadALDEV0.grid(row=2,column=0,sticky='nsw')
 
 	# Set the device value to 1 for variable ALSA Device
-    RadBit24=Radiobutton(frame101,text='1   -->',variable=vADefDev,value='1',command=ADefDev,width=9)
-    RadBit24.grid(row=3,column=0,sticky='nsw')
+    RadALDEV1=Radiobutton(frame101,text='1   -->',variable=vADefDev,value='1',command=ADefDev,width=9)
+    RadALDEV1.grid(row=3,column=0,sticky='nsw')
 
 	# Set the device value to 2 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='2   -->',variable=vADefDev,value='2',command=ADefDev,width=9)
-    RadBit32.grid(row=4,column=0,sticky='nsw')
+    RadALDEV2=Radiobutton(frame101,text='2   -->',variable=vADefDev,value='2',command=ADefDev,width=9)
+    RadALDEV2.grid(row=4,column=0,sticky='nsw')
 
 	# Set the device value to 3 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='3   -->',variable=vADefDev,value='3',command=ADefDev,width=9)
-    RadBit32.grid(row=5,column=0,sticky='nsw')
+    RadALDEV3=Radiobutton(frame101,text='3   -->',variable=vADefDev,value='3',command=ADefDev,width=9)
+    RadALDEV3.grid(row=5,column=0,sticky='nsw')
 
 	# Set the device value to 4 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='4   -->',variable=vADefDev,value='4',command=ADefDev,width=9)
-    RadBit32.grid(row=6,column=0,sticky='nsw')
+    RadALDEV4=Radiobutton(frame101,text='4   -->',variable=vADefDev,value='4',command=ADefDev,width=9)
+    RadALDEV4.grid(row=6,column=0,sticky='nsw')
 
 	# Set the device value to 5 for variable ALSA Device
-    RadBit32=Radiobutton(frame101,text='5   -->',variable=vADefDev,value='5',command=ADefDev,width=9)
-    RadBit32.grid(row=7,column=0,sticky='nsw')
+    RadALDEV5=Radiobutton(frame101,text='5   -->',variable=vADefDev,value='5',command=ADefDev,width=9)
+    RadALDEV5.grid(row=7,column=0,sticky='nsw')
 
 # End ----------
 
@@ -315,8 +315,8 @@ def main():
 
 # End ----------
 
-    apply_btn2=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
-    apply_btn2.grid(row=8,column=0,columnspan=4,padx=5,pady=5,sticky='nesw')
+    AplAL1=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
+    AplAL1.grid(row=8,column=0,columnspan=4,padx=5,pady=5,sticky='nesw')
 
 
 # ----------------- Menubar  -----------------
