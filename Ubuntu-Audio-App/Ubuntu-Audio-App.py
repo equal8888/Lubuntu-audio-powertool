@@ -48,8 +48,6 @@ def main():
 	# Set the black background page 1
     frame2=Label(frame1,bg="white")
     frame2.grid(row=3,column=3,sticky='nes')
-#	(row=2,column=3,sticky='nes')
-#    background_label.place(width=800,height=84)
 
 # ---------- Show Info ----------
 
