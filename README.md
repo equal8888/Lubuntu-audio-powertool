@@ -4,7 +4,7 @@
  <strong>Current Development stage 0.5 </strong> 😔
 <br>
 <br>
-Tested on 64-bit Lubuntu (16.04.3 LTS) Link -->
+Tested on </strong>un-updated</strong> 64-bit Lubuntu (16.04.3 LTS) Link -->
 <br>
 http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04.3-desktop-amd64.iso
 <br>
