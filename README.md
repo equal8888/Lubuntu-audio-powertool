@@ -25,14 +25,13 @@ sudo apt-get install python3-tk
 
 ## Troubleshoot
 
-1) Cannot run the app.
+1 Cannot run the app)
 install " python3-tk " and chmod some files on app root directory
 ```
 sudo apt-get install python3-tk
 chmod +x  Ubuntu-Audio-App/*
 ```
-2) ALSA page issues.
-<br>
+2 ALSA page issues)
 ALSA might not work if the user allready has his own ALSA config. Create required /etc/asound.conf manually with following parameters *CASE SENSITIVE*:
 ```
 defaults.pcm.card 1
