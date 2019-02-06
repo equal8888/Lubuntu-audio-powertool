@@ -40,7 +40,7 @@ defaults.ctl.card 1
 
 ## Known issues
 
-if PulseAudio is removed --> During system reboot user logins to openbox desktop env.
+if PulseAudio is removed --> During system reboot user MIGHT login to openbox desktop env.
 
 workaround to lxde enviroment, has black color scheme and icons are not the same (With pure ALSA)
 ```
