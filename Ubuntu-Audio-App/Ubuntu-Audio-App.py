@@ -251,7 +251,7 @@ def main():
     RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
 
 	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base pulseaudio -y && pulseaudio -D',command=ADefDev)
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo alsa force-reload && pulseaudio -D',command=ADefDev)
     RadPul01.grid(row=13,column=1,sticky='nsw')
 
 	# Select to uninstall Palemoon
