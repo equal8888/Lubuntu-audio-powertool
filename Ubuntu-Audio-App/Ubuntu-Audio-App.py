@@ -251,11 +251,11 @@ def main():
     RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
 
 	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='apt-get install pulseaudio',command=ADefDev)
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base pulseaudio -y ',command=ADefDev)
     RadPul01.grid(row=13,column=1,sticky='nsw')
 
 	# Select to uninstall Palemoon
-    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base -y',command=ADefDev)
+    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='sudo apt-get autoremove pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base -y',command=ADefDev)
     RadPul02.grid(row=13,column=2,sticky='nsw')
 
     AplPul1=Button(RemPa11,text='Install / Uninstall',command=installerPA)
@@ -504,9 +504,9 @@ def applyPA():
 
     subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
 
-# Remove PA and resolve a bug with no desktop env after it
-def RemPa():
-    subprocess.call('sudo apt-get autoremove pulseaudio && sudo apt-get install lxde -y && sudo apt-get install lubuntu-desktop -y && sudo /etc/init.d/alsa-utils stop | sudo alsa force-reload | sudo /etc/init.d/alsa-utils start', shell=True)
+# Remove PA
+# def RemPa():
+#    subprocess.call('sudo apt-get autoremove pulseaudio && sudo apt-get install lxde -y && sudo apt-get install lubuntu-desktop -y && sudo alsa force-reload', shell=True)
 
 # The current PulseAudio output setting is passed to variable and printed to terminal
 def showsamplerate():
@@ -534,13 +534,13 @@ def showsamplerate():
 def applyAL():
     cADefDev=(vADefDev.get())
     cADefDev=(vADefDev.get())
-    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | sudo /etc/init.d/alsa-utils stop | sudo alsa force-reload | sudo /etc/init.d/alsa-utils start'.format(cADefDev,cADefDev),shell=True);
+    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | sudo alsa force-reload'.format(cADefDev,cADefDev),shell=True);
 
 # Uninstall/install PulseAudio
 def installerPA():
     try:
         PaUninst=(vPaUninst.get())
-        subprocess.call('sudo {}'.format(PaUninst),shell=True);
+        subprocess.call('sudo {} && sudo alsa force-reload'.format(PaUninst),shell=True);
         vPaRun.set("Status: Off")
         ShvPaOut.set("Output: N/A")
         print ("---------------- PulseAudio ----------------")
