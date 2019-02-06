@@ -40,7 +40,7 @@ defaults.ctl.card 1
 
 ## Known issues
 
-Because Ubuntu is dependent on PulseAudio. PURE ALSA SYSTEMS --> During system reboot user logins to openbox desktop env. 
+if PulseAudio is removed --> During system reboot user logins to openbox desktop env.
 
 Revert changes
 ```
