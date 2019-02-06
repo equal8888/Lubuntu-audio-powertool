@@ -13,7 +13,7 @@ def main():
     mainFrame=Frame(top,relief="sunken",border=1)
     Description=Label(mainFrame,text="Audio Powertool:")
 
-    mainFrame.master.title("Audio Powertool")
+    mainFrame.master.title("Audio Powertool for Lubuntu 16.04.3 LTS")
     mainFrame.master.minsize(width=717,height=258)
     mainFrame.master.resizable(False, False)
 
@@ -45,11 +45,19 @@ def main():
     frame1=tkinter.LabelFrame(frame0,bg="black")
     frame1.grid(row=0,rowspan=5,column=1)
 
-	# Set the black background page 1
+	# White box around info txt
     frame2=Label(frame1,bg="white")
     frame2.grid(row=3,column=3,sticky='nes')
 
+	# White box around info txt
+    frame7=Label(frame1,bg="white")
+    frame7.grid(row=2,column=3,sticky='nes')
+
 # ---------- Show Info ----------
+
+# show current PA status from button
+    label=Label(frame7,textvariable=vPaRun,fg='white',bg='black',font=('Monospace Regular',11))
+    label.grid(sticky='nes')
 
 # show current PA output from button
     label=Label(frame2,textvariable=ShvPaOut,fg='white',bg='black',font=('Monospace Regular',11))
@@ -241,18 +249,21 @@ def main():
     apply_btn1=Button(frame5,text='Default Values',command=defaultpulsebutton)
     apply_btn1.grid(row=12,column=1,padx=5,pady=5)
 
+    apply_btn3=Button(frame5,text='Remove PulseAudio',foreground="red4",command=RemPa)
+    apply_btn3.grid(row=12,column=4,padx=5,pady=5)
+
     apply_btn2=Button(frame6,text='Apply & Restart pulseaudio',command=applyPA)
     apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='e')
 
 # End ----------
 
 # Text below app
-    label=Label(frame6,text="Press apply for changes to take affect        ")
+    label=Label(frame6,text="Press apply for changes to take affect  ")
     label.grid(row=1,column=0,padx=5)
 
 
 # Button Show Samplerate
-    apply_btn3=Button(frame1,text='Show Current PA Output (Click to refresh)',command=showsamplerate)
+    apply_btn3=Button(frame1,text='PulseAudio Status & Output (Click to refresh)',command=showsamplerate)
     apply_btn3.grid(row=0,column=3)
 
 # -------------------- Tab 2 (ALSA) --------------------
@@ -268,7 +279,11 @@ def main():
     label=Label(frame101,text="Set Device:",font='bold')
     label.grid(row=0,column=0,padx=5,pady=5,sticky='nesw')
 
-    # Black frame
+    # Black frame ALSA Device
+    frame102=tkinter.LabelFrame(frame101,bg="black")
+    frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
+
+    # Black frame Show PA Status
     frame102=tkinter.LabelFrame(frame101,bg="black")
     frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
 
@@ -311,12 +326,12 @@ def main():
 
 # End ----------
 
-# ---------- ALSA Manual Config ----------
-
-# End ----------
+# ---------- ALSA Apply ----------
 
     AplAL1=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
     AplAL1.grid(row=8,column=0,columnspan=4,padx=5,pady=5,sticky='nesw')
+
+# End ----------
 
 
 # ----------------- Menubar  -----------------
@@ -349,6 +364,7 @@ vPaBitdepth=StringVar() 			# PulseAudio BithDepth
 vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 					# PulseAudio Resample method
+vPaRun=StringVar()                  # Check Running PA instances
 
 ShvPaOut=StringVar() 				# Show Current PA output
 
@@ -364,12 +380,14 @@ vADefDevList=StringVar() 		    # ALSA device name list
 vPaBitdepth.set('; default-sample-format = s16le')      # PulseAudio BithDepth
 vPaPriRate.set('; default-sample-rate = 44100')         # PulseAudio Primary Samplerate
 vPaAltRate.set('; alternate-sample-rate = 48000')       # PulseAudio Alternative Samplerate
-vPaRe.set('; resample-method = speex-float-1')          #PulseAudio Resample method
+vPaRe.set('; resample-method = speex-float-1')          # PulseAudio Resample method
+vPaRun.set('')                                          # Check Running PA instances
+
 ShvPaOut.set('')                                        # Show Current PA output
 
 # ALSA
-vADefDev.set('0') 		    # ALSA Default Device
-vADefDevList.set('') 		# ALSA Default name list
+vADefDev.set('0') 		                                # ALSA Default Device
+vADefDevList.set('') 		                            # ALSA Default name list
 
 # ---------- Print Variable Data ----------
 
@@ -388,6 +406,9 @@ def PaRe():
 
 def PaOut():
     print(ShvPaOut.get())
+
+def PaRun():
+    print(vPaRun.get())
 
 # ALSA
 def ADefDev():
@@ -427,16 +448,42 @@ def applyPA():
 
     subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
 
+# Remove PA and resolve a bug with no desktop env after it
+def RemPa():
+    subprocess.call('sudo apt-get autoremove pulseaudio && sudo apt-get install lxde -y && sudo apt-get install lubuntu-desktop -y', shell=True)
+
 # The current PulseAudio output setting is passed to variable and printed to terminal
 def showsamplerate():
     try:
         showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip();
         ShvPaOut.set(showsamplerateoutput)
+        vPaRun.set("Status: On")
+        print ("---------------- PulseAudio ----------------")
+        print ("Status: On")
+        print ("Output: ")
         print (ShvPaOut.get())
+        print ("--------------------------------------------")
 
     except subprocess.CalledProcessError as err:
-        ShvPaOut.set("No PA Detected. Use ALSA its better")
-        print ("   No PulseAudio Detected. Use ALSA its better !")
+        ShvPaOut.set("Output: N/A")
+        vPaRun.set("Status: Off")
+        print ("---------------- PulseAudio ----------------")
+        print ("Status: Off")
+        print ("Output: N/A")
+        print ("--------------------------------------------")
+        response = err.returncode
+# End ----------
+
+# Check running pulseaudio instances
+def CheckPAStatus():
+    try:
+        checkpa=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip();
+        vPaRun.set("Status: On")
+        print ("   Status: On.")
+
+    except subprocess.CalledProcessError as err:
+        vPaRun.set("No running PulseAudio detected.")
+        print ("   No running PulseAudio detected.")
         response = err.returncode
 # End ----------
 
