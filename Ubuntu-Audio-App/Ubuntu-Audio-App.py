@@ -245,11 +245,11 @@ def main():
     RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
 
 	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo alsa force-reload && pulseaudio -D',command=ADefDev)
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get purge lxde -y && sudo apt purge lxde-common -y && sudo apt-get purge lxde -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install alsa-base pulseaudio -y && sudo alsa force-reload && pulseaudio -D',command=ADefDev)
     RadPul01.grid(row=13,column=1,sticky='nsw')
 
 	# Select to uninstall Palemoon
-    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='pulseaudio -k | killall pulseaudio && sudo apt-get purge padevchooser -y && sudo apt-get purge paprefs -y && sudo apt-get purge pulseaudio gstreamer0.10-pulseaudio -y && sudo apt-get purge pulseaudio-utils -y && sudo apt-get install lxde -y && sudo apt install lxde-common && sudo apt autoremove -y',command=ADefDev)
+    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='pulseaudio -k | killall pulseaudio | sudo apt-get purge lxde -y && sudo apt-get purge lubuntu-desktop -y && sudo apt-get autoremove pulseaudio -y && sudo apt-get purge padevchooser -y && sudo apt-get purge paprefs -y && sudo apt-get purge pulseaudio gstreamer0.10-pulseaudio -y && sudo apt-get purge pulseaudio-utils -y && sudo apt-get install lxde -y && sudo apt install lxde-common -y && sudo apt autoremove -y',command=ADefDev)
     RadPul02.grid(row=13,column=2,sticky='nsw')
 
     AplPul1=Button(RemPa11,text='Apply Install / Uninstall',command=installerPA)
