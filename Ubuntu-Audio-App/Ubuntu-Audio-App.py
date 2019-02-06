@@ -247,18 +247,18 @@ def main():
 
 # ---------- Remove PulseAudio ----------
 
-    RemPa11=tkinter.LabelFrame(frame5,text=" PulseAudio Installer")
+    RemPa11=tkinter.LabelFrame(frame5,text=" PulseAudio Installer ")
     RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
 
 	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vADefDev,value='null 2',command=ADefDev,state=DISABLED)
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='apt-get install pulseaudio',command=ADefDev)
     RadPul01.grid(row=13,column=1,sticky='nsw')
 
 	# Select to uninstall Palemoon
-    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vADefDev,value='null 1',command=ADefDev,state=DISABLED)
+    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base -y',command=ADefDev)
     RadPul02.grid(row=13,column=2,sticky='nsw')
 
-    AplPul1=Button(RemPa11,text='Apply',command=applyAL,state=DISABLED)
+    AplPul1=Button(RemPa11,text='Install / Uninstall',command=installerPA)
     AplPul1.grid(row=14,column=1,columnspan=4,padx=5,pady=5,sticky='nesw')
 
 # End ----------
@@ -269,7 +269,7 @@ def main():
 # Make Default Button and
 # Apply Button disable it self for few seconds after button press 😘
 
-    RemPa12=tkinter.LabelFrame(frame5,text="5 Apply changes ")
+    RemPa12=tkinter.LabelFrame(frame5,text="5) Apply changes ")
     RemPa12.grid(row=1,column=4,sticky='NESW',padx=5,pady=5)
 
     apply_btn2=Button(RemPa12,text='Apply & Restart PulseAudio',command=applyPA)
@@ -412,7 +412,9 @@ vPaBitdepth=StringVar() 			# PulseAudio BithDepth
 vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
 vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
 vPaRe=StringVar() 					# PulseAudio Resample method
-vPaRun=StringVar()                  # Check Running PA instances
+vPaRun=StringVar()                  # Check Running PulseAudio instances
+vPaUninst=StringVar()               # uninstall PulseAudio
+
 
 ShvPaOut=StringVar() 				# Show Current PA output
 
@@ -429,7 +431,8 @@ vPaBitdepth.set('; default-sample-format = s16le')      # PulseAudio BithDepth
 vPaPriRate.set('; default-sample-rate = 44100')         # PulseAudio Primary Samplerate
 vPaAltRate.set('; alternate-sample-rate = 48000')       # PulseAudio Alternative Samplerate
 vPaRe.set('; resample-method = speex-float-1')          # PulseAudio Resample method
-vPaRun.set('')                                          # Check Running PA instances
+vPaRun.set('')                                          # Check Running PulseAudio instances
+vPaUninst.set('')                                       # Uninstall PulseAudio
 
 ShvPaOut.set('')                                        # Show Current PA output
 
@@ -458,9 +461,14 @@ def PaOut():
 def PaRun():
     print(vPaRun.get())
 
+def PaUninst():
+    print(vPaUninst.get())
+
 # ALSA
 def ADefDev():
     print(vADefDev.get())
+
+
 
 
 # End ----------
@@ -498,7 +506,7 @@ def applyPA():
 
 # Remove PA and resolve a bug with no desktop env after it
 def RemPa():
-    subprocess.call('sudo apt-get autoremove pulseaudio && sudo apt-get install lxde -y && sudo apt-get install lubuntu-desktop -y', shell=True)
+    subprocess.call('sudo apt-get autoremove pulseaudio && sudo apt-get install lxde -y && sudo apt-get install lubuntu-desktop -y && sudo /etc/init.d/alsa-utils stop | sudo alsa force-reload | sudo /etc/init.d/alsa-utils start', shell=True)
 
 # The current PulseAudio output setting is passed to variable and printed to terminal
 def showsamplerate():
@@ -526,7 +534,26 @@ def showsamplerate():
 def applyAL():
     cADefDev=(vADefDev.get())
     cADefDev=(vADefDev.get())
-    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | sudo alsa force-reload'.format(cADefDev,cADefDev),shell=True);
+    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | sudo /etc/init.d/alsa-utils stop | sudo alsa force-reload | sudo /etc/init.d/alsa-utils start'.format(cADefDev,cADefDev),shell=True);
+
+# Uninstall/install PulseAudio
+def installerPA():
+    try:
+        PaUninst=(vPaUninst.get())
+        subprocess.call('sudo {}'.format(PaUninst),shell=True);
+        vPaRun.set("Status: Off")
+        ShvPaOut.set("Output: N/A")
+        print ("---------------- PulseAudio ----------------")
+        print (vPaRun.get())
+        print (ShvPaOut.get())
+        print ("--------------------------------------------")
+
+    except subprocess.CalledProcessError as err:
+        print ("---------------- PulseAudio ----------------")
+        print ("Installer: Error")
+        print ("--------------------------------------------")
+        response = err.returncode
+# End ----------
 
 
 # The current ALSA device list is passed to variable and printed to terminal
