@@ -40,4 +40,9 @@ defaults.ctl.card 1
 
 ## Known issues
 
-Alsa page might not work currently on systems with pulseaudio installed. (Update is coming for this)
+Because Ubuntu is dependent on PulseAudio. Pure alsa systems will not work after system reboot.
+
+get back in to desktop
+```
+sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo alsa force-reload
+```
