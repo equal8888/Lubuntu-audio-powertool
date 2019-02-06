@@ -42,7 +42,7 @@ defaults.ctl.card 1
 
 if PulseAudio is removed --> During system reboot user logins to openbox desktop env.
 
-Revert changes
+get back to lxde enviroment
 ```
-sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo alsa force-reload
+sudo apt-get install lxde -y && sudo apt install lxde-common
 ```
