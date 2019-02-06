@@ -1,4 +1,4 @@
-## Now with ALSA 😉
+## CAUTION SYSTEM REBOOT WILL REMOVE DESKTOP ENVIROMENT. Now with ALSA 😉
 <img src="https://drive.google.com/uc?id=1SUkGyXMAlLDD6wMpfgIOYbf75QFv_0mi" width="auto" height="200"/>
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
@@ -42,7 +42,7 @@ defaults.ctl.card 1
 
 Because Ubuntu is dependent on PulseAudio. Pure alsa systems will not work after system reboot.
 
-get back in to desktop
+Revert changes
 ```
 sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo alsa force-reload
 ```
