@@ -332,13 +332,13 @@ def main():
 
 # ---------- Install Palemoon Browser ---------- width=9
 
-	# Select to uninstall Palemoon
-    RadAL01=Radiobutton(frame103,text='Uninstall Pale Moon',variable=vADefDev,value='null 1',command=ADefDev,state=DISABLED)
-    RadAL01.grid(row=2,column=0,sticky='nsw')
-
 	# Select to install Palemoon
     RadAL02=Radiobutton(frame103,text='Install Pale Moon',variable=vADefDev,value='null 2',command=ADefDev,state=DISABLED)
-    RadAL02.grid(row=2,column=1,sticky='nsw')
+    RadAL02.grid(row=2,column=0,sticky='nsw')
+
+	# Select to uninstall Palemoon
+    RadAL01=Radiobutton(frame103,text='Uninstall Pale Moon',variable=vADefDev,value='null 1',command=ADefDev,state=DISABLED)
+    RadAL01.grid(row=2,column=1,sticky='nsw')
 
     AplAL1=Button(frame103,text='Apply',command=applyAL,state=DISABLED)
     AplAL1.grid(row=8,column=0,columnspan=4,padx=5,pady=5,sticky='nesw')
