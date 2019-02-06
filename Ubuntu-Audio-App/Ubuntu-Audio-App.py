@@ -251,7 +251,7 @@ def main():
     RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
 
 	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base pulseaudio -y ',command=ADefDev)
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base pulseaudio -y && pulseaudio -D',command=ADefDev)
     RadPul01.grid(row=13,column=1,sticky='nsw')
 
 	# Select to uninstall Palemoon
@@ -468,9 +468,6 @@ def PaUninst():
 def ADefDev():
     print(vADefDev.get())
 
-
-
-
 # End ----------
 
 # ---------- Button Commands ----------
@@ -511,23 +508,25 @@ def applyPA():
 # The current PulseAudio output setting is passed to variable and printed to terminal
 def showsamplerate():
     try:
-        showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip();
+        showsamplerateoutput=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
         ShvPaOut.set(showsamplerateoutput)
+        PaStatus=subprocess.check_output(["pulseaudio --check"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
         vPaRun.set("Status: On")
         print ("---------------- PulseAudio ----------------")
-        print ("Status: On")
-        print ("Output: ")
+        print (vPaRun.get())
         print (ShvPaOut.get())
         print ("--------------------------------------------")
-
-    except subprocess.CalledProcessError as err:
+    except subprocess.CalledProcessError as e:
         ShvPaOut.set("Output: N/A")
         vPaRun.set("Status: Off")
         print ("---------------- PulseAudio ----------------")
         print ("Status: Off")
         print ("Output: N/A")
         print ("--------------------------------------------")
-        response = err.returncode
+        sys.stderr.write(
+        "common::run_command() : [ERROR]: output = %s, error code = %s\n"
+        % (e.output, e.returncode))
+
 # End ----------
 
 # Apply ALSA Button
@@ -547,8 +546,7 @@ def installerPA():
         print (vPaRun.get())
         print (ShvPaOut.get())
         print ("--------------------------------------------")
-
-    except subprocess.CalledProcessError as err:
+    except subprocess.CalledProcessError as response:
         print ("---------------- PulseAudio ----------------")
         print ("Installer: Error")
         print ("--------------------------------------------")
