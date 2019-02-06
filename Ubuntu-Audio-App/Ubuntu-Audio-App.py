@@ -38,7 +38,7 @@ def main():
 # -------------------- Tab 1 (PulseAudio) --------------------
 
     # page1 main frame
-    frame0=tkinter.LabelFrame(page1,bd=1)
+    frame0=tkinter.LabelFrame(page1,bd=6,bg="red")
     frame0.grid(row=0,column=0,columnspan=9,rowspan=2,sticky='nesw')
 
     # page1 frame
@@ -86,8 +86,8 @@ def main():
 # End ----------
 
 	# Label Resample method rowspan=4
-    label=Label(frame0,text="Bit Depth      ")
-    label.grid(row=0,column=0,sticky='new')
+    label=Label(frame0,text="1) Bit Depth      ")
+    label.grid(row=0,column=0,sticky='nesw')
 
 # ---------- BithDepth Radio Buttons ----------
 
@@ -109,6 +109,9 @@ def main():
 
 # End ----------
 
+    # Separator
+    ttk.Separator(page1).grid(row=2,column=0,columnspan=11,sticky="ew")
+
 # ---------- Primary Samplerate Radio Buttons ----------
 
 	# samplerate frame
@@ -120,7 +123,7 @@ def main():
     frame4.grid(row=5,column=0,columnspan=8,sticky='nesw')
 
 	# Label
-    label=Label(frame4,text="Primary Sample rate")
+    label=Label(frame4,text="2) Primary Sample rate")
     label.grid(row=1,column=1)
 
 	# Set the BithDepth value to default for variable vPaBitdepth
@@ -148,7 +151,7 @@ def main():
 # ---------- Alternative Samplerate Radio Buttons ----------
 
 	# Label
-    label=Label(frame4,text="Alternative Sample rate")
+    label=Label(frame4,text="3) Alternative Sample rate")
     label.grid(row=2,column=1)
 
 	# Set the BithDepth value to default for variable vPaAltRate
@@ -178,11 +181,11 @@ def main():
 
 # ---------- Resample method Radio Buttons ----------
     frame5=Label(page1)
-    frame5.grid(row=9,column=0,columnspan=8,sticky='nesw')
+    frame5.grid(row=9,column=0,sticky='nesw')
 
 
     # Label Resample method
-    label=Label(frame5,text="Resample method")
+    label=Label(frame5,text="4) Resample method")
     label.grid(row=1,column=1,pady=4)
 
 #    vPaRespeexfloatN=Radiobutton(page1,indicatoron=0,text='???',variable=vPaRe,value='resample-method = speex-float-N',command=PaRe,width=12)
@@ -234,32 +237,58 @@ def main():
 
 	# Set the Buttons (Default Settings)
     frame5=Label(page1)
-    frame5.grid(row=12,column=0,columnspan=11,sticky='nesw')
+    frame5.grid(row=12,column=0,sticky='nesw')
 
 
 	# Set the Apply Button
     frame6=Label(page1)
-    frame6.grid(row=12,column=6,columnspan=11,sticky='nesw')
+    frame6.grid(row=12,column=6,sticky='nesw')
+
+
+# ---------- Remove PulseAudio ----------
+
+    RemPa11=tkinter.LabelFrame(frame5,text=" PulseAudio Installer")
+    RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
+
+	# Select to install Palemoon
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vADefDev,value='null 2',command=ADefDev,state=DISABLED)
+    RadPul01.grid(row=13,column=1,sticky='nsw')
+
+	# Select to uninstall Palemoon
+    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vADefDev,value='null 1',command=ADefDev,state=DISABLED)
+    RadPul02.grid(row=13,column=2,sticky='nsw')
+
+    AplPul1=Button(RemPa11,text='Apply',command=applyAL,state=DISABLED)
+    AplPul1.grid(row=14,column=1,columnspan=4,padx=5,pady=5,sticky='nesw')
+
+# End ----------
+
 # ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
 # Make Default Button and
 # Apply Button disable it self for few seconds after button press 😘
 
-    apply_btn1=Button(frame5,text='Default Values',command=defaultpulsebutton)
-    apply_btn1.grid(row=12,column=1,padx=5,pady=5)
+    RemPa12=tkinter.LabelFrame(frame5,text="5 Apply changes ")
+    RemPa12.grid(row=1,column=4,sticky='NESW',padx=5,pady=5)
 
-    apply_btn3=Button(frame5,text='Remove PulseAudio',foreground="red4",command=RemPa)
-    apply_btn3.grid(row=12,column=4,padx=5,pady=5)
+    apply_btn2=Button(RemPa12,text='Apply & Restart PulseAudio',command=applyPA)
+    apply_btn2.grid(row=2,column=1,padx=5,pady=5,sticky='e')
 
-    apply_btn2=Button(frame6,text='Apply & Restart pulseaudio',command=applyPA)
-    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='e')
+# End ----------
+    apply_btn11=Button(frame5,text='Set all PulseAudio Values to Default',command=defaultpulsebutton)
+    apply_btn11.grid(row=1,column=3,padx=5)
+
+
+
+#    apply_btn3=Button(frame5,text='Remove PulseAudio',foreground="red4",command=RemPa)
+#    apply_btn3.grid(row=13,column=4,padx=5,pady=5)
 
 # End ----------
 
 # Text below app
-    label=Label(frame6,text="Press apply for changes to take affect  ")
-    label.grid(row=1,column=0,padx=5)
+#    label=Label(frame6,text="Press apply for changes to take affect  ")
+#    label.grid(row=1,column=0,padx=5)
 
 
 # Button Show Samplerate
@@ -330,7 +359,7 @@ def main():
 
 # End ----------
 
-# ---------- Install Palemoon Browser ---------- width=9
+# ---------- Install Palemoon Browser ----------
 
 	# Select to install Palemoon
     RadAL02=Radiobutton(frame103,text='Install Pale Moon',variable=vADefDev,value='null 2',command=ADefDev,state=DISABLED)
@@ -357,7 +386,7 @@ def main():
 
     menubar=Menu(mainFrame.master)
     filemenu=Menu(menubar,tearoff=0)
-    filemenu.add_separator()
+#    filemenu.add_separator()
     filemenu.add_command(label="Exit",command=mainFrame.master.quit)
     menubar.add_cascade(label="File",menu=filemenu)
 
