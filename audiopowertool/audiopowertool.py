@@ -270,6 +270,30 @@ def main():
 
 # -------------------- Tab 2 (ALSA) --------------------
 
+    # page2 main frame
+
+    frame101=tkinter.LabelFrame(page2,text=" ALSA Soundcard ")
+    frame101.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
+
+    frame103=tkinter.LabelFrame(page2,text=" Installer ")
+    frame103.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
+
+# ---------- Install Palemoon Browser ----------
+
+    # PulseAudio
+    frame104=tkinter.LabelFrame(frame103,text=" PulseAudio ")
+    frame104.grid(row=0,column=0,sticky='NESW',padx=5,pady=5)
+
+	# Select to install Palemoon
+    RadAL02=Radiobutton(frame104,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get purge lxde -y && sudo apt purge lxde-common -y && sudo apt-get purge lxde -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install alsa-base pulseaudio -y && sudo alsa force-reload && pulseaudio -D',command=ADefDev)
+    RadAL02.grid(row=2,column=0,sticky='nsw')
+
+	# Select to uninstall Palemoon
+    RadAL01=Radiobutton(frame104,text='Uninstall PulseAudio',variable=vPaUninst,value='pulseaudio -k | killall pulseaudio | sudo apt-get purge lxde -y && sudo apt-get purge lubuntu-desktop -y && sudo apt-get autoremove pulseaudio -y && sudo apt-get purge padevchooser -y && sudo apt-get purge paprefs -y && sudo apt-get purge pulseaudio gstreamer0.10-pulseaudio -y && sudo apt-get purge pulseaudio-utils -y && sudo apt-get install lxde -y && sudo apt install lxde-common -y && sudo apt autoremove -y',command=ADefDev)
+    RadAL01.grid(row=2,column=1,sticky='nsw')
+
+    AplAL1=Button(frame104,text='Apply Install / Uninstall',command=installerPA)
+    AplAL1.grid(row=3,column=0,padx=5,pady=5, columnspan=2,sticky='nesw')
 
 # End ----------
 
