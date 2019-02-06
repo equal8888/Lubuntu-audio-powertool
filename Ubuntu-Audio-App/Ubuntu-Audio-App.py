@@ -474,19 +474,6 @@ def showsamplerate():
         response = err.returncode
 # End ----------
 
-# Check running pulseaudio instances
-def CheckPAStatus():
-    try:
-        checkpa=subprocess.check_output(["pacmd list-sinks | grep sample"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip();
-        vPaRun.set("Status: On")
-        print ("   Status: On.")
-
-    except subprocess.CalledProcessError as err:
-        vPaRun.set("No running PulseAudio detected.")
-        print ("   No running PulseAudio detected.")
-        response = err.returncode
-# End ----------
-
 # Apply ALSA Button
 def applyAL():
     cADefDev=(vADefDev.get())
