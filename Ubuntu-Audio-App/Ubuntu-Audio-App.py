@@ -15,7 +15,7 @@ def main():
 
     mainFrame.master.title("Audio Powertool for Lubuntu 16.04.3 LTS")
     mainFrame.master.minsize(width=717,height=258)
-    mainFrame.master.resizable(False, False)
+#    mainFrame.master.resizable(False, False)
 
 # End ----------
 
@@ -42,7 +42,7 @@ def main():
     frame0.grid(row=0,column=0,columnspan=9,rowspan=2,sticky='nesw')
 
     # page1 frame
-    frame1=tkinter.LabelFrame(frame0,bg="black")
+    frame1=tkinter.LabelFrame(frame0,bd=5,bg="black")
     frame1.grid(row=0,rowspan=5,column=1)
 
 	# White box around info txt
@@ -86,25 +86,25 @@ def main():
 # End ----------
 
 	# Label Resample method rowspan=4
-    label=Label(frame0,text="  Bit Depth  ")
-    label.grid(row=0,column=0,sticky='nsw')
+    label=Label(frame0,text="Bit Depth      ")
+    label.grid(row=0,column=0,sticky='new')
 
 # ---------- BithDepth Radio Buttons ----------
 
 	# Set the BithDepth value to Default for variable vPaBitdepth
-    RadBit16=Radiobutton(frame0,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16=Radiobutton(frame0,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=10)
     RadBit16.grid(row=1,column=0,sticky='nsw')
 
 	# Set the BithDepth value to 16 Bit for variable vPaBitdepth
-    RadBit16=Radiobutton(frame0,text='16 Bit',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=9)
+    RadBit16=Radiobutton(frame0,text='16 Bit',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=10)
     RadBit16.grid(row=2,column=0,sticky='nsw')
 
     # Set the BithDepth value to 24 Bit for variable vPaBitdepth
-    RadBit24=Radiobutton(frame0,text='24 Bit',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=9)
+    RadBit24=Radiobutton(frame0,text='24 Bit',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=10)
     RadBit24.grid(row=3,column=0,sticky='nsw')
 
     # Set the BithDepth value to 32 Bit for variable vPaBitdepth
-    RadBit32=Radiobutton(frame0,text='32 Bit',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=9)
+    RadBit32=Radiobutton(frame0,text='32 Bit',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=10)
     RadBit32.grid(row=4,column=0,sticky='nsw')
 
 # End ----------
@@ -270,8 +270,12 @@ def main():
 
     # page2 main frame
 
-    frame101=tkinter.LabelFrame(page2,text="ALSA Soundcard")
+    frame101=tkinter.LabelFrame(page2,text=" ALSA Soundcard ")
     frame101.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
+
+    frame103=tkinter.LabelFrame(page2,text=" ALSA Compatible Browser ")
+    frame103.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
+
 
 # ---------- ALSA Soundcard ----------
 
@@ -280,7 +284,7 @@ def main():
     label.grid(row=0,column=0,padx=5,pady=5,sticky='nesw')
 
     # Black frame ALSA Device
-    frame102=tkinter.LabelFrame(frame101,bg="black")
+    frame102=tkinter.LabelFrame(frame101,bd=5,bg="black")
     frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
 
     # Black frame Show PA Status
@@ -323,6 +327,21 @@ def main():
 	# Set the device value to 5 for variable ALSA Device
     RadALDEV5=Radiobutton(frame101,text='5   -->',variable=vADefDev,value='5',command=ADefDev,width=9)
     RadALDEV5.grid(row=7,column=0,sticky='nsw')
+
+# End ----------
+
+# ---------- Install Palemoon Browser ---------- width=9
+
+	# Select to uninstall Palemoon
+    RadALDEV0=Radiobutton(frame103,text='Uninstall Pale Moon',variable=vADefDev,value='null 1',command=ADefDev)
+    RadALDEV0.grid(row=2,column=0,sticky='nsw')
+
+	# Select to install Palemoon
+    RadALDEV0=Radiobutton(frame103,text='Install Pale Moon',variable=vADefDev,value='null 2',command=ADefDev)
+    RadALDEV0.grid(row=2,column=1,sticky='nsw')
+
+    AplAL1=Button(frame103,text='Apply',command=applyAL,state=DISABLED)
+    AplAL1.grid(row=8,column=0,columnspan=4,padx=5,pady=5,sticky='nesw')
 
 # End ----------
 
