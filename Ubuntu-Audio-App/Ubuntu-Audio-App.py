@@ -38,7 +38,7 @@ def main():
 # -------------------- Tab 1 (PulseAudio) --------------------
 
     # page1 main frame
-    frame0=tkinter.LabelFrame(page1,bd=6,bg="red")
+    frame0=tkinter.LabelFrame(page1,bd=6,bg="blue3")
     frame0.grid(row=0,column=0,columnspan=9,rowspan=2,sticky='nesw')
 
     # page1 frame
@@ -251,11 +251,11 @@ def main():
     RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
 
 	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base pulseaudio -y && pulseaudio -D',command=ADefDev)
+    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base pulseaudio -y && pulseaudio -D',command=ADefDev)
     RadPul01.grid(row=13,column=1,sticky='nsw')
 
 	# Select to uninstall Palemoon
-    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='sudo apt-get autoremove pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo apt-get remove --purge alsa-base pulseaudio -y && sudo apt-get install alsa-base -y',command=ADefDev)
+    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='pulseaudio -k | killall pulseaudio && sudo apt-get purge padevchooser -y && sudo apt-get purge paprefs -y && sudo apt-get purge pulseaudio gstreamer0.10-pulseaudio -y && sudo apt-get purge pulseaudio-utils -y && sudo apt autoremove -y',command=ADefDev)
     RadPul02.grid(row=13,column=2,sticky='nsw')
 
     AplPul1=Button(RemPa11,text='Install / Uninstall',command=installerPA)
@@ -520,8 +520,8 @@ def showsamplerate():
         ShvPaOut.set("Output: N/A")
         vPaRun.set("Status: Off")
         print ("---------------- PulseAudio ----------------")
-        print ("Status: Off")
-        print ("Output: N/A")
+        print (vPaRun.get())
+        print (ShvPaOut.get())
         print ("--------------------------------------------")
         sys.stderr.write(
         "common::run_command() : [ERROR]: output = %s, error code = %s\n"
@@ -539,7 +539,7 @@ def applyAL():
 def installerPA():
     try:
         PaUninst=(vPaUninst.get())
-        subprocess.call('sudo {} && sudo alsa force-reload'.format(PaUninst),shell=True);
+        subprocess.call('{}'.format(PaUninst),shell=True);
         vPaRun.set("Status: Off")
         ShvPaOut.set("Output: N/A")
         print ("---------------- PulseAudio ----------------")
