@@ -1,7 +1,7 @@
-## Now with ALSA 😉
+## PA Page 😉
 <img src="https://drive.google.com/uc?id=1SUkGyXMAlLDD6wMpfgIOYbf75QFv_0mi" width="auto" height="200"/>
 <br>
- <strong>Current Development stage 0.5 </strong> 😔
+ <strong>Current Development stage 0.58 </strong> 😔
 <br>
 <br>
 Tested on <strong>un-updated</strong> 64-bit Lubuntu (16.04.3 LTS) Link -->
@@ -29,17 +29,3 @@ Cannot run the app
 ```
 chmod +x  Ubuntu-Audio-App/*
 ```
-
-ALSA page issues
-<br>
-ALSA might not work if the user allready has his own ALSA config. Create required /etc/asound.conf manually with following parameters *CASE SENSITIVE*:
-```
-defaults.pcm.card 1
-defaults.ctl.card 1
-```
-
-## Known issues
-
-If pulseaudio is removed
-
- lubuntu-desktop is replaced with pure LXDE desktop (Its faster) this means that default color theme is black and icons are bit different
