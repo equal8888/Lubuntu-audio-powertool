@@ -40,14 +40,6 @@ defaults.ctl.card 1
 
 ## Known issues
 
-if PulseAudio is removed --> During system reboot user MIGHT login to openbox desktop env.
+If pulseaudio is removed
 
-workaround to lxde enviroment, has black color scheme and icons are not the same (With pure ALSA)
-```
-sudo apt-get install lxde -y && sudo apt install lxde-common
-```
-
-get back to Lubuntu enviroment (with PulseAudio)
-```
-sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y
-```
+ lubuntu-desktop is replaced with pure LXDE desktop (Its faster) this means that default color theme is black and icons are bit different
