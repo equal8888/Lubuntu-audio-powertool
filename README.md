@@ -49,5 +49,5 @@ sudo apt-get install lxde -y && sudo apt install lxde-common
 
 get back to Lubuntu enviroment (with PulseAudio)
 ```
-sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y && sudo alsa force-reload
+sudo apt-get install alsa-base pulseaudio -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install lxde -y
 ```
