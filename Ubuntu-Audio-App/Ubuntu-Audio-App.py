@@ -238,40 +238,31 @@ def main():
     frame6=Label(page1)
     frame6.grid(row=12,column=6,sticky='nesw')
 
-
-# ---------- Remove PulseAudio ----------
-
-    RemPa11=tkinter.LabelFrame(frame5,text=" PulseAudio Installer ")
-    RemPa11.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
-
-	# Select to install Palemoon
-    RadPul01=Radiobutton(RemPa11,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get purge lxde -y && sudo apt purge lxde-common -y && sudo apt-get purge lxde -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install alsa-base pulseaudio -y && sudo alsa force-reload && pulseaudio -D',command=ADefDev)
-    RadPul01.grid(row=13,column=1,sticky='nsw')
-
-	# Select to uninstall Palemoon
-    RadPul02=Radiobutton(RemPa11,text='Uninstall PulseAudio',variable=vPaUninst,value='pulseaudio -k | killall pulseaudio | sudo apt-get purge lxde -y && sudo apt-get purge lubuntu-desktop -y && sudo apt-get autoremove pulseaudio -y && sudo apt-get purge padevchooser -y && sudo apt-get purge paprefs -y && sudo apt-get purge pulseaudio gstreamer0.10-pulseaudio -y && sudo apt-get purge pulseaudio-utils -y && sudo apt-get install lxde -y && sudo apt install lxde-common -y && sudo apt autoremove -y',command=ADefDev)
-    RadPul02.grid(row=13,column=2,sticky='nsw')
-
-    AplPul1=Button(RemPa11,text='Apply Install / Uninstall',command=installerPA)
-    AplPul1.grid(row=14,column=1,columnspan=4,padx=5,pady=5,sticky='nesw')
-
-# End ----------
-
 # ---------- Default & Apply PA Button ----------
 
 # ---------- Note to self ----------
 # Make Default Button and
 # Apply Button disable it self for few seconds after button press 😘
 
-    RemPa12=tkinter.LabelFrame(frame5,text="5) Apply changes ")
-    RemPa12.grid(row=1,column=4,sticky='NESW',padx=5,pady=5)
+# Text below app
+    label = Label(frame5, text="           Restarting services take few seconds           ")
+    label.grid(row=1, column=3)
+
+    RemPa12=tkinter.LabelFrame(frame5,text=" 5) Apply changes ")
+    RemPa12.grid(row=1,column=4,sticky='NES',padx=5,pady=5)
 
     apply_btn2=Button(RemPa12,text='Apply & Restart PulseAudio',command=applyPA)
-    apply_btn2.grid(row=2,column=1,padx=5,pady=5,sticky='e')
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='e')
 
 # End ----------
-    apply_btn11=Button(frame5,text='Set all PulseAudio Values to Default',command=defaultpulsebutton)
-    apply_btn11.grid(row=1,column=3,padx=5)
+    RemPa14=tkinter.LabelFrame(frame5,text=" * Predefined PulseAudio Config ")
+    RemPa14.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
+
+    vPaConf01=Radiobutton(RemPa14,text='Default',variable=vPaPrefConf,value='Default',command=defpa)
+    vPaConf01.grid(row=1,column=1,padx=5,sticky='NW')
+
+    vPaConf02=Radiobutton(RemPa14,text='Recommended',variable=vPaPrefConf,value='Recommended',command=recpa)
+    vPaConf02.grid(row=2,column=1,padx=5)
 
 # Button Show Samplerate
     apply_btn3=Button(frame1,text='PulseAudio Status & Output (Click to refresh)',command=showsamplerate)
@@ -284,83 +275,25 @@ def main():
     frame101=tkinter.LabelFrame(page2,text=" ALSA Soundcard ")
     frame101.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
 
-    frame103=tkinter.LabelFrame(page2,text=" ALSA Compatible Browser ")
+    frame103=tkinter.LabelFrame(page2,text=" Installer ")
     frame103.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
-
-
-# ---------- ALSA Soundcard ----------
-
-    # text Set Device:
-    label=Label(frame101,text="Set Device:",font='bold')
-    label.grid(row=0,column=0,padx=5,pady=5,sticky='nesw')
-
-    # Black frame ALSA Device
-    frame102=tkinter.LabelFrame(frame101,bd=5,bg="black")
-    frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
-
-    # Black frame Show PA Status
-    frame102=tkinter.LabelFrame(frame101,bg="black")
-    frame102.grid(row=1,rowspan=7,column=1,padx=5,sticky='nesw')
-
-    # ---------- Show Device Info ----------
-
-    # Show Devices list
-    label=Label(frame102,textvariable=vADefDevList,fg='grey',bg='black',font=('Monospace Regular',11))
-    label.grid(row=0,column=1,sticky='esw')
-    # End ----------
-
-    # Button Show Devices
-    FindAL=Button(frame101,text='Find Soundcards',command=showalsadevices)
-    FindAL.grid(row=0,column=1,padx=5,pady=5,sticky='nesw')
-
-    # ---------- ALSA Device Select ----------
-
-	# Set the device value to 0 for variable ALSA Device
-    RadALDEV0=Radiobutton(frame101,text='0   -->',variable=vADefDev,value='0',command=ADefDev,width=9)
-    RadALDEV0.grid(row=2,column=0,sticky='nsw')
-
-	# Set the device value to 1 for variable ALSA Device
-    RadALDEV1=Radiobutton(frame101,text='1   -->',variable=vADefDev,value='1',command=ADefDev,width=9)
-    RadALDEV1.grid(row=3,column=0,sticky='nsw')
-
-	# Set the device value to 2 for variable ALSA Device
-    RadALDEV2=Radiobutton(frame101,text='2   -->',variable=vADefDev,value='2',command=ADefDev,width=9)
-    RadALDEV2.grid(row=4,column=0,sticky='nsw')
-
-	# Set the device value to 3 for variable ALSA Device
-    RadALDEV3=Radiobutton(frame101,text='3   -->',variable=vADefDev,value='3',command=ADefDev,width=9)
-    RadALDEV3.grid(row=5,column=0,sticky='nsw')
-
-	# Set the device value to 4 for variable ALSA Device
-    RadALDEV4=Radiobutton(frame101,text='4   -->',variable=vADefDev,value='4',command=ADefDev,width=9)
-    RadALDEV4.grid(row=6,column=0,sticky='nsw')
-
-	# Set the device value to 5 for variable ALSA Device
-    RadALDEV5=Radiobutton(frame101,text='5   -->',variable=vADefDev,value='5',command=ADefDev,width=9)
-    RadALDEV5.grid(row=7,column=0,sticky='nsw')
-
-# End ----------
-
 
 # ---------- Install Palemoon Browser ----------
 
+    # PulseAudio
+    frame104=tkinter.LabelFrame(frame103,text=" PulseAudio ")
+    frame104.grid(row=0,column=0,sticky='NESW',padx=5,pady=5)
+
 	# Select to install Palemoon
-    RadAL02=Radiobutton(frame103,text='Install Pale Moon',variable=vADefDev,value='null 2',command=ADefDev,state=DISABLED)
+    RadAL02=Radiobutton(frame104,text='Install PulseAudio',variable=vPaUninst,value='sudo apt-get purge lxde -y && sudo apt purge lxde-common -y && sudo apt-get purge lxde -y && sudo apt-get install lubuntu-desktop -y && sudo apt-get install alsa-base pulseaudio -y && sudo alsa force-reload && pulseaudio -D',command=ADefDev)
     RadAL02.grid(row=2,column=0,sticky='nsw')
 
 	# Select to uninstall Palemoon
-    RadAL01=Radiobutton(frame103,text='Uninstall Pale Moon',variable=vADefDev,value='null 1',command=ADefDev,state=DISABLED)
+    RadAL01=Radiobutton(frame104,text='Uninstall PulseAudio',variable=vPaUninst,value='pulseaudio -k | killall pulseaudio | sudo apt-get purge lxde -y && sudo apt-get purge lubuntu-desktop -y && sudo apt-get autoremove pulseaudio -y && sudo apt-get purge padevchooser -y && sudo apt-get purge paprefs -y && sudo apt-get purge pulseaudio gstreamer0.10-pulseaudio -y && sudo apt-get purge pulseaudio-utils -y && sudo apt-get install lxde -y && sudo apt install lxde-common -y && sudo apt autoremove -y',command=ADefDev)
     RadAL01.grid(row=2,column=1,sticky='nsw')
 
-    AplAL1=Button(frame103,text='Apply',command=applyAL,state=DISABLED)
-    AplAL1.grid(row=8,column=0,padx=5,pady=5,sticky='nesw')
-
-# End ----------
-
-# ---------- ALSA Apply ----------
-
-    AplAL1=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
-    AplAL1.grid(row=8,column=0,padx=5,pady=5,sticky='nesw')
+    AplAL1=Button(frame104,text='Apply Install / Uninstall',command=installerPA)
+    AplAL1.grid(row=3,column=0,padx=5,pady=5, columnspan=2,sticky='nesw')
 
 # End ----------
 
@@ -391,12 +324,13 @@ def main():
 # ---------- Variable Config ----------
 
 # PulseAudio
-vPaBitdepth=StringVar() 			# PulseAudio BithDepth
-vPaPriRate=StringVar() 				# PulseAudio Primary Samplerate
-vPaAltRate=StringVar() 				# PulseAudio Alternative Samplerate
-vPaRe=StringVar() 					# PulseAudio Resample method
+vPaBitdepth=StringVar() 			# BithDepth
+vPaPriRate=StringVar() 				# Primary Samplerate
+vPaAltRate=StringVar() 				# Alternative Samplerate
+vPaRe=StringVar() 					# Resample method
 vPaRun=StringVar()                  # Check Running PulseAudio instances
 vPaUninst=StringVar()               # uninstall PulseAudio
+vPaPrefConf=StringVar()             # Predefined Conf
 
 
 ShvPaOut=StringVar() 				# Show Current PA output
@@ -416,7 +350,7 @@ vPaAltRate.set('; alternate-sample-rate = 48000')       # PulseAudio Alternative
 vPaRe.set('; resample-method = speex-float-1')          # PulseAudio Resample method
 vPaRun.set('')                                          # Check Running PulseAudio instances
 vPaUninst.set('')                                       # Uninstall PulseAudio
-
+vPaPrefConf.set('')                                     # Predefined Conf initial value
 ShvPaOut.set('')                                        # Show Current PA output
 
 # ALSA
@@ -447,6 +381,9 @@ def PaRun():
 def PaUninst():
     print(vPaUninst.get())
 
+def PaPrefConf():
+    print(vPaPrefConf.get())
+
 # ALSA
 def ADefDev():
     print(vADefDev.get())
@@ -459,7 +396,7 @@ def helpmenu01():
     tkinter.messagebox.showinfo("About Audio Powertool: ","PulseAudio is only a SOFTWARE MIXER' \n \nDont set the Samplerate to Maximum option available\n \nthat will do audio resampling and you dont want that!")
 
 # Default button
-def defaultpulsebutton():
+def defpa():
 # Set new values for variables
     vPaBitdepth.set('; default-sample-format = s16le')
     vPaPriRate.set('; default-sample-rate = 44100')
@@ -474,6 +411,20 @@ def defaultpulsebutton():
     print ("---------------------------------------------")
 
 # End ----------
+
+def recpa():
+# Set new values for variables
+    vPaBitdepth.set('  default-sample-format = s24le')
+    vPaPriRate.set('  default-sample-rate = 44100')
+    vPaAltRate.set('  alternate-sample-rate = 48000')
+    vPaRe.set('  resample-method = speex-float-10')
+# Show variables
+    print ("-------------- Default Values ---------------")
+    print(vPaBitdepth.get())
+    print(vPaPriRate.get())
+    print(vPaAltRate.get())
+    print(vPaRe.get())
+    print ("---------------------------------------------")
 
 # Apply PA Button
 def applyPA():
@@ -503,12 +454,13 @@ def showsamplerate():
         print (ShvPaOut.get())
         print ("--------------------------------------------")
         sys.stderr.write(
-        "common::run_command() : [ERROR]: output = %s, error code = %s\n"
-        % (e.output, e.returncode))
+        "return code: %s\n"
+        % (e.returncode))
+
 
 # End ----------
 
-# Apply ALSA Button
+# Apply Alsa
 def applyAL():
     cADefDev=(vADefDev.get())
     cADefDev=(vADefDev.get())
