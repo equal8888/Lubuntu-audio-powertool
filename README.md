@@ -1,4 +1,4 @@
-## CAUTION SYSTEM REBOOT WILL REMOVE DESKTOP ENVIROMENT. Now with ALSA 😉
+## Now with ALSA 😉
 <img src="https://drive.google.com/uc?id=1SUkGyXMAlLDD6wMpfgIOYbf75QFv_0mi" width="auto" height="200"/>
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
@@ -40,7 +40,7 @@ defaults.ctl.card 1
 
 ## Known issues
 
-Because Ubuntu is dependent on PulseAudio. Pure alsa systems will not work after system reboot.
+Because Ubuntu is dependent on PulseAudio. PURE ALSA SYSTEMS --> During system reboot user logins to openbox desktop env. 
 
 Revert changes
 ```
