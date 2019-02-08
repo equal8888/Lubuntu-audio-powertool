@@ -3,7 +3,7 @@
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
 <br>
-This version works on system with PulseAudio installed 
+This version works on systems with PulseAudio installed 
 <br>
 <br>
 
