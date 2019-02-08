@@ -86,25 +86,25 @@ def main():
 # End ----------
 
 	# Label Resample method rowspan=4
-    label=Label(frame0,text="1) Bit Depth      ")
+    label=Label(frame0,text=" 1) Bit Depth ")
     label.grid(row=0,column=0,sticky='nesw')
 
 # ---------- BithDepth Radio Buttons ----------
 
 	# Set the BithDepth value to Default for variable vPaBitdepth
-    RadBit16=Radiobutton(frame0,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=10)
+    RadBit16=Radiobutton(frame0,text='Default',variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=8)
     RadBit16.grid(row=1,column=0,sticky='nsw')
 
 	# Set the BithDepth value to 16 Bit for variable vPaBitdepth
-    RadBit16=Radiobutton(frame0,text='16 Bit',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=10)
+    RadBit16=Radiobutton(frame0,text='16 Bit',variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=8)
     RadBit16.grid(row=2,column=0,sticky='nsw')
 
     # Set the BithDepth value to 24 Bit for variable vPaBitdepth
-    RadBit24=Radiobutton(frame0,text='24 Bit',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=10)
+    RadBit24=Radiobutton(frame0,text='24 Bit',variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=8)
     RadBit24.grid(row=3,column=0,sticky='nsw')
 
     # Set the BithDepth value to 32 Bit for variable vPaBitdepth
-    RadBit32=Radiobutton(frame0,text='32 Bit',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=10)
+    RadBit32=Radiobutton(frame0,text='32 Bit',variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=8)
     RadBit32.grid(row=4,column=0,sticky='nsw')
 
 # End ----------
@@ -186,7 +186,7 @@ def main():
 
     # Label Resample method
     label=Label(frame5,text="4) Resample method")
-    label.grid(row=1,column=1,pady=4)
+    label.grid(row=1,column=1)
 
 	# Set the Resample value to speexfloat-10 for variable vPaRe
     vPaRespeexfloat10=Radiobutton(frame5,indicatoron=0,text='speexfloat-10',variable=vPaRe,value='  resample-method = speex-float-10',command=PaRe,width=16)
