@@ -15,7 +15,7 @@ def main():
 
     mainFrame.master.title("Audio Powertool for Lubuntu 16.04.3 LTS")
     mainFrame.master.minsize(width=717,height=258)
-#    mainFrame.master.resizable(False, False)
+    mainFrame.master.resizable(False, False)
 
 # End ----------
 
