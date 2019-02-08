@@ -27,5 +27,5 @@ sudo apt-get install python3-tk
 
 Cannot run the app
 ```
-chmod +x  audiopowertool/*
+chmod +x  ubuntu-audio-powertool/*
 ```
