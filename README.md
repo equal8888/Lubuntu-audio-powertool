@@ -25,5 +25,5 @@ sudo apt-get install python3-tk
 
 Cannot run the app ? Make it executable with a command
 ```
-chmod +x  ubuntu-audio-powertool/*
+chmod +x audiopowertool.py
 ```
