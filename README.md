@@ -3,6 +3,7 @@
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
 <br>
+This version work on system with PulseAudio installed 
 <br>
 Tested on 64-bit Lubuntu (16.04.3 LTS) Link -->
 <br>
@@ -25,7 +26,7 @@ sudo apt-get install python3-tk
 
 ## Troubleshoot
 
-Cannot run the app
+Cannot run the app ? Make it executable with a command
 ```
 chmod +x  ubuntu-audio-powertool/*
 ```
