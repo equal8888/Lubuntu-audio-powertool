@@ -3,7 +3,8 @@
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
 <br>
-This version work on system with PulseAudio installed 
+This version works on system with PulseAudio installed 
+<br>
 <br>
 Tested on 64-bit Lubuntu (16.04.3 LTS) Link -->
 <br>
