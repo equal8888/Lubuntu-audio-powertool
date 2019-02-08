@@ -305,15 +305,10 @@ vPaPriRate=StringVar() 				# Primary Samplerate
 vPaAltRate=StringVar() 				# Alternative Samplerate
 vPaRe=StringVar() 					# Resample method
 vPaRun=StringVar()                  # Check Running PulseAudio instances
-vPaUninst=StringVar()               # uninstall PulseAudio
 vPaPrefConf=StringVar()             # Predefined Conf
 
 
 ShvPaOut=StringVar() 				# Show Current PA output
-
-# ALSA
-vADefDev=StringVar() 			    # ALSA Default Device
-vADefDevList=StringVar() 		    # ALSA device name list
 
 # End ----------
 
@@ -325,13 +320,8 @@ vPaPriRate.set('; default-sample-rate = 44100')         # PulseAudio Primary Sam
 vPaAltRate.set('; alternate-sample-rate = 48000')       # PulseAudio Alternative Samplerate
 vPaRe.set('; resample-method = speex-float-1')          # PulseAudio Resample method
 vPaRun.set('')                                          # Check Running PulseAudio instances
-vPaUninst.set('')                                       # Uninstall PulseAudio
 vPaPrefConf.set('')                                     # Predefined Conf initial value
 ShvPaOut.set('')                                        # Show Current PA output
-
-# ALSA
-vADefDev.set('0') 		                                # ALSA Default Device
-vADefDevList.set('') 		                            # ALSA Default name list
 
 # ---------- Print Variable Data ----------
 
@@ -469,7 +459,7 @@ def showalsadevices():
 # End ----------
 
 # Run at start for now to be 100% that --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
-subprocess.call('[ -f /etc/asound.conf ] && echo "----------------------------- Audio Powertool -----------------------------" || echo "defaults.pcm.card 1\ndefaults.ctl.card 1" > /etc/asound.conf', shell=True)
+# subprocess.call('[ -f /etc/asound.conf ] && echo "----------------------------- Audio Powertool -----------------------------" || echo "defaults.pcm.card 1\ndefaults.ctl.card 1" > /etc/asound.conf', shell=True)
 
 # Close Window
 def close_window():
