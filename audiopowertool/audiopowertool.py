@@ -418,10 +418,10 @@ def showsamplerate():
         print ("---------------- PulseAudio ----------------")
         print (vPaRun.get())
         print (ShvPaOut.get())
-        print ("--------------------------------------------")
         sys.stderr.write(
-        "return code: %s\n"
+        "No audio playback detected: %s\n"
         % (e.returncode))
+        print ("--------------------------------------------")
 
 
 # End ----------
@@ -450,16 +450,6 @@ def installerPA():
         response = err.returncode
 # End ----------
 
-
-# The current ALSA device list is passed to variable and printed to terminal
-def showalsadevices():
-    showalsadeviceslist=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
-    vADefDevList.set(showalsadeviceslist)
-    print (vADefDevList.get())
-# End ----------
-
-# Run at start for now to be 100% that --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
-# subprocess.call('[ -f /etc/asound.conf ] && echo "----------------------------- Audio Powertool -----------------------------" || echo "defaults.pcm.card 1\ndefaults.ctl.card 1" > /etc/asound.conf', shell=True)
 
 # Close Window
 def close_window():
