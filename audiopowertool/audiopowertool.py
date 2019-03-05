@@ -385,7 +385,7 @@ def recpa():
     vPaAltRate.set('  alternate-sample-rate = 48000')
     vPaRe.set('  resample-method = speex-float-10')
 # Show variables
-    print ("-------------- Default Values ---------------")
+    print ("------------ Recommended Values -------------")
     print(vPaBitdepth.get())
     print(vPaPriRate.get())
     print(vPaAltRate.get())
