@@ -11,7 +11,7 @@ This version works on systems with PulseAudio installed
 
 run command from terminal
 ```
-./Ubuntu-Audio-App.py
+sudo ./Ubuntu-Audio-App.py
 ```
 
 ## Prerequisites
