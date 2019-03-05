@@ -419,7 +419,7 @@ def showsamplerate():
         print (vPaRun.get())
         print (ShvPaOut.get())
         sys.stderr.write(
-        "No audio playback detected: %s\n"
+        "No PulseAudio playback detected: %s\n"
         % (e.returncode))
         print ("--------------------------------------------")
 
