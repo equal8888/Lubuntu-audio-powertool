@@ -344,15 +344,8 @@ def PaOut():
 def PaRun():
     print(vPaRun.get())
 
-def PaUninst():
-    print(vPaUninst.get())
-
 def PaPrefConf():
     print(vPaPrefConf.get())
-
-# ALSA
-def ADefDev():
-    print(vADefDev.get())
 
 # End ----------
 
@@ -422,34 +415,7 @@ def showsamplerate():
         "No PulseAudio playback detected: %s\n"
         % (e.returncode))
         print ("--------------------------------------------")
-
-
 # End ----------
-
-# Apply Alsa
-def applyAL():
-    cADefDev=(vADefDev.get())
-    cADefDev=(vADefDev.get())
-    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | sudo alsa force-reload'.format(cADefDev,cADefDev),shell=True);
-
-# Uninstall/install PulseAudio
-def installerPA():
-    try:
-        PaUninst=(vPaUninst.get())
-        subprocess.call('{}'.format(PaUninst),shell=True);
-        vPaRun.set("Status: Off")
-        ShvPaOut.set("Output: N/A")
-        print ("---------------- PulseAudio ----------------")
-        print (vPaRun.get())
-        print (ShvPaOut.get())
-        print ("--------------------------------------------")
-    except subprocess.CalledProcessError as response:
-        print ("---------------- PulseAudio ----------------")
-        print ("Installer: Error")
-        print ("--------------------------------------------")
-        response = err.returncode
-# End ----------
-
 
 # Close Window
 def close_window():
