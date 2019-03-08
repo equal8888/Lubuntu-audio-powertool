@@ -11,7 +11,7 @@ This version works on systems with PulseAudio installed
 
 run command from terminal
 ```
-sudo ./audiopowertool.py
+./audiopowertool.py
 ```
 
 ## Prerequisites
