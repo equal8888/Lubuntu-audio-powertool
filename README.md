@@ -3,7 +3,7 @@
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
 <br>
-This version works on systems with PulseAudio installed . Wrong settings can produce clipping from the pulseaudio. For good quality sound please consider ALSA with hw mixer
+This version might work on systems with PulseAudio installed. For good quality sound please consider ALSA with hw mixer
 <br>
 <br>
 
