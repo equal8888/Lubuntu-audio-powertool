@@ -1,4 +1,5 @@
-## Easy audio settings management on Lubuntu 😉
+## This app is Broken 
+## Easy audio settings management on Lubuntu
 <img src="https://drive.google.com/uc?id=1BIkDhjF2F5TDhPeoBiACK9HKKYnJNBbE" width="auto" height="200"/>
 <br>
  <strong>Current Development stage 0.5 </strong> 😔
