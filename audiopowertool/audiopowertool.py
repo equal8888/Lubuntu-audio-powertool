@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-from tkinter import *  					# the GUI toolkit
+from tkinter import *  					# the GUI toolkit.
+from tkinter import ttk					# Define Pages and Separators
+import tkinter.messagebox   			# Messagebox About page
 import subprocess						# for pulseaudio config
 
 top = Tk()
@@ -8,9 +10,9 @@ def main():
 # ---------- Define MainFrame ----------
 
     mainFrame=Frame(top,relief="sunken",border=1)
-    Description=Label(mainFrame,text="PulseAudio Configurator:")
+    Description=Label(mainFrame,text="Audio Powertool:")
 
-    mainFrame.master.title("Audio Tool")
+    mainFrame.master.title("Audio Powertool for Lubuntu 16.04.3 LTS")
     mainFrame.master.resizable(False, False)
 
 # End ----------
@@ -18,18 +20,26 @@ def main():
 # ---------- Define Pages ----------
 
 	# Menu for pages
-    page0=(mainFrame.master)
+    nb=ttk.Notebook(mainFrame.master)
+    nb.grid(row=1,column=1,sticky='NESW')
 
-    # Around the app
-    page1=LabelFrame(page0,bg="black")
-    page1.grid(row=0,column=1,rowspan=5,sticky='nesw')
+	# Page 1 PulseAudio
+    page1=ttk.Frame(nb)
+    nb.add(page1,text='PulseAudio (Software Mixer)')
+
+	# Page 2 ALSA
+    page2=ttk.Frame(nb)
+    nb.add(page2,text='ALSA (Hardware Mixer)')
+
+	# Page 3 Config
+    page3=ttk.Frame(nb)
+    nb.add(page3,text='System Config (OS)')
 
 # End ----------
 
-# -------------------- Page (PulseAudio) --------------------
-
+# -------------------- Tab 1 (PulseAudio) --------------------
     # page1 main frame
-    frame0=LabelFrame(page1,bd=5,bg="green3")
+    frame0=LabelFrame(page1,bd=5,bg="blue3")
     frame0.grid(row=0,column=0,sticky='nesw')
 
     # page1 frame
@@ -242,6 +252,148 @@ def main():
     apply_btn3=Button(frame1,text='PulseAudio Status & Output (Click to refresh)',font=('Monospace Regular',11),command=showsamplerate)
     apply_btn3.grid(row=0,column=3)
 
+# -------------------- Tab 2 (ALSA) --------------------
+
+    # page2 main frame
+    frame222=tkinter.LabelFrame(page2,bd=6,bg="green3")
+    frame222.grid(row=0,column=1,columnspan=10,sticky='nesw')
+
+    # page1 frame
+    frame133=tkinter.LabelFrame(frame222,bd=5,bg="black")
+    frame133.grid(row=0,column=1,rowspan=11,sticky='NESW')
+
+    frame101=tkinter.LabelFrame(page2,text='Press Enter to Apply')
+    frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
+
+
+# End ----------
+
+
+# Shortcut to get what I want atm....
+    label=Label(frame133,bg="black",text="____________________________________________________________________",font=('Monospace Regular',13))
+    label.grid(row=0,column=1,columnspan=10,sticky='nsw')
+
+    # ---------- Show Device Info ----------
+
+    # Show Devices number
+    label=Label(frame133,textvariable=vADefDevId,fg='grey',bg='black',font=('Monospace Regular',13))
+    label.grid(row=1,column=0,columnspan=2,sticky='esw')
+
+    # Show Devices name
+    label=Label(frame133,textvariable=vADefDevName,fg='grey',bg='black',font=('Monospace Regular',13))
+    label.grid(row=1,column=2,columnspan=2,sticky='esw')
+
+    # Show ALSA Config
+    label=Label(frame133,textvariable=ShvALConf,fg='white',bg='black',font=('Monospace Regular',11))
+    label.grid(row=1,column=5,rowspan=8,columnspan=8,sticky='nes')
+
+#    label=Label(frame133,textvariable=ShvPaOut,fg='grey',bg='black',font=('Monospace Regular',13))
+#    label.grid(row=1,column=5,columnspan=2,sticky='esw')
+
+    # End ----------
+
+# ---------- ALSA Apply ----------
+
+    # Button Show Devices
+    FindAL=Button(frame133,text='Scan Devices',command=showalsadevices)
+    FindAL.grid(row=0,column=0,columnspan=9,rowspan=1,padx=5,pady=5,sticky='nsw')
+
+    # User inputbox
+    frame4=Label(frame101)
+    frame4.grid(row=1,column=1,sticky='nesw')
+
+# Trying difrent style this time
+    def input_stuff(event):
+        print(inputbox01.get())
+        Cappterminal=(inputbox01.get())
+        subprocess.call('sudo sed -i "/card / c card {}" /etc/asound.conf'.format(Cappterminal),shell=True);
+
+        ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+        ShvALConf.set(ALSAConf)
+
+        subprocess.call('alsactl kill rescan && alsactl nrestore ', shell=True)
+        subprocess.call('echo "-----------------------------------------------------------" && echo " Current /etc/asound.conf file \n"-----------------------------------------------------------""', shell=True)
+        subprocess.call('cat /etc/asound.conf', shell=True)
+
+    inputbox01=Entry(frame101,width=25)
+    inputbox01.insert(0, 'Input Card (nro or name)')
+    inputbox01.bind("<Return>", input_stuff)
+    inputbox01.grid(row=1,column=1,sticky='nsw')
+
+    # Button Apply
+#    AplAL1=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
+#    AplAL1.grid(row=0,column=1,padx=5,pady=5,sticky='nes')
+
+# End ----------
+
+# -------------------- Tab 3 (Config) --------------------
+
+    # Tab3 main frame
+    CMainP=tkinter.LabelFrame(page3, text=" Installer ")
+    CMainP.grid(row=1,column=1,columnspan=7,rowspan=5,sticky='NESW')
+
+    RemPa111=tkinter.LabelFrame(CMainP,text=" PulseAudio (Experimental) ")
+    RemPa111.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
+
+    RemPa1111=tkinter.LabelFrame(CMainP,text=" ALSA Compatible Browser ")
+    RemPa1111.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
+
+# ---------- Remove PulseAudio ----------
+
+	# Select to install PulseAudio
+    RadPul01=Radiobutton(RemPa111,text='Install PulseAudio',variable=vPaInst,value=' Install PulseAudio',command=PaInst)
+    RadPul01.grid(row=1,column=1,sticky='nsw')
+
+	# Select to uninstall PulseAudio
+    RadPul02=Radiobutton(RemPa111,text='Uninstall PulseAudio',variable=vPaInst,value=' Uninstall PulseAudio',command=PaInst)
+    RadPul02.grid(row=1,column=2,sticky='nsw')
+
+    RemPa12=tkinter.LabelFrame(RemPa111)
+    RemPa12.grid(row=2,column=1,columnspan=4,sticky='NESW',padx=5,pady=5)
+
+    label=Label(RemPa12,text="INSTALL Replaces lxde with lubuntu-desktop")
+    label.grid(row=3,column=1,columnspan=10,sticky='nsw')
+
+    # Separator5
+    # ttk.Separator(RemPa12).grid(row=4,column=1,sticky="ew")
+
+    label=Label(RemPa12,text="UNINSTALL Replaces lubuntu-desktop with lxde")
+    label.grid(row=5,column=1,columnspan=10,sticky='nsw')
+
+    # Separator
+    ttk.Separator(RemPa12).grid(row=6,column=1,sticky="ew")
+
+    label=Label(RemPa12,text="System will reboot after install")
+    label.grid(row=7,column=1,columnspan=10,sticky='nsw')
+
+    AplPul1=Button(RemPa111,text='Apply',command=installerPA)
+    AplPul1.grid(row=8,column=1,columnspan=4,padx=5,sticky='nesw')
+
+# End ----------
+
+# ---------- Install Palemoon Browser ----------
+
+	# Select to install Palemoon
+    RadAL01=Radiobutton(RemPa1111,text='Install Chromium',variable=vBrowserInst,value=' Install Chromium',command=BrowserInst)
+    RadAL01.grid(row=1,column=0,sticky='nsw')
+
+	# Select to uninstall Palemoon
+    RadAL02=Radiobutton(RemPa1111,text='Uninstall Chromium',variable=vBrowserInst,value=' Uninstall Chromium',command=BrowserInst)
+    RadAL02.grid(row=2,column=0,sticky='nsw')
+
+	# Select to install Palemoon
+    RadAL03=Radiobutton(RemPa1111,text='Install Pale Moon',variable=vBrowserInst,value=' Install Palemoon',command=BrowserInst)
+    RadAL03.grid(row=3,column=0,sticky='nsw')
+
+	# Select to uninstall Palemoon
+    RadAL04=Radiobutton(RemPa1111,text='Uninstall Pale Moon',variable=vBrowserInst,value=' Uninstall Palemoon',command=BrowserInst)
+    RadAL04.grid(row=4,column=0,sticky='nsw')
+
+    AplAL1=Button(RemPa1111,text='Apply',command=installMoon)
+    AplAL1.grid(row=5,column=0,padx=5,pady=5,sticky='nesw')
+
+# End ----------
+
     top.mainloop()
 
 # ---------- Variable Config ----------
@@ -256,6 +408,16 @@ vPaPrefConf=StringVar()             		# Predefined Conf
 
 ShvPaOut=StringVar() 				# Show Current PA output
 
+# ALSA
+ShvALConf=StringVar()                   # Alsa asound.conf file data
+vADefDev=StringVar() 			    	# Default Device
+vADefDevId=StringVar()                  # Device id
+vADefDevName=StringVar() 		    	# Device name list
+
+# Installers
+vPaInst=StringVar()                		# Install/Uninstall PulseAudio
+vBrowserInst=StringVar()               		# Install Palemoon
+
 # End ----------
 
 # ---------- Set some Values for Variable on app startup ----------
@@ -268,6 +430,15 @@ vPaRe.set('; resample-method = speex-float-1')          # PulseAudio Resample me
 vPaRun.set('')                                          # Check Running PulseAudio instances
 vPaPrefConf.set('')                                     # Predefined Conf initial value
 ShvPaOut.set('')                                        # Show Current PA output
+
+# ALSA
+vADefDev.set('') 		                        # ALSA Default Device
+vADefDevName.set('') 		                        # ALSA Default name list
+
+# Installers
+vPaInst.set('0')                                        # Install/Uninstall PulseAudio
+vBrowserInst.set('0')                                      # Install Palemoon
+
 
 # ---------- Print Variable Data ----------
 
@@ -293,9 +464,23 @@ def PaRun():
 def PaPrefConf():
     print(vPaPrefConf.get())
 
+# ALSA
+def ADefDev():
+    print(vADefDev.get())
+
+# Installers
+def PaInst():
+    print(vPaInst.get())
+
+def BrowserInst():
+    print(vBrowserInst.get())
+
 # End ----------
 
 # ---------- Button Commands ----------
+
+def helpmenu01():
+    tkinter.messagebox.showinfo("About Audio Powertool: ","Easy audio settings management\n \nNo more boring Config files\n \n")
 
 # Default button
 def defpa():
@@ -304,7 +489,7 @@ def defpa():
     vPaPriRate.set('; default-sample-rate = 44100')
     vPaAltRate.set('; alternate-sample-rate = 48000')
     vPaRe.set('; resample-method = speex-float-1')
-    print ("  default values ")
+    print (" Default Values ")
 # End ----------
 
 def recpa():
@@ -313,11 +498,14 @@ def recpa():
     vPaPriRate.set('  default-sample-rate = 44100')
     vPaAltRate.set('  alternate-sample-rate = 48000')
     vPaRe.set('; resample-method = speex-float-1')
-    print ("  recommended values ")
+    print (" Recommended Values ")
 # End ----------
+
 
 # Apply PA Button
 def applyPA():
+    subprocess.call('pkexec echo "ok" | gksudo echo "ok"',shell=True);
+
     CvPaBitdepth=(vPaBitdepth.get())
     CvPaPriRate=(vPaPriRate.get())
     CvPaAltRate=(vPaAltRate.get())
@@ -332,20 +520,150 @@ def showsamplerate():
         ShvPaOut.set(showsamplerateoutput)
         PaStatus=subprocess.check_output(["pulseaudio --check"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
         vPaRun.set("Status: On")
-        print ("  ---------------- PulseAudio -----------------")
-        print ("  "+vPaRun.get())
-        print ("  "+ShvPaOut.get())
-        print ("  ---------------------------------------------")
+        print ("---------------- PulseAudio -----------------")
+        print (vPaRun.get())
+        print (ShvPaOut.get())
+        print ("---------------------------------------------")
     except subprocess.CalledProcessError as e:
-        vPaRun.set("Status: Off")
         ShvPaOut.set("Output: N/A")
-        print ("  ---------- PulseAudio Configurator ----------")
-        print ("  Status: Off")
-        print ("  Output: N/A")
-        sys.stderr.write("  Error Code: %s No PulseAudio playback detected\n"%(e.returncode))
-        print ("\n  Tip:\n  Open new terminal & run app without sudo")
-        print ("  ---------------------------------------------")
+        vPaRun.set("Status: Off")
+        print ("---------------- PulseAudio -----------------")
+        print (vPaRun.get())
+        print (ShvPaOut.get())
+        sys.stderr.write(
+        "No PulseAudio playback detected: %s\n"
+        % (e.returncode))
+        print ("---------------------------------------------")
 # End ----------
+
+# Apply Alsa
+def applyAL():
+    cADefDev=(vADefDev.get())
+    cADefDev=(vADefDev.get())
+    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | alsactl kill rescan && alsactl nrestore'.format(cADefDev,cADefDev),shell=True);
+
+# Uninstall/install PulseAudio
+def installerPA():
+    PaInst=(vPaInst.get())
+    if PaInst==" Install PulseAudio":
+        print ("-------------- Install PulseAudio --------------")
+        subprocess.call('sudo apt purge --remove lubuntu-* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt purge --remove lxde* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt-get install lubuntu-desktop -y',shell=True);
+        subprocess.call('sudo apt-get install alsa-base pulseaudio -y',shell=True);
+        subprocess.call('sudo alsa force-reload',shell=True);
+        subprocess.call('pulseaudio --kill ; pulseaudio --start',shell=True);
+
+        subprocess.call('sudo apt-get update',shell=True);
+        subprocess.call('sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt-get autoclean -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+        subprocess.call('sleep 1 && echo "System Reboot in..." && sleep 1 && echo "3" && sleep 1 && echo "2" && sleep 1 && echo "1" && sleep 1 && sudo reboot',shell=True);
+
+    if PaInst==" Uninstall PulseAudio":
+        print ("-------------- Uninstall PulseAudio --------------")
+        subprocess.call('pulseaudio -k | killall pulseaudio',shell=True);
+
+	# Uninstall -->
+        subprocess.call('sudo apt purge --remove pulseaudio* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt purge --remove padevchooser* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt purge --remove pavucontrol* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt purge --remove paprefs* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt-get purge gstreamer0.10-pulseaudio -y',shell=True);
+        subprocess.call('sudo apt-get purge alsa-base -y',shell=True);
+        subprocess.call('sudo apt purge unity-session unity -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt purge --remove lubuntu-* -y; sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt purge --remove lxde* -y; sudo apt autoremove -y',shell=True);
+
+	# New Desktop Env
+        subprocess.call('sudo apt-get install lxde -y',shell=True);
+        subprocess.call('sudo apt install lxde-common -y',shell=True);
+
+	# Testing -->
+#        subprocess.call('sudo apt purge --remove gvfs* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove gvfsd* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove dbus-daemon* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove xscreensaver* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove xfce4* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove at-spi* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove at-spi2* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove telnet* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove ssh* -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge --remove vnc* -y; sudo apt autoremove -y',shell=True);
+
+	# Cleanup & Reboot
+        subprocess.call('sudo apt-get update',shell=True);
+        subprocess.call('sudo apt autoremove -y',shell=True);
+        subprocess.call('sudo apt-get autoclean -y',shell=True);
+        subprocess.call('sudo apt-get install alsa -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+        subprocess.call('sleep 1 && echo "System Reboot in..." && sleep 1 && echo "3" && sleep 1 && echo "2" && sleep 1 && echo "1" && sleep 1 && sudo reboot',shell=True);
+
+# End ----------
+
+# install Palemoon
+def installMoon():
+    subprocess.call('pkexec echo "ok" | gksudo echo "ok"',shell=True);
+
+    if BrowserInst==" Install Chromium":
+        print ("-------------- Install Chromium --------------")
+        subprocess.call('sudo apt-get install chromium-browser -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+    if BrowserInst==" Uninstall Chromium":
+        print ("-------------- Uninstall Chromium --------------")
+        subprocess.call('sudo apt-get purge chromium-browser -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+    if BrowserInst==" Install Palemoon":
+        print ("-------------- install Palemoon --------------")
+        subprocess.call('wget -nv https://download.opensuse.org/repositories/home:stevenpusser/xUbuntu_18.04/Release.key -O Release.key',shell=True);
+        subprocess.call('sudo apt-key add - < Release.key && sudo apt-get update',shell=True);
+        BrowserInst1=("sudo sh -c")
+        BrowserInst2=("'deb http://download.opensuse.org/repositories/home:/stevenpusser/xUbuntu_16.04/ /'")
+        subprocess.call('{} "echo {} > /etc/apt/sources.list.d/home:stevenpusser.list"'.format(BrowserInst1,BrowserInst2),shell=True);
+        subprocess.call('sudo apt-get update',shell=True);
+        subprocess.call('sudo apt-get install palemoon -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+    if BrowserInst==" Uninstall Palemoon":
+        print ("-------------- Uninstall Palemoon --------------")
+        subprocess.call('sudo rm /etc/apt/sources.list.d/home:stevenpusser.list',shell=True);
+        subprocess.call('sudo apt-get purge palemoon -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+
+# End ----------
+
+
+# The current ALSA device list is passed to variable and printed to terminal
+def showalsadevices():
+    ALSAdevId=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
+    vADefDevId.set(ALSAdevId)
+
+    ALSAdevName=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
+    vADefDevName.set(ALSAdevName)
+    print (vADefDevName.get())
+# End ----------
+
+# Run at start for now to be 100% that --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
+subprocess.call('echo "-----------------------------------------------------------" && echo " Creating SystemWide asound.conf file if not existing... if existing technical bs for now -> \n"-----------------------------------------------------------""', shell=True)
+subprocess.call('[ -f /etc/asound.conf ] && echo "------------------------ ALSA Conf ------------------------" || echo "pcm.!default {\ntype hw\ncard "1"\n} \nctl.!default {\ntype hw\ncard "1"\n}" > /etc/asound.conf', shell=True)
+subprocess.call('alsactl kill rescan && alsactl nrestore ', shell=True)
+subprocess.call('echo "-----------------------------------------------------------" && echo " ALSA Has been restarted Current asound.conf file \n"-----------------------------------------------------------""', shell=True)
+subprocess.call('cat /etc/asound.conf', shell=True)
+
+subprocess.call('echo "-----------------------------------------------------------" && echo " Supported card names by current system \n"-----------------------------------------------------------""', shell=True)
+subprocess.call("aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq", shell=True)
+
+ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+ShvALConf.set(ALSAConf)
 
 # Close Window
 def close_window():
