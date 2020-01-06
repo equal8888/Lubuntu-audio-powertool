@@ -10,7 +10,7 @@ def main():
     mainFrame=Frame(top,relief="sunken",border=1)
     Description=Label(mainFrame,text="PulseAudio Configurator:")
 
-    mainFrame.master.title("PulseAudio Configurator for Ubuntu")
+    mainFrame.master.title("Audio Tool")
     mainFrame.master.resizable(False, False)
 
 # End ----------
