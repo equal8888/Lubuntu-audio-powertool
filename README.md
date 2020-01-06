@@ -47,3 +47,6 @@ Uninstall PulseAudio and let the OS reboot on its own
 Select Scan Devices <br>
 type the number of your sound device & press Enter from keyboard
 
+3) From the tab 'System Config (OS)'
+Select Alsa compatible Browser <br>
+Install Chromium and or Palemoon to get audio from www-browser
