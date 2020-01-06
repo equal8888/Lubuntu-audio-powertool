@@ -341,11 +341,11 @@ def main():
 # ---------- Remove PulseAudio ----------
 
 	# Select to install PulseAudio
-    RadPul01=Radiobutton(RemPa111,text='Install PulseAudio',variable=vPaInst,value=' Install PulseAudio',command=PaInst)
+    RadPul01=Radiobutton(RemPa111,text='Install PulseAudio',variable=vPaInst,value=' Install PulseAudio')
     RadPul01.grid(row=1,column=1,sticky='nsw')
 
 	# Select to uninstall PulseAudio
-    RadPul02=Radiobutton(RemPa111,text='Uninstall PulseAudio',variable=vPaInst,value=' Uninstall PulseAudio',command=PaInst)
+    RadPul02=Radiobutton(RemPa111,text='Uninstall PulseAudio',variable=vPaInst,value=' Uninstall PulseAudio')
     RadPul02.grid(row=1,column=2,sticky='nsw')
 
     RemPa12=tkinter.LabelFrame(RemPa111)
@@ -374,36 +374,32 @@ def main():
 # ---------- Install Palemoon Browser ----------
 
 	# Select to install Chromium
-    RadAL01=Radiobutton(RemPa1111,text='Install Chromium',variable=vBrowserInst,value=' Install Chromium',command=BrowserInst)
+    RadAL01=Radiobutton(RemPa1111,text='Install Chromium',variable=vBrowserInst,value=' Install Chromium')
     RadAL01.grid(row=1,column=0,sticky='nsw')
 
 	# Select to uninstall Chromium
-    RadAL02=Radiobutton(RemPa1111,text='Uninstall Chromium',variable=vBrowserInst,value=' Uninstall Chromium',command=BrowserInst)
+    RadAL02=Radiobutton(RemPa1111,text='Uninstall Chromium',variable=vBrowserInst,value=' Uninstall Chromium')
     RadAL02.grid(row=1,column=1,sticky='nsw')
 
 	# Select to install Firefox ESR
-    RadAL05=Radiobutton(RemPa1111,text='Install Firefox ESR',variable=vBrowserInst,value=' Install FirefoxESR',command=BrowserInst)
-    RadAL05.grid(row=2,column=0,sticky='nsw')
+    RadAL03=Radiobutton(RemPa1111,text='Install Firefox ESR',variable=vBrowserInst,value=' Install Firefox ESR')
+    RadAL03.grid(row=2,column=0,sticky='nsw')
 
 	# Select to uninstall Firefox ESR
-    RadAL02=Radiobutton(RemPa1111,text='Uninstall Firefox ESR',variable=vBrowserInst,value=' Uninstall FirefoxESR',command=BrowserInst)
-    RadAL02.grid(row=2,column=1,sticky='nsw')
+    RadAL04=Radiobutton(RemPa1111,text='Uninstall Firefox ESR',variable=vBrowserInst,value=' Uninstall Firefox ESR')
+    RadAL04.grid(row=2,column=1,sticky='nsw')
 
 	# Select to install Palemoon
 
-    RadAL03=Radiobutton(RemPa1111,text='Install Pale Moon',variable=vBrowserInst,value=' Install Palemoon',command=BrowserInst)
-    RadAL03.grid(row=3,column=0,sticky='nsw')
+    RadAL05=Radiobutton(RemPa1111,text='Install Pale Moon',variable=vBrowserInst,value=' Install Palemoon')
+    RadAL05.grid(row=3,column=0,sticky='nsw')
 
 	# Select to uninstall Palemoon
-    RadAL04=Radiobutton(RemPa1111,text='Uninstall Pale Moon',variable=vBrowserInst,value=' Uninstall Palemoon',command=BrowserInst)
-    RadAL04.grid(row=3,column=1,sticky='nsw')
+    RadAL06=Radiobutton(RemPa1111,text='Uninstall Pale Moon',variable=vBrowserInst,value=' Uninstall Palemoon')
+    RadAL06.grid(row=3,column=1,sticky='nsw')
 
 
-
-
-
-
-    AplAL1=Button(RemPa1111,text='Apply',command=BrowserInst)
+    AplAL1=Button(RemPa1111,text='Apply',command=cBrowserInst)
     AplAL1.grid(row=5,column=0,padx=5,pady=5,sticky='nesw')
 
 # End ----------
@@ -451,7 +447,7 @@ vADefDevName.set('') 		                        # ALSA Default name list
 
 # Installers
 vPaInst.set('0')                                        # Install/Uninstall PulseAudio
-vBrowserInst.set('0')                                      # Install Palemoon
+vBrowserInst.set('0')                                      # Install browser
 
 
 # ---------- Print Variable Data ----------
@@ -618,34 +614,35 @@ def installerPA():
 # End ----------
 
 # install Palemoon
-def BrowserInst():
+def cBrowserInst():
+    vdBrowserInst=(vBrowserInst.get())
 
-    if BrowserInst==" Install Chromium":
+    if vdBrowserInst==" Install Chromium":
         print ("-------------- Install Chromium --------------")
         subprocess.call('sudo apt-get install chromium-browser -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
 
-    if BrowserInst==" Uninstall Chromium":
+    if vdBrowserInst==" Uninstall Chromium":
         print ("-------------- Uninstall Chromium --------------")
         subprocess.call('sudo apt-get purge chromium-browser -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
 
-    if BrowserInst==" Install FirefoxESR":
+    if vdBrowserInst==" Install Firefox ESR":
         print ("-------------- Install Firefox ESR --------------")
         subprocess.call('sudo add-apt-repository ppa:mozillateam/ppa -y && sudo apt-get remove firefox -y && sudo apt-get update && sudo apt-get install firefox-esr -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
 
-    if BrowserInst==" Uninstall FirefoxESR":
-        print ("-------------- Install Firefox ESR --------------")
-        subprocess.call('sudo apt-get remove firefox-esr -y && sudo apt-get autoremove -y &&sudo apt-get update && sudo apt-get install firefox -y',shell=True);
+    if vdBrowserInst==" Uninstall Firefox ESR":
+        print ("-------------- Uninstall Palemoon --------------")
+        subprocess.call('sudo apt-get remove --auto-remove firefox-esr',shell=True);
+        subprocess.call('sudo apt-get install firefox -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
 
-
-    if BrowserInst==" Install Palemoon":
+    if vdBrowserInst==" Install Palemoon":
         print ("-------------- install Palemoon --------------")
         subprocess.call('wget -nv https://download.opensuse.org/repositories/home:stevenpusser/xUbuntu_18.04/Release.key -O Release.key',shell=True);
         subprocess.call('sudo apt-key add - < Release.key && sudo apt-get update',shell=True);
@@ -657,7 +654,7 @@ def BrowserInst():
         print ("--------------------------------------------")
         print (" Done !")
 
-    if BrowserInst==" Uninstall Palemoon":
+    if vdBrowserInst==" Uninstall Palemoon":
         print ("-------------- Uninstall Palemoon --------------")
         subprocess.call('sudo rm /etc/apt/sources.list.d/home:stevenpusser.list',shell=True);
         subprocess.call('sudo apt-get purge palemoon -y',shell=True);
