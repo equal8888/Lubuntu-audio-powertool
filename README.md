@@ -23,7 +23,9 @@ sudo apt-get install python3-tk
 
 ## Troubleshoot
 
-Cannot run the app ? Make it executable with a command
+1) Cannot run the app ? Make it executable with a command
 ```
 chmod +x audiopowertool.py
 ```
+
+2) The app will ask password from terminal
