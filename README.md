@@ -3,7 +3,7 @@
 <br>
  <strong>Current Development stage 0.7 </strong> 😔
 <br>
-Make sure to pay attention to terminal for password prompt
+Enables configuration of PulseAudio, ALSA & Operating System for Audio Playback devices
 <br>
 <br>
 
@@ -30,3 +30,14 @@ chmod +x audiopowertool.py
 
 2) The app will ask password from terminal.
 Why ? Because of better combatibility
+
+## Here is my settings
+Just in case your interested 
+
+1) From the tab 'System Config (OS)' <br>
+Uninstall PulseAudio and let the OS reboot on its own
+
+2) From the tab 'ALSA (Hardware Mixer)'
+Select Scan Devices <br>
+type the number of your sound device & press Enter from keyboard
+
