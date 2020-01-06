@@ -3,7 +3,7 @@
 <br>
  <strong>Current Development stage 0.7 </strong> 😔
 <br>
-This version might work on systems with PulseAudio installed. For good quality sound please consider ALSA with hw mixer
+Make sure to pay attention to terminal for password prompt
 <br>
 <br>
 
