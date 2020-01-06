@@ -373,23 +373,37 @@ def main():
 
 # ---------- Install Palemoon Browser ----------
 
-	# Select to install Palemoon
+	# Select to install Chromium
     RadAL01=Radiobutton(RemPa1111,text='Install Chromium',variable=vBrowserInst,value=' Install Chromium',command=BrowserInst)
     RadAL01.grid(row=1,column=0,sticky='nsw')
 
-	# Select to uninstall Palemoon
+	# Select to uninstall Chromium
     RadAL02=Radiobutton(RemPa1111,text='Uninstall Chromium',variable=vBrowserInst,value=' Uninstall Chromium',command=BrowserInst)
-    RadAL02.grid(row=2,column=0,sticky='nsw')
+    RadAL02.grid(row=1,column=1,sticky='nsw')
+
+	# Select to install Firefox ESR
+    RadAL05=Radiobutton(RemPa1111,text='Install Firefox ESR',variable=vBrowserInst,value=' Install FirefoxESR',command=BrowserInst)
+    RadAL05.grid(row=2,column=0,sticky='nsw')
+
+	# Select to uninstall Firefox ESR
+    RadAL02=Radiobutton(RemPa1111,text='Uninstall Firefox ESR',variable=vBrowserInst,value=' Uninstall FirefoxESR',command=BrowserInst)
+    RadAL02.grid(row=2,column=1,sticky='nsw')
 
 	# Select to install Palemoon
+
     RadAL03=Radiobutton(RemPa1111,text='Install Pale Moon',variable=vBrowserInst,value=' Install Palemoon',command=BrowserInst)
     RadAL03.grid(row=3,column=0,sticky='nsw')
 
 	# Select to uninstall Palemoon
     RadAL04=Radiobutton(RemPa1111,text='Uninstall Pale Moon',variable=vBrowserInst,value=' Uninstall Palemoon',command=BrowserInst)
-    RadAL04.grid(row=4,column=0,sticky='nsw')
+    RadAL04.grid(row=3,column=1,sticky='nsw')
 
-    AplAL1=Button(RemPa1111,text='Apply',command=installMoon)
+
+
+
+
+
+    AplAL1=Button(RemPa1111,text='Apply',command=BrowserInst)
     AplAL1.grid(row=5,column=0,padx=5,pady=5,sticky='nesw')
 
 # End ----------
@@ -604,8 +618,7 @@ def installerPA():
 # End ----------
 
 # install Palemoon
-def installMoon():
-    subprocess.call('pkexec echo "ok" | gksudo echo "ok"',shell=True);
+def BrowserInst():
 
     if BrowserInst==" Install Chromium":
         print ("-------------- Install Chromium --------------")
@@ -618,6 +631,19 @@ def installMoon():
         subprocess.call('sudo apt-get purge chromium-browser -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
+
+    if BrowserInst==" Install FirefoxESR":
+        print ("-------------- Install Firefox ESR --------------")
+        subprocess.call('sudo add-apt-repository ppa:mozillateam/ppa -y && sudo apt-get remove firefox -y && sudo apt-get update && sudo apt-get install firefox-esr -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+    if BrowserInst==" Uninstall FirefoxESR":
+        print ("-------------- Install Firefox ESR --------------")
+        subprocess.call('sudo apt-get remove firefox-esr -y && sudo apt-get autoremove -y &&sudo apt-get update && sudo apt-get install firefox -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
 
     if BrowserInst==" Install Palemoon":
         print ("-------------- install Palemoon --------------")
