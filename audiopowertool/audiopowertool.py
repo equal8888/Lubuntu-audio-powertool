@@ -333,23 +333,24 @@ def main():
     CMainP.grid(row=1,column=1,columnspan=7,rowspan=5,sticky='NESW')
 
     RemPa111=tkinter.LabelFrame(CMainP,text=" PulseAudio (Experimental) ")
-    RemPa111.grid(row=1,column=1,sticky='NESW',padx=5,pady=5)
+    RemPa111.grid(row=1,column=1,sticky='NESW')
 
     RemPa1111=tkinter.LabelFrame(CMainP,text=" ALSA Compatible Browser ")
     RemPa1111.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
+
 
 # ---------- Remove PulseAudio ----------
 
 	# Select to install PulseAudio
     RadPul01=Radiobutton(RemPa111,text='Install PulseAudio',variable=vPaInst,value=' Install PulseAudio')
-    RadPul01.grid(row=1,column=1,sticky='nsw')
+    RadPul01.grid(row=1,column=1,sticky='nesw')
 
 	# Select to uninstall PulseAudio
     RadPul02=Radiobutton(RemPa111,text='Uninstall PulseAudio',variable=vPaInst,value=' Uninstall PulseAudio')
-    RadPul02.grid(row=1,column=2,sticky='nsw')
+    RadPul02.grid(row=1,column=2,sticky='nesw')
 
     RemPa12=tkinter.LabelFrame(RemPa111)
-    RemPa12.grid(row=2,column=1,columnspan=4,sticky='NESW',padx=5,pady=5)
+    RemPa12.grid(row=2,column=1,columnspan=4,sticky='NESW')
 
     label=Label(RemPa12,text="INSTALL Replaces lxde with lubuntu-desktop")
     label.grid(row=3,column=1,columnspan=10,sticky='nsw')
@@ -398,9 +399,16 @@ def main():
     RadAL06=Radiobutton(RemPa1111,text='Uninstall Pale Moon',variable=vBrowserInst,value=' Uninstall Palemoon')
     RadAL06.grid(row=3,column=1,sticky='nsw')
 
+	# Select to install Firefox
+    RadAL03=Radiobutton(RemPa1111,text='Install Firefox (Not Compatible)',variable=vBrowserInst,value=' Install Firefox')
+    RadAL03.grid(row=5,column=0,sticky='nsw')
+
+	# Select to uninstall Firefox
+    RadAL04=Radiobutton(RemPa1111,text='Uninstall Firefox (Not Compatible)',variable=vBrowserInst,value=' Uninstall Firefox')
+    RadAL04.grid(row=5,column=1,sticky='nsw')
 
     AplAL1=Button(RemPa1111,text='Apply',command=cBrowserInst)
-    AplAL1.grid(row=5,column=0,padx=5,pady=5,sticky='nesw')
+    AplAL1.grid(row=6,column=1,padx=5,pady=5,sticky='nesw')
 
 # End ----------
 
@@ -631,14 +639,25 @@ def cBrowserInst():
 
     if vdBrowserInst==" Install Firefox ESR":
         print ("-------------- Install Firefox ESR --------------")
-        subprocess.call('sudo add-apt-repository ppa:mozillateam/ppa -y && sudo apt-get remove firefox -y && sudo apt-get update && sudo apt-get install firefox-esr -y',shell=True);
+        subprocess.call('sudo add-apt-repository ppa:mozillateam/ppa -y && sudo apt-get update && sudo apt-get install firefox-esr -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
 
     if vdBrowserInst==" Uninstall Firefox ESR":
         print ("-------------- Uninstall Firefox ESR --------------")
-        subprocess.call('sudo apt-get remove --auto-remove firefox-esr',shell=True);
+        subprocess.call('sudo apt-get remove --auto-remove firefox-esr -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+    if vdBrowserInst==" Install Firefox":
+        print ("-------------- Install Firefox --------------")
         subprocess.call('sudo apt-get install firefox -y',shell=True);
+        print ("--------------------------------------------")
+        print (" Done !")
+
+    if vdBrowserInst==" Uninstall Firefox":
+        print ("-------------- Uninstall Firefox ESR --------------")
+        subprocess.call('sudo apt-get remove --auto-remove firefox -y',shell=True);
         print ("--------------------------------------------")
         print (" Done !")
 
