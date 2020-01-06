@@ -636,7 +636,7 @@ def cBrowserInst():
         print (" Done !")
 
     if vdBrowserInst==" Uninstall Firefox ESR":
-        print ("-------------- Uninstall Palemoon --------------")
+        print ("-------------- Uninstall Firefox ESR --------------")
         subprocess.call('sudo apt-get remove --auto-remove firefox-esr',shell=True);
         subprocess.call('sudo apt-get install firefox -y',shell=True);
         print ("--------------------------------------------")
