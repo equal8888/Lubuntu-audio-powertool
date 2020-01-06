@@ -28,4 +28,5 @@ sudo apt-get install python3-tk
 chmod +x audiopowertool.py
 ```
 
-2) The app will ask password from terminal
+2) The app will ask password from terminal.
+Why ? Because of better combatibility
