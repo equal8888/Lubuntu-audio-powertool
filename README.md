@@ -45,7 +45,7 @@ Uninstall PulseAudio and let the OS reboot on its own
 
 2) From the tab 'ALSA (Hardware Mixer)'
 Select Scan Devices <br>
-type the number of your sound device & press Enter from keyboard
+type the corresponding name of your sound device & press Enter from keyboard
 
 3) From the tab 'System Config (OS)'
 Select Alsa compatible Browser <br>
