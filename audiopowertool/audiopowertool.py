@@ -40,11 +40,11 @@ def main():
 # -------------------- Tab 1 (PulseAudio) --------------------
     # page1 main frame
     frame0=LabelFrame(page1,bd=5,bg="blue3")
-    frame0.grid(row=0,column=0,sticky='nesw')
+    frame0.grid(row=0,column=0,sticky='NESW')
 
     # page1 frame
     frame1=LabelFrame(frame0,bd=5,bg="black")
-    frame1.grid(row=0,column=1,rowspan=5,sticky='nesw')
+    frame1.grid(row=0,column=1,rowspan=5,sticky='NESW')
 
 	# PulseAudio Status and output info frame (white)
     frame2=Label(frame1)
@@ -54,11 +54,11 @@ def main():
 
 # show current PA status from button
     label=Label(frame2,textvariable=vPaRun,fg='white',bg='black',font=('Monospace Regular',11))
-    label.grid(sticky='nesw')
+    label.grid(sticky='NESW')
 
 # show current PA output from button
     label=Label(frame2,textvariable=ShvPaOut,fg='white',bg='black',font=('Monospace Regular',11))
-    label.grid(sticky='nesw')
+    label.grid(sticky='NESW')
 
 # Bitdepth Samplerate
     label=Label(frame1,textvariable=vPaBitdepth,fg='grey',bg='black',font=('Monospace Regular',11))
@@ -77,14 +77,14 @@ def main():
     label.grid(row=3,column=1,columnspan=4,sticky='nsw')
 
 # Shortcut to get what I want atm.... (gui fix)
-    label=Label(frame1,bg="black",text="-----------------------------",font=('Monospace Regular',11))
+    label=Label(frame1,bg="black",text="--------------------------",font=('Monospace Regular',11))
     label.grid(row=0,column=2,sticky='nsw')
 
 # End ----------
 
 	# Label Resample method rowspan=4
     label=Label(frame0,text=" 1) Bit Depth ",font=('Monospace Regular',11))
-    label.grid(row=0,column=0,sticky='nesw')
+    label.grid(row=0,column=0,sticky='NESW')
 
 # ---------- BithDepth Radio Buttons ----------
 
@@ -110,7 +110,7 @@ def main():
 
 	# samplerate frame
     frame4=LabelFrame(page1)
-    frame4.grid(row=5,column=0,columnspan=2,sticky='nesw')
+    frame4.grid(row=5,column=0,columnspan=2,sticky='NESW')
 
 	# Label
     label=Label(frame4,text=" 2) Primary Sample Rate         ",font=('Monospace Regular',11))
@@ -118,23 +118,23 @@ def main():
 
 	# Set the BithDepth value to default for variable vPaBitdepth
     RadPriRateDefault=Radiobutton(frame4,text='Default',font=('Monospace Regular',11),variable=vPaPriRate,value='; default-sample-rate = 44100',command=PaPriRate,width=10)
-    RadPriRateDefault.grid(row=1,column=2,sticky='nesw')
+    RadPriRateDefault.grid(row=1,column=2,sticky='NESW')
 
 	# Set the BithDepth value to 44,100 Hz for variable vPaBitdepth
     RadPriRate44100=Radiobutton(frame4,text='44,100 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 44100',command=PaPriRate,width=10)
-    RadPriRate44100.grid(row=1,column=3,sticky='nesw')
+    RadPriRate44100.grid(row=1,column=3,sticky='NESW')
 
 	# Set the BithDepth value to 48,000 Hz for variable vPaBitdepth
     RadPriRate48000=Radiobutton(frame4,text='48,000 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 48000',command=PaPriRate,width=10)
-    RadPriRate48000.grid(row=1,column=4,sticky='nesw')
+    RadPriRate48000.grid(row=1,column=4,sticky='NESW')
 
 	# Set the BithDepth value to 88,200 Hz for variable vPaBitdepth
     RadPriRate88200=Radiobutton(frame4,text='88,200 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 88200',command=PaPriRate,width=10)
-    RadPriRate88200.grid(row=1,column=5,sticky='nesw')
+    RadPriRate88200.grid(row=1,column=5,sticky='NESW')
 
 	# Set the BithDepth value to 96,000 Hz for variable vPaBitdepth
     RadPriRate96000=Radiobutton(frame4,text='96,000 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 96000',command=PaPriRate,width=10)
-    RadPriRate96000.grid(row=1,column=6,sticky='nesw')
+    RadPriRate96000.grid(row=1,column=6,sticky='NESW')
 
 # End ----------
 
@@ -169,15 +169,15 @@ def main():
 # ---------- Resample method Radio Buttons ----------
 
     frame5=Frame(page1)
-    frame5.grid(row=9,column=0,sticky='nesw')
+    frame5.grid(row=9,column=0,sticky='NESW')
 
 	# frame for resample method txt
     frame4=Label(frame5)
-    frame4.grid(row=1,column=1,sticky='nesw')
+    frame4.grid(row=1,column=1,sticky='NESW')
 
     # Label Resample method
     label=Label(frame4,text=" 4) Resample method                  ",font=('Monospace Regular',11))
-    label.grid(row=1,column=1,columnspan=2,sticky='nesw')
+    label.grid(row=1,column=1,columnspan=2,sticky='NESW')
 
 	# Set the Resample value to speexfloat-10 for variable vPaRe
     vPaRespeexfloat10=Radiobutton(frame5,indicatoron=0,text='speexfloat-10',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = speex-float-10',command=PaRe,width=16)
@@ -219,7 +219,7 @@ def main():
 
 	# Set the Buttons (Default Settings)
     frame6=LabelFrame(page1)
-    frame6.grid(row=12,column=0,sticky='nesw')
+    frame6.grid(row=12,column=0,sticky='NESW')
 
 # ---------- Default & Apply PA Button ----------
 
@@ -227,14 +227,14 @@ def main():
 # Make Apply Button disable it self for few seconds after button press 😘
 
 # Text below app
-    label = Label(frame6, text=" Restarting services take few seconds ",font=('Monospace Regular',11))
+    label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
     label.grid(row=1, column=3)
 
     RemPa12=LabelFrame(frame6,text=" 5) Apply changes ",font=('Monospace Regular',11))
     RemPa12.grid(row=1,column=4,sticky='NES',padx=5,pady=5)
 
     apply_btn2=Button(RemPa12,text='Apply & Restart PulseAudio',font=('Monospace Regular',11),command=applyPA)
-    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='nesw')
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
 
 # End ----------
 
@@ -254,23 +254,29 @@ def main():
 
 # -------------------- Tab 2 (ALSA) --------------------
 
+# 1) 'x' and 'y' are the x and y coordinates inside 'errorArea'
+# 2) 'place' uses 'anchor' instead of 'sticky'
+# 3) There is no need for 'padx' and 'pady' with 'place'
+# since you can specify the exact coordinates
+# errorMessage.place(x=10, y=10, anchor="w")
+
     # page2 main frame
     frame222=tkinter.LabelFrame(page2,bd=6,bg="green3")
-    frame222.grid(row=0,column=1,columnspan=10,sticky='nesw')
+    frame222.grid(row=0,column=1,columnspan=10,sticky='NESW')
 
     # page1 frame
     frame133=tkinter.LabelFrame(frame222,bd=5,bg="black")
     frame133.grid(row=0,column=1,rowspan=11,sticky='NESW')
 
     frame101=tkinter.LabelFrame(page2,text='Press Enter to Apply')
-    frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
+    frame101.grid(row=1,column=10,sticky='ES',padx=5,pady=5)
 
 
 # End ----------
 
 
 # Shortcut to get what I want atm....
-    label=Label(frame133,bg="black",text="____________________________________________________________________",font=('Monospace Regular',13))
+    label=Label(frame133,bg="black",text="___________________ _________________________________________________________________________",font=('Monospace Regular',13))
     label.grid(row=0,column=1,columnspan=10,sticky='nsw')
 
     # ---------- Show Device Info ----------
@@ -300,7 +306,7 @@ def main():
 
     # User inputbox
     frame4=Label(frame101)
-    frame4.grid(row=1,column=1,sticky='nesw')
+    frame4.grid(row=1,column=1,sticky='NESW')
 
 # Trying difrent style this time
     def input_stuff(event):
@@ -343,11 +349,11 @@ def main():
 
 	# Select to install PulseAudio
     RadPul01=Radiobutton(RemPa111,text='Install PulseAudio',variable=vPaInst,value=' Install PulseAudio')
-    RadPul01.grid(row=1,column=1,sticky='nesw')
+    RadPul01.grid(row=1,column=1,sticky='NESW')
 
 	# Select to uninstall PulseAudio
     RadPul02=Radiobutton(RemPa111,text='Uninstall PulseAudio',variable=vPaInst,value=' Uninstall PulseAudio')
-    RadPul02.grid(row=1,column=2,sticky='nesw')
+    RadPul02.grid(row=1,column=2,sticky='NESW')
 
     RemPa12=tkinter.LabelFrame(RemPa111)
     RemPa12.grid(row=2,column=1,columnspan=4,sticky='NESW')
@@ -368,7 +374,7 @@ def main():
     label.grid(row=7,column=1,columnspan=10,sticky='nsw')
 
     AplPul1=Button(RemPa111,text='Apply',command=installerPA)
-    AplPul1.grid(row=8,column=1,columnspan=4,padx=5,sticky='nesw')
+    AplPul1.grid(row=8,column=1,columnspan=4,padx=5,sticky='NESW')
 
 # End ----------
 
@@ -408,7 +414,7 @@ def main():
     RadAL04.grid(row=5,column=1,sticky='nsw')
 
     AplAL1=Button(RemPa1111,text='Apply',command=cBrowserInst)
-    AplAL1.grid(row=6,column=1,padx=5,pady=5,sticky='nesw')
+    AplAL1.grid(row=6,column=1,padx=5,pady=5,sticky='NESW')
 
 # End ----------
 
