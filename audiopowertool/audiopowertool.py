@@ -596,7 +596,7 @@ def installerPA():
         subprocess.call('sudo apt purge --remove paprefs* -y; sudo apt autoremove -y',shell=True);
         subprocess.call('sudo apt-get purge gstreamer0.10-pulseaudio -y',shell=True);
         subprocess.call('sudo apt-get purge alsa-base -y',shell=True);
-        subprocess.call('sudo apt purge unity-session unity -y; sudo apt autoremove -y',shell=True);
+#        subprocess.call('sudo apt purge unity-session unity -y; sudo apt autoremove -y',shell=True);
         subprocess.call('sudo apt purge --remove lubuntu-* -y; sudo apt autoremove -y',shell=True);
         subprocess.call('sudo apt purge --remove lxde* -y; sudo apt autoremove -y',shell=True);
 
