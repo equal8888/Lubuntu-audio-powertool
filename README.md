@@ -17,7 +17,7 @@ In theory should work on other Debian/Lubuntu/Ubuntu versions but untested for n
 
 run command from terminal
 ```
-./audiopowertool.py
+sudo ./audiopowertool.py
 ```
 
 ## Prerequisites
