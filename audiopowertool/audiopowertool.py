@@ -528,8 +528,6 @@ def recpa():
 
 # Apply PA Button
 def applyPA():
-    subprocess.call('pkexec echo "ok" | gksudo echo "ok"',shell=True);
-
     CvPaBitdepth=(vPaBitdepth.get())
     CvPaPriRate=(vPaPriRate.get())
     CvPaAltRate=(vPaAltRate.get())
