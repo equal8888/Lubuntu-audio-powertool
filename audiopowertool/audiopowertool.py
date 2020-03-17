@@ -227,14 +227,27 @@ def main():
 # Make Apply Button disable it self for few seconds after button press 😘
 
 # Text below app
-    label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
+#    label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
+#    label.grid(row=1, column=3)
+
+# Text below app new
+    label = Label(frame6, text="                                                            ",font=('Monospace Regular',11))
     label.grid(row=1, column=3)
 
+
+# Manual edit button
+    RemPa12=LabelFrame(frame6,text=" * Manual edit ",font=('Monospace Regular',11))
+    RemPa12.grid(row=1,column=3,sticky='NSW',padx=5,pady=5)
+
+    apply_btn2=Button(RemPa12,text='open config',font=('Monospace Regular',11),command=ManPA)
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
+
+    #Apply button
     RemPa12=LabelFrame(frame6,text=" 5) Apply changes ",font=('Monospace Regular',11))
     RemPa12.grid(row=1,column=4,sticky='NES',padx=5,pady=5)
 
     apply_btn2=Button(RemPa12,text='Apply & Restart PulseAudio',font=('Monospace Regular',11),command=applyPA)
-    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NES')
 
 # End ----------
 
@@ -268,8 +281,17 @@ def main():
     frame133=tkinter.LabelFrame(frame222,bd=5,bg="black")
     frame133.grid(row=0,column=1,rowspan=11,sticky='NESW')
 
-    frame101=tkinter.LabelFrame(page2,text='Press Enter to Apply')
-    frame101.grid(row=1,column=10,sticky='ES',padx=5,pady=5)
+    # Manual edit
+    ManEdit02=LabelFrame(page2,text=" * Manual edit ",font=('Monospace Regular',11))
+    ManEdit02.grid(row=1,column=1,padx=5,pady=5,sticky='NSW')
+
+    apply_btn2=Button(ManEdit02,text='open config',font=('Monospace Regular',11),command=ManALSA)
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
+
+
+
+    frame101=tkinter.LabelFrame(page2,text=' Press Enter to Apply ',padx=5,pady=5)
+    frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
 
 
 # End ----------
@@ -526,6 +548,9 @@ def recpa():
 # End ----------
 
 
+def ManPA():
+    subprocess.call('sudo xdg-open /etc/pulse/daemon.conf',shell=True);
+
 # Apply PA Button
 def applyPA():
     CvPaBitdepth=(vPaBitdepth.get())
@@ -557,6 +582,9 @@ def showsamplerate():
         % (e.returncode))
         print ("---------------------------------------------")
 # End ----------
+
+def ManALSA():
+    subprocess.call('sudo xdg-open /etc/asound.conf',shell=True);
 
 # Apply Alsa
 def applyAL():
