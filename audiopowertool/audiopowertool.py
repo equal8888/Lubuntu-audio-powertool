@@ -227,20 +227,20 @@ def main():
 # Make Apply Button disable it self for few seconds after button press 😘
 
 # Text below app
-#    label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
-#    label.grid(row=1, column=3)
+    label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
+    label.grid(row=1, column=3)
 
 # Text below app new
-    label = Label(frame6, text="                                                            ",font=('Monospace Regular',11))
-    label.grid(row=1, column=3)
+#    label = Label(frame6, text="                                                            ",font=('Monospace Regular',11))
+#    label.grid(row=1, column=3)
 
 
 # Manual edit button
-    RemPa12=LabelFrame(frame6,text=" * Manual edit ",font=('Monospace Regular',11))
-    RemPa12.grid(row=1,column=3,sticky='NSW',padx=5,pady=5)
+#    RemPa12=LabelFrame(frame6,text=" * Manual edit ",font=('Monospace Regular',11))
+#    RemPa12.grid(row=1,column=3,sticky='NSW',padx=5,pady=5)
 
-    apply_btn2=Button(RemPa12,text='open config',font=('Monospace Regular',11),command=ManPA)
-    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
+#    apply_btn2=Button(RemPa12,text='open config',font=('Monospace Regular',11),command=ManPA)
+#    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
 
     #Apply button
     RemPa12=LabelFrame(frame6,text=" 5) Apply changes ",font=('Monospace Regular',11))
@@ -282,11 +282,11 @@ def main():
     frame133.grid(row=0,column=1,rowspan=11,sticky='NESW')
 
     # Manual edit
-    ManEdit02=LabelFrame(page2,text=" * Manual edit ",font=('Monospace Regular',11))
-    ManEdit02.grid(row=1,column=1,padx=5,pady=5,sticky='NSW')
+#    ManEdit02=LabelFrame(page2,text=" * Manual edit ",font=('Monospace Regular',11))
+#    ManEdit02.grid(row=1,column=1,padx=5,pady=5,sticky='NSW')
 
-    apply_btn2=Button(ManEdit02,text='open config',font=('Monospace Regular',11),command=ManALSA)
-    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
+#    apply_btn2=Button(ManEdit02,text='open config',font=('Monospace Regular',11),command=ManALSA)
+#    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
 
 
 
