@@ -38,7 +38,7 @@ chmod +x audiopowertool.py
 Why ? Because of better combatibility
 
 ## Here is my settings for soundcards
-Just in case your interested 
+Just in case your interested
 
 1) From the tab 'System Config (OS)' <br>
 Uninstall PulseAudio and let the OS reboot on its own
@@ -50,3 +50,13 @@ type the corresponding name of your sound device & press Enter from keyboard
 3) From the tab 'System Config (OS)'
 Select Alsa compatible Browser <br>
 Install Chromium and or Palemoon to get audio from www-browser
+
+4) type in the terminal
+
+```
+amixer -c 0 cset name='IEC958 Playback Switch' on
+```
+
+5)
+
+reboot
