@@ -322,7 +322,7 @@ def main():
         subprocess.call('cat /etc/asound.conf', shell=True)
 
     inputbox01=Entry(frame101,width=25)
-    inputbox01.insert(0, 'Input Card (nro or name)')
+    inputbox01.insert(0, 'Input Card Name')
     inputbox01.bind("<Return>", input_stuff)
     inputbox01.grid(row=1,column=1,sticky='nsw')
 
