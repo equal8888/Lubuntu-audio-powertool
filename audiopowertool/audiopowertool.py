@@ -230,12 +230,11 @@ def main():
     label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
     label.grid(row=1, column=3)
 
-    #Apply button
     RemPa12=LabelFrame(frame6,text=" 5) Apply changes ",font=('Monospace Regular',11))
     RemPa12.grid(row=1,column=4,sticky='NES',padx=5,pady=5)
 
     apply_btn2=Button(RemPa12,text='Apply & Restart PulseAudio',font=('Monospace Regular',11),command=applyPA)
-    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NES')
+    apply_btn2.grid(row=1,column=1,padx=5,pady=5,sticky='NESW')
 
 # End ----------
 
@@ -269,8 +268,8 @@ def main():
     frame133=tkinter.LabelFrame(frame222,bd=5,bg="black")
     frame133.grid(row=0,column=1,rowspan=11,sticky='NESW')
 
-    frame101=tkinter.LabelFrame(page2,text=' Press Enter to Apply ',padx=5,pady=5)
-    frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
+    frame101=tkinter.LabelFrame(page2,text='Press Enter to Apply')
+    frame101.grid(row=1,column=10,sticky='ES',padx=5,pady=5)
 
 
 # End ----------
@@ -323,7 +322,7 @@ def main():
         subprocess.call('cat /etc/asound.conf', shell=True)
 
     inputbox01=Entry(frame101,width=25)
-    inputbox01.insert(0, 'Input Card Name')
+    inputbox01.insert(0, 'Input Card (nro or name)')
     inputbox01.bind("<Return>", input_stuff)
     inputbox01.grid(row=1,column=1,sticky='nsw')
 
@@ -525,6 +524,7 @@ def recpa():
     vPaRe.set('; resample-method = speex-float-1')
     print (" Recommended Values ")
 # End ----------
+
 
 # Apply PA Button
 def applyPA():
