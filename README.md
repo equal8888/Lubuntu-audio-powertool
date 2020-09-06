@@ -57,6 +57,4 @@ Install Chromium and or Palemoon to get audio from www-browser
 amixer -c X cset name='IEC958 Playback Switch' on
 ```
 
-5)
-
-reboot
+5) reboot
