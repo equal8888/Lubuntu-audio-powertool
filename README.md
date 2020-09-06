@@ -51,10 +51,10 @@ type the corresponding name of your sound device & press Enter from keyboard
 Select Alsa compatible Browser <br>
 Install Chromium and or Palemoon to get audio from www-browser
 
-4) type in the terminal (replace "X" with the soundcard name)
+4) Type in the terminal (replace "X" with the soundcard name)
 
 ```
 amixer -c X cset name='IEC958 Playback Switch' on
 ```
 
-5) reboot
+5) Reboot
