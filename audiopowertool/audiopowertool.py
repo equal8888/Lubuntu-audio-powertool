@@ -301,7 +301,7 @@ def main():
 # ---------- ALSA Apply ----------
 
     # Button Show Devices
-    FindAL=Button(frame133,text='Scan Devices',command=showalsadevices)
+    FindAL=Button(frame133,text='Detect Soundcards',command=showalsadevices)
     FindAL.grid(row=0,column=0,columnspan=9,rowspan=1,padx=5,pady=5,sticky='nsw')
 
     # User inputbox
@@ -562,7 +562,8 @@ def showsamplerate():
 def applyAL():
     cADefDev=(vADefDev.get())
     cADefDev=(vADefDev.get())
-    subprocess.call('sudo sed -i "/defaults.pcm.card / c defaults.pcm.card {}" /etc/asound.conf && sudo sed -i "/defaults.ctl.card / c defaults.ctl.card {}" /etc/asound.conf | alsactl kill rescan && alsactl nrestore'.format(cADefDev,cADefDev),shell=True);
+
+    subprocess.call('sudo sed -i "/card / c card {}" /etc/asound.conf && sudo sed -i "/card / c card {}" /etc/asound.conf | alsactl kill rescan && alsactl nrestore'.format(cADefDev,cADefDev),shell=True);
 
 # Uninstall/install PulseAudio
 def installerPA():
@@ -695,6 +696,7 @@ def showalsadevices():
 
     ALSAdevName=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
     vADefDevName.set(ALSAdevName)
+    subprocess.call('echo "-----------------------------------------------------------" && echo " Detected Soundcards \n"-----------------------------------------------------------""', shell=True)
     print (vADefDevName.get())
 # End ----------
 
@@ -705,7 +707,7 @@ subprocess.call('alsactl kill rescan && alsactl nrestore ', shell=True)
 subprocess.call('echo "-----------------------------------------------------------" && echo " ALSA Has been restarted Current asound.conf file \n"-----------------------------------------------------------""', shell=True)
 subprocess.call('cat /etc/asound.conf', shell=True)
 
-subprocess.call('echo "-----------------------------------------------------------" && echo " Supported card names by current system \n"-----------------------------------------------------------""', shell=True)
+subprocess.call('echo "-----------------------------------------------------------" && echo " Supported Soundcard names by ALSA \n"-----------------------------------------------------------""', shell=True)
 subprocess.call("aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq", shell=True)
 
 ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
