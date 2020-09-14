@@ -685,7 +685,6 @@ def cBrowserInst():
         print ("--------------------------------------------")
         print (" Done !")
 
-
 # End ----------
 
 
@@ -716,9 +715,22 @@ ShvALConf.set(ALSAConf)
 # Close Window
 def close_window():
     root.destroy()
-# End ----------
-
     root.mainloop()
+# End ----------
 
 if __name__ == '__main__':
     main()
+
+# Commands for maybe future update
+#
+# aplay -l | awk -F \: '/,/{print $1}' | uniq
+#
+# aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq
+#
+# cat /proc/asound/card0/id
+#
+# aplay -L | grep :CARD=Audio
+#
+# aplay -L | grep :CARD=Audio | awk -F \: '/,/{print $1}' | uniq
+#
+# speaker-test -c 2
