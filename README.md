@@ -49,7 +49,7 @@ type the corresponding name of your sound device & press Enter from keyboard
 
 3) From the tab 'System Config (OS)'
 Select Alsa compatible Browser <br>
-Install Chromium and or Palemoon to get audio from www-browser
+Install Chromium to get audio from www-browser
 
 4) Type in the terminal (replace "X" with the soundcard name)
 
