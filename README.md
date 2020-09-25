@@ -40,8 +40,8 @@ Why ? Because of better combatibility
 ## Here is my settings for soundcards
 Just in case your interested
 
-1) From the tab 'System Config (OS)' <br>
-Uninstall PulseAudio and let the OS reboot on its own
+1) If system is updated -> select tab 'System Config (OS)' else skip to step 2 <br>
+Uninstall PulseAudio and let the OS reboot on its own.
 
 2) From the tab 'ALSA (Hardware Mixer)'
 Select Scan Devices <br>
