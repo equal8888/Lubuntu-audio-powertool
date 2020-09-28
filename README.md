@@ -37,7 +37,7 @@ chmod +x audiopowertool.py
 2) The app will ask password from terminal.
 Why ? Because of better combatibility
 
-## Here is my settings for soundcards
+## Here is my settings
 Just in case your interested
 
 1) If system is updated -> select tab 'System Config (OS)' else skip to step 2 <br>
