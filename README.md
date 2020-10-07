@@ -3,7 +3,7 @@
 <br>
  <strong>Current Development stage 0.7 </strong> 😔
 <br>
-Enables configuration of PulseAudio, ALSA & Operating System for Audio Playback devices.
+Enables configuration of PulseAudio, ALSA.
 <br>
 <br>
 Tested on 64-bit Lubuntu (16.04.3 LTS) Link -->
