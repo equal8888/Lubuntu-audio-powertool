@@ -1,5 +1,5 @@
 ## Audio Powertool
-[![Header](https://github.com/equal8888/Lubuntu-audio-powertool/blob/master/audiopowertool.png "Header")]()
+[![Header](https://github.com/equal8888/Lubuntu-audio-powertool/blob/master/audiopowertool.jpg "Header")]()
 <br>
 <br>
 Enables configuration of PulseAudio & ALSA.
