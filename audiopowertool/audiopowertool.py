@@ -33,7 +33,8 @@ def main():
 
 	# Page 3 Config
     page3=ttk.Frame(nb)
-    nb.add(page3,text='System Config (OS)')
+# Page 3 is hidden because features might not work    
+#    nb.add(page3,text='System Config (OS)')
 
 # End ----------
 
