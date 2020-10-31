@@ -34,26 +34,3 @@ chmod +x audiopowertool.py
 ```
 
 2) The app will ask password from terminal.
-Why ? Because of better combatibility
-
-## Here is my settings
-Just in case your interested
-
-1) If system is updated -> select tab 'System Config (OS)' else skip to step 2 <br>
-Uninstall PulseAudio and let the OS reboot on its own.
-
-2) From the tab 'ALSA (Hardware Mixer)'
-Select Scan Devices <br>
-type the corresponding name of your sound device & press Enter from keyboard
-
-3) From the tab 'System Config (OS)'
-Select Alsa compatible Browser <br>
-Install Chromium to get audio from www-browser
-
-4) Type in the terminal (replace "X" with the soundcard name)
-
-```
-amixer -c X cset name='IEC958 Playback Switch' on
-```
-
-5) Reboot
