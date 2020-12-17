@@ -293,55 +293,55 @@ def main():
 # ---------- ALSA Apply ----------
 
     try:
-        ALSAdevName0=subprocess.check_output(["cat /proc/asound/card0/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName0=subprocess.check_output(["cat /proc/asound/card0/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName0.set(ALSAdevName0)
     except subprocess.CalledProcessError as e:
         vADefDevName0.set("---")
 
     try:
-        ALSAdevName1=subprocess.check_output(["cat /proc/asound/card1/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName1=subprocess.check_output(["cat /proc/asound/card1/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName1.set(ALSAdevName1)
     except subprocess.CalledProcessError as e:
         vADefDevName1.set("---")
 
     try:
-        ALSAdevName2=subprocess.check_output(["cat /proc/asound/card2/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName2=subprocess.check_output(["cat /proc/asound/card2/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName2.set(ALSAdevName2)
     except subprocess.CalledProcessError as e:
         vADefDevName2.set("---")
 
     try:
-        ALSAdevName3=subprocess.check_output(["cat /proc/asound/card3/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName3=subprocess.check_output(["cat /proc/asound/card3/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName3.set(ALSAdevName3)
     except subprocess.CalledProcessError as e:
         vADefDevName3.set("---")
 
     try:
-        ALSAdevName4=subprocess.check_output(["cat /proc/asound/card4/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName4=subprocess.check_output(["cat /proc/asound/card4/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName4.set(ALSAdevName4)
     except subprocess.CalledProcessError as e:
         vADefDevName4.set("---")
 
     try:
-        ALSAdevName5=subprocess.check_output(["cat /proc/asound/card5/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName5=subprocess.check_output(["cat /proc/asound/card5/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName5.set(ALSAdevName5)
     except subprocess.CalledProcessError as e:
         vADefDevName5.set("---")
 
     try:
-        ALSAdevName6=subprocess.check_output(["cat /proc/asound/card6/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName6=subprocess.check_output(["cat /proc/asound/card6/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName6.set(ALSAdevName6)
     except subprocess.CalledProcessError as e:
         vADefDevName6.set("---")
 
     try:
-        ALSAdevName7=subprocess.check_output(["cat /proc/asound/card7/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName7=subprocess.check_output(["cat /proc/asound/card7/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName7.set(ALSAdevName7)
     except subprocess.CalledProcessError as e:
         vADefDevName7.set("---")
 
     try:
-        ALSAdevName8=subprocess.check_output(["cat /proc/asound/card8/id"],universal_newlines=True,shell=True).strip();
+        ALSAdevName8=subprocess.check_output(["cat /proc/asound/card8/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
         vADefDevName8.set(ALSAdevName8)
     except subprocess.CalledProcessError as e:
         vADefDevName8.set("---")
@@ -371,55 +371,55 @@ def main():
         FindAL01['menu'].delete(0, 'end')
 
         try:
-            ALSAdevName0=subprocess.check_output(["cat /proc/asound/card0/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName0=subprocess.check_output(["cat /proc/asound/card0/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName0.set(ALSAdevName0)
         except subprocess.CalledProcessError as e:
             vADefDevName0.set("---")
 
         try:
-            ALSAdevName1=subprocess.check_output(["cat /proc/asound/card1/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName1=subprocess.check_output(["cat /proc/asound/card1/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName1.set(ALSAdevName1)
         except subprocess.CalledProcessError as e:
             vADefDevName1.set("---")
 
         try:
-            ALSAdevName2=subprocess.check_output(["cat /proc/asound/card2/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName2=subprocess.check_output(["cat /proc/asound/card2/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName2.set(ALSAdevName2)
         except subprocess.CalledProcessError as e:
             vADefDevName2.set("---")
 
         try:
-            ALSAdevName3=subprocess.check_output(["cat /proc/asound/card3/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName3=subprocess.check_output(["cat /proc/asound/card3/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName3.set(ALSAdevName3)
         except subprocess.CalledProcessError as e:
             vADefDevName3.set("---")
 
         try:
-            ALSAdevName4=subprocess.check_output(["cat /proc/asound/card4/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName4=subprocess.check_output(["cat /proc/asound/card4/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName4.set(ALSAdevName4)
         except subprocess.CalledProcessError as e:
             vADefDevName4.set("---")
 
         try:
-            ALSAdevName5=subprocess.check_output(["cat /proc/asound/card5/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName5=subprocess.check_output(["cat /proc/asound/card5/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName5.set(ALSAdevName5)
         except subprocess.CalledProcessError as e:
             vADefDevName5.set("---")
 
         try:
-            ALSAdevName6=subprocess.check_output(["cat /proc/asound/card6/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName6=subprocess.check_output(["cat /proc/asound/card6/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName6.set(ALSAdevName6)
         except subprocess.CalledProcessError as e:
             vADefDevName6.set("---")
 
         try:
-            ALSAdevName7=subprocess.check_output(["cat /proc/asound/card7/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName7=subprocess.check_output(["cat /proc/asound/card7/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName7.set(ALSAdevName7)
         except subprocess.CalledProcessError as e:
             vADefDevName7.set("---")
 
         try:
-            ALSAdevName8=subprocess.check_output(["cat /proc/asound/card8/id"],universal_newlines=True,shell=True).strip();
+            ALSAdevName8=subprocess.check_output(["cat /proc/asound/card8/id"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
             vADefDevName8.set(ALSAdevName8)
         except subprocess.CalledProcessError as e:
             vADefDevName8.set("---")
