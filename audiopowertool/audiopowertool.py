@@ -33,7 +33,7 @@ def main():
 
 	# Page 3 Config
     page3=ttk.Frame(nb)
-# Page 3 is hidden because features might not work    
+# Page 3 is hidden because features might not work
 #    nb.add(page3,text='System Config (OS)')
 
 # End ----------
@@ -224,8 +224,6 @@ def main():
 
 # ---------- Default & Apply PA Button ----------
 
-# ---------- Note to self ----------
-# Make Apply Button disable it self for few seconds after button press 😘
 
 # Text below app
     label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
@@ -255,29 +253,24 @@ def main():
 
 # -------------------- Tab 2 (ALSA) --------------------
 
-# 1) 'x' and 'y' are the x and y coordinates inside 'errorArea'
-# 2) 'place' uses 'anchor' instead of 'sticky'
-# 3) There is no need for 'padx' and 'pady' with 'place'
-# since you can specify the exact coordinates
-# errorMessage.place(x=10, y=10, anchor="w")
-
     # page2 main frame
     frame222=tkinter.LabelFrame(page2,bd=6,bg="green3")
     frame222.grid(row=0,column=1,columnspan=10,sticky='NESW')
 
     # page1 frame
     frame133=tkinter.LabelFrame(frame222,bd=5,bg="black")
-    frame133.grid(row=0,column=1,rowspan=11,sticky='NESW')
+    frame133.grid(row=0,column=1,rowspan=10,sticky='NESW')
 
-    frame101=tkinter.LabelFrame(page2,text='Press Enter to Apply')
-    frame101.grid(row=1,column=10,sticky='ES',padx=5,pady=5)
+    frame101=tkinter.LabelFrame(page2,text='2) Apply changes')
+    frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
 
-
+    frame102=tkinter.LabelFrame(page2,text='1) Select Card')
+    frame102.grid(row=1,column=1,sticky='NSW',padx=5,pady=5)
 # End ----------
 
 
 # Shortcut to get what I want atm....
-    label=Label(frame133,bg="black",text="___________________ _________________________________________________________________________",font=('Monospace Regular',13))
+    label=Label(frame133,bg="black",text="------------------------------------------------------------------",font=('Monospace Regular',11))
     label.grid(row=0,column=1,columnspan=10,sticky='nsw')
 
     # ---------- Show Device Info ----------
@@ -294,25 +287,183 @@ def main():
     label=Label(frame133,textvariable=ShvALConf,fg='white',bg='black',font=('Monospace Regular',11))
     label.grid(row=1,column=5,rowspan=8,columnspan=8,sticky='nes')
 
-#    label=Label(frame133,textvariable=ShvPaOut,fg='grey',bg='black',font=('Monospace Regular',13))
-#    label.grid(row=1,column=5,columnspan=2,sticky='esw')
 
     # End ----------
 
 # ---------- ALSA Apply ----------
 
+    try:
+        ALSAdevName0=subprocess.check_output(["cat /proc/asound/card0/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName0.set(ALSAdevName0)
+    except subprocess.CalledProcessError as e:
+        vADefDevName0.set("---")
+
+    try:
+        ALSAdevName1=subprocess.check_output(["cat /proc/asound/card1/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName1.set(ALSAdevName1)
+    except subprocess.CalledProcessError as e:
+        vADefDevName1.set("---")
+
+    try:
+        ALSAdevName2=subprocess.check_output(["cat /proc/asound/card2/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName2.set(ALSAdevName2)
+    except subprocess.CalledProcessError as e:
+        vADefDevName2.set("---")
+
+    try:
+        ALSAdevName3=subprocess.check_output(["cat /proc/asound/card3/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName3.set(ALSAdevName3)
+    except subprocess.CalledProcessError as e:
+        vADefDevName3.set("---")
+
+    try:
+        ALSAdevName4=subprocess.check_output(["cat /proc/asound/card4/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName4.set(ALSAdevName4)
+    except subprocess.CalledProcessError as e:
+        vADefDevName4.set("---")
+
+    try:
+        ALSAdevName5=subprocess.check_output(["cat /proc/asound/card5/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName5.set(ALSAdevName5)
+    except subprocess.CalledProcessError as e:
+        vADefDevName5.set("---")
+
+    try:
+        ALSAdevName6=subprocess.check_output(["cat /proc/asound/card6/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName6.set(ALSAdevName6)
+    except subprocess.CalledProcessError as e:
+        vADefDevName6.set("---")
+
+    try:
+        ALSAdevName7=subprocess.check_output(["cat /proc/asound/card7/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName7.set(ALSAdevName7)
+    except subprocess.CalledProcessError as e:
+        vADefDevName7.set("---")
+
+    try:
+        ALSAdevName8=subprocess.check_output(["cat /proc/asound/card8/id"],universal_newlines=True,shell=True).strip();
+        vADefDevName8.set(ALSAdevName8)
+    except subprocess.CalledProcessError as e:
+        vADefDevName8.set("---")
+
+
+    OPTIONS = [
+    vADefDevName0.get(),
+    vADefDevName1.get(),
+    vADefDevName2.get(),
+    vADefDevName3.get(),
+    vADefDevName4.get(),
+    vADefDevName5.get(),
+    vADefDevName6.get(),
+    vADefDevName7.get(),
+    vADefDevName8.get()
+    ]
+
+    variable01 = StringVar(frame101)
+    variable01.set(OPTIONS[0]) # default value
+
+    FindAL01=OptionMenu(frame102, variable01, *OPTIONS )
+    FindAL01.grid(row=1,column=0,sticky='nsw')
+
+    def optionsupdate():
+
+        # clear optionmenu
+        FindAL01['menu'].delete(0, 'end')
+
+        try:
+            ALSAdevName0=subprocess.check_output(["cat /proc/asound/card0/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName0.set(ALSAdevName0)
+        except subprocess.CalledProcessError as e:
+            vADefDevName0.set("---")
+
+        try:
+            ALSAdevName1=subprocess.check_output(["cat /proc/asound/card1/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName1.set(ALSAdevName1)
+        except subprocess.CalledProcessError as e:
+            vADefDevName1.set("---")
+
+        try:
+            ALSAdevName2=subprocess.check_output(["cat /proc/asound/card2/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName2.set(ALSAdevName2)
+        except subprocess.CalledProcessError as e:
+            vADefDevName2.set("---")
+
+        try:
+            ALSAdevName3=subprocess.check_output(["cat /proc/asound/card3/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName3.set(ALSAdevName3)
+        except subprocess.CalledProcessError as e:
+            vADefDevName3.set("---")
+
+        try:
+            ALSAdevName4=subprocess.check_output(["cat /proc/asound/card4/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName4.set(ALSAdevName4)
+        except subprocess.CalledProcessError as e:
+            vADefDevName4.set("---")
+
+        try:
+            ALSAdevName5=subprocess.check_output(["cat /proc/asound/card5/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName5.set(ALSAdevName5)
+        except subprocess.CalledProcessError as e:
+            vADefDevName5.set("---")
+
+        try:
+            ALSAdevName6=subprocess.check_output(["cat /proc/asound/card6/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName6.set(ALSAdevName6)
+        except subprocess.CalledProcessError as e:
+            vADefDevName6.set("---")
+
+        try:
+            ALSAdevName7=subprocess.check_output(["cat /proc/asound/card7/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName7.set(ALSAdevName7)
+        except subprocess.CalledProcessError as e:
+            vADefDevName7.set("---")
+
+        try:
+            ALSAdevName8=subprocess.check_output(["cat /proc/asound/card8/id"],universal_newlines=True,shell=True).strip();
+            vADefDevName8.set(ALSAdevName8)
+        except subprocess.CalledProcessError as e:
+            vADefDevName8.set("---")
+
+        OPTIONS = [
+        vADefDevName0.get(),
+        vADefDevName1.get(),
+        vADefDevName2.get(),
+        vADefDevName3.get(),
+        vADefDevName4.get(),
+        vADefDevName5.get(),
+        vADefDevName6.get(),
+        vADefDevName7.get(),
+        vADefDevName8.get()
+        ]
+
+        variable01.set(OPTIONS[0]) # default value
+
+        #new optionmenu
+
+        for choice in OPTIONS:
+           FindAL01['menu'].add_command(label=choice, command=tkinter._setit(variable01, choice))
+
+
+        ALSAdevId=subprocess.check_output([" aplay -l | awk -F \: '/,/{print $1}' | uniq "],universal_newlines=True,shell=True).strip();
+        vADefDevId.set(ALSAdevId)
+
+        ALSAdevName=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
+        vADefDevName.set(ALSAdevName)
+        subprocess.call('echo "-----------------------------------------------------------" && echo " Detected Soundcards \n"-----------------------------------------------------------""', shell=True)
+        print (vADefDevName.get())
+
+
     # Button Show Devices
-    FindAL=Button(frame133,text='Detect Soundcards',command=showalsadevices)
+    FindAL=Button(frame133,text='Detect Soundcards',command=optionsupdate)
     FindAL.grid(row=0,column=0,columnspan=9,rowspan=1,padx=5,pady=5,sticky='nsw')
 
     # User inputbox
     frame4=Label(frame101)
     frame4.grid(row=1,column=1,sticky='NESW')
 
-# Trying difrent style this time
-    def input_stuff(event):
-        print(inputbox01.get())
-        Cappterminal=(inputbox01.get())
+    def applyalsa():
+        print(variable01.get())
+        Cappterminal=(variable01.get())
         subprocess.call('sudo sed -i "/card / c card {}" /etc/asound.conf'.format(Cappterminal),shell=True);
 
         ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
@@ -322,14 +473,10 @@ def main():
         subprocess.call('echo "-----------------------------------------------------------" && echo " Current /etc/asound.conf file \n"-----------------------------------------------------------""', shell=True)
         subprocess.call('cat /etc/asound.conf', shell=True)
 
-    inputbox01=Entry(frame101,width=25)
-    inputbox01.insert(0, 'Input Card Name')
-    inputbox01.bind("<Return>", input_stuff)
-    inputbox01.grid(row=1,column=1,sticky='nsw')
 
-    # Button Apply
-#    AplAL1=Button(frame101,text='Apply & Restart ALSA',command=applyAL)
-#    AplAL1.grid(row=0,column=1,padx=5,pady=5,sticky='nes')
+    apply_btn3=Button(frame101,text='Apply & Restart Alsa',font=('Monospace Regular',11),command=applyalsa)
+    apply_btn3.grid(row=1,column=1,sticky='nesw')
+
 
 # End ----------
 
@@ -438,6 +585,17 @@ ShvALConf=StringVar()                   # Alsa asound.conf file data
 vADefDev=StringVar() 			    	# Default Device
 vADefDevId=StringVar()                  # Device id
 vADefDevName=StringVar() 		    	# Device name list
+
+vADefDevName0=StringVar() 		    	# Device name list
+vADefDevName1=StringVar() 		    	# Device name list
+vADefDevName2=StringVar() 		    	# Device name list
+vADefDevName3=StringVar() 		    	# Device name list
+vADefDevName4=StringVar() 		    	# Device name list
+vADefDevName5=StringVar() 		    	# Device name list
+vADefDevName6=StringVar() 		    	# Device name list
+vADefDevName7=StringVar() 		    	# Device name list
+vADefDevName8=StringVar() 		    	# Device name list
+
 
 # Installers
 vPaInst=StringVar()                		# Install/Uninstall PulseAudio
@@ -604,18 +762,6 @@ def installerPA():
         subprocess.call('sudo apt-get install lxde -y',shell=True);
         subprocess.call('sudo apt install lxde-common -y',shell=True);
 
-	# Testing -->
-#        subprocess.call('sudo apt purge --remove gvfs* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove gvfsd* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove dbus-daemon* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove xscreensaver* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove xfce4* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove at-spi* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove at-spi2* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove telnet* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove ssh* -y; sudo apt autoremove -y',shell=True);
-#        subprocess.call('sudo apt purge --remove vnc* -y; sudo apt autoremove -y',shell=True);
-
 	# Cleanup & Reboot
         subprocess.call('sudo apt-get update',shell=True);
         subprocess.call('sudo apt autoremove -y',shell=True);
@@ -691,16 +837,19 @@ def cBrowserInst():
 
 # The current ALSA device list is passed to variable and printed to terminal
 def showalsadevices():
-    ALSAdevId=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
+
+    ALSAdevId=subprocess.check_output([" aplay -l | awk -F \: '/,/{print $1}' | uniq "],universal_newlines=True,shell=True).strip();
     vADefDevId.set(ALSAdevId)
 
     ALSAdevName=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
     vADefDevName.set(ALSAdevName)
     subprocess.call('echo "-----------------------------------------------------------" && echo " Detected Soundcards \n"-----------------------------------------------------------""', shell=True)
     print (vADefDevName.get())
+
+
 # End ----------
 
-# Run at start for now to be 100% that --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
+# Run at start to check --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
 subprocess.call('echo "-----------------------------------------------------------" && echo " Creating SystemWide asound.conf file if not existing... if existing technical bs for now -> \n"-----------------------------------------------------------""', shell=True)
 subprocess.call('[ -f /etc/asound.conf ] && echo "------------------------ ALSA Conf ------------------------" || echo "pcm.!default {\ntype hw\ncard "1"\n} \nctl.!default {\ntype hw\ncard "1"\n}" > /etc/asound.conf', shell=True)
 subprocess.call('alsactl kill rescan && alsactl nrestore ', shell=True)
@@ -721,17 +870,3 @@ def close_window():
 
 if __name__ == '__main__':
     main()
-
-# Commands for maybe future update
-#
-# aplay -l | awk -F \: '/,/{print $1}' | uniq
-#
-# aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq
-#
-# cat /proc/asound/card0/id
-#
-# aplay -L | grep :CARD=Audio
-#
-# aplay -L | grep :CARD=Audio | awk -F \: '/,/{print $1}' | uniq
-#
-# speaker-test -c 2
