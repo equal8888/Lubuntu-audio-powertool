@@ -469,7 +469,7 @@ def main():
         ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
         ShvALConf.set(ALSAConf)
 
-        subprocess.call('alsactl kill rescan && alsactl nrestore ', shell=True)
+        subprocess.call('alsactl kill rescan && alsactl nrestore ',stderr=subprocess.DEVNULL, shell=True)
         subprocess.call('echo "-----------------------------------------------------------" && echo " Current /etc/asound.conf file \n"-----------------------------------------------------------""', shell=True)
         subprocess.call('cat /etc/asound.conf', shell=True)
 
@@ -850,11 +850,13 @@ def showalsadevices():
 # End ----------
 
 # Run at start to check --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
-subprocess.call('echo "-----------------------------------------------------------" && echo " Creating SystemWide asound.conf file if not existing... if existing technical bs for now -> \n"-----------------------------------------------------------""', shell=True)
-subprocess.call('[ -f /etc/asound.conf ] && echo "------------------------ ALSA Conf ------------------------" || echo "pcm.!default {\ntype hw\ncard "1"\n} \nctl.!default {\ntype hw\ncard "1"\n}" > /etc/asound.conf', shell=True)
-subprocess.call('alsactl kill rescan && alsactl nrestore ', shell=True)
-subprocess.call('echo "-----------------------------------------------------------" && echo " ALSA Has been restarted Current asound.conf file \n"-----------------------------------------------------------""', shell=True)
-subprocess.call('cat /etc/asound.conf', shell=True)
+try:
+    subprocess.check_output(["cat /etc/asound.conf"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
+except subprocess.CalledProcessError as e:
+    subprocess.call('echo "-----------------------------------------------------------" && echo " Creating SystemWide asound.conf file \n"-----------------------------------------------------------""', shell=True)
+    subprocess.call('[ -f /etc/asound.conf ] && echo "------------------------ ALSA Conf ------------------------" || echo "pcm.!default {\ntype hw\ncard "1"\n} \nctl.!default {\ntype hw\ncard "1"\n}" > /etc/asound.conf', shell=True)
+    subprocess.call('alsactl kill rescan && alsactl nrestore ', stderr=subprocess.DEVNULL,shell=True)
+
 
 subprocess.call('echo "-----------------------------------------------------------" && echo " Supported Soundcard names by ALSA \n"-----------------------------------------------------------""', shell=True)
 subprocess.call("aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq", shell=True)
