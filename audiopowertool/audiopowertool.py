@@ -257,34 +257,40 @@ def main():
     frame222=tkinter.LabelFrame(page2,bd=6,bg="green3")
     frame222.grid(row=0,column=1,columnspan=10,sticky='NESW')
 
-    # page1 frame
-    frame133=tkinter.LabelFrame(frame222,bd=5,bg="black")
-    frame133.grid(row=0,column=1,rowspan=10,sticky='NESW')
+    # page frame
+    frame33=tkinter.LabelFrame(frame222,bd=5,bg="black")
+    frame33.grid(row=0,column=1,rowspan=10,sticky='NESW')
+
+	# ALSA conf info frame (white)
+    frame122=Label(frame222)
+    frame122.grid(row=1,column=1,columnspan=2,sticky='nes',padx=5,pady=5)
+
 
     frame101=tkinter.LabelFrame(page2,text='2) Apply changes')
     frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
 
     frame102=tkinter.LabelFrame(page2,text='1) Select Card')
     frame102.grid(row=1,column=1,sticky='NSW',padx=5,pady=5)
+
+
+
 # End ----------
 
-
-# Shortcut to get what I want atm....
-    label=Label(frame133,bg="black",text="------------------------------------------------------------------",font=('Monospace Regular',11))
+    label=Label(frame33,bg="black",text="------------------------------------------------------------------",font=('Monospace Regular',11))
     label.grid(row=0,column=1,columnspan=10,sticky='nsw')
 
     # ---------- Show Device Info ----------
 
     # Show Devices number
-    label=Label(frame133,textvariable=vADefDevId,fg='grey',bg='black',font=('Monospace Regular',13))
+    label=Label(frame33,textvariable=vADefDevId,fg='grey',bg='black',font=('Monospace Regular',11))
     label.grid(row=1,column=0,columnspan=2,sticky='esw')
 
     # Show Devices name
-    label=Label(frame133,textvariable=vADefDevName,fg='grey',bg='black',font=('Monospace Regular',13))
+    label=Label(frame33,textvariable=vADefDevName,fg='grey',bg='black',font=('Monospace Regular',11))
     label.grid(row=1,column=2,columnspan=2,sticky='esw')
 
     # Show ALSA Config
-    label=Label(frame133,textvariable=ShvALConf,fg='white',bg='black',font=('Monospace Regular',11))
+    label=Label(frame122,textvariable=ShvALConf,fg='white',bg='black',font=('Monospace Regular',11))
     label.grid(row=1,column=5,rowspan=8,columnspan=8,sticky='nes')
 
 
@@ -454,7 +460,7 @@ def main():
 
 
     # Button Show Devices
-    FindAL=Button(frame133,text='Detect Soundcards',command=optionsupdate)
+    FindAL=Button(frame33,text='Detect Soundcards',command=optionsupdate)
     FindAL.grid(row=0,column=0,columnspan=9,rowspan=1,padx=5,pady=5,sticky='nsw')
 
     # User inputbox
