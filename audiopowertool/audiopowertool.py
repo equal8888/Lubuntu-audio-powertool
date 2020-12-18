@@ -857,10 +857,6 @@ except subprocess.CalledProcessError as e:
     subprocess.call('[ -f /etc/asound.conf ] && echo "------------------------ ALSA Conf ------------------------" || echo "pcm.!default {\ntype hw\ncard "1"\n} \nctl.!default {\ntype hw\ncard "1"\n}" > /etc/asound.conf', shell=True)
     subprocess.call('alsactl kill rescan && alsactl nrestore ', stderr=subprocess.DEVNULL,shell=True)
 
-
-subprocess.call('echo "-----------------------------------------------------------" && echo " Supported Soundcard names by ALSA \n"-----------------------------------------------------------""', shell=True)
-subprocess.call("aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq", shell=True)
-
 ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
 ShvALConf.set(ALSAConf)
 
