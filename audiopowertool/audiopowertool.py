@@ -1,18 +1,17 @@
 #!/usr/bin/python3
-from tkinter import *  					# the GUI toolkit.
-from tkinter import ttk					# Define Pages and Separators
-import tkinter.messagebox   			# Messagebox About page
-import subprocess						# for pulseaudio config
+import tkinter                          # GUI toolkit
+from tkinter import StringVar, Frame, Label, LabelFrame, Radiobutton, OptionMenu, Button, ttk, _setit # GUI toolkit
+import subprocess                       # Pulseaudio/alsa config
 
-top = Tk()
+top = tkinter.Tk()
 def main():
 
 # ---------- Define MainFrame ----------
 
-    mainFrame=Frame(top,relief="sunken",border=1)
+    mainFrame=Frame(top,border=1)
     Description=Label(mainFrame,text="Audio Powertool:")
 
-    mainFrame.master.title("Audio Powertool for Lubuntu 16.04.3 LTS")
+    mainFrame.master.title("Audio Powertool")
     mainFrame.master.resizable(False, False)
 
 # End ----------
@@ -31,16 +30,11 @@ def main():
     page2=ttk.Frame(nb)
     nb.add(page2,text='ALSA (Hardware Mixer)')
 
-	# Page 3 Config
-    page3=ttk.Frame(nb)
-# Page 3 is hidden because features might not work
-#    nb.add(page3,text='System Config (OS)')
-
 # End ----------
 
 # -------------------- Tab 1 (PulseAudio) --------------------
     # page1 main frame
-    frame0=LabelFrame(page1,bd=5,bg="blue3")
+    frame0=LabelFrame(page1,bd=5,bg="cyan")
     frame0.grid(row=0,column=0,sticky='NESW')
 
     # page1 frame
@@ -62,47 +56,41 @@ def main():
     label.grid(sticky='NESW')
 
 # Bitdepth Samplerate
-    label=Label(frame1,textvariable=vPaBitdepth,fg='grey',bg='black',font=('Monospace Regular',11))
+    label=Label(frame1,textvariable=vConfPaBitdepth,fg='grey',bg='black',font=('Monospace Regular',11))
     label.grid(row=0,column=1,sticky='nsw')
 
 # Primary Samplerate
-    label=Label(frame1,textvariable=vPaPriRate,fg='grey',bg='black',font=('Monospace Regular',11))
+    label=Label(frame1,textvariable=vConfPaPriRate,fg='grey',bg='black',font=('Monospace Regular',11))
     label.grid(row=1,column=1,columnspan=4,sticky='nsw')
 
 # Alternative Samplerate
-    label=Label(frame1,textvariable=vPaAltRate,fg='grey',bg='black',font=('Monospace Regular',11))
+    label=Label(frame1,textvariable=vConfPaAltRate,fg='grey',bg='black',font=('Monospace Regular',11))
     label.grid(row=2,column=1,columnspan=4,sticky='nsw')
 
 # Resampling
-    label=Label(frame1,textvariable=vPaRe,fg='grey',bg='black',font=('Monospace Regular',11))
-    label.grid(row=3,column=1,columnspan=4,sticky='nsw')
+    resamplinglabel=Label(frame1,textvariable=vConfPaRe,fg='grey',bg='black',font=('Monospace Regular',11))
+    resamplinglabel.grid(row=3,column=1,columnspan=4,sticky='nsw')
 
-# Shortcut to get what I want atm.... (gui fix)
-    label=Label(frame1,bg="black",text="--------------------------",font=('Monospace Regular',11))
+    label=Label(frame1,bg="black",text="----------------------------",font=('Monospace Regular',11))
     label.grid(row=0,column=2,sticky='nsw')
 
 # End ----------
 
-	# Label Resample method rowspan=4
     label=Label(frame0,text=" 1) Bit Depth ",font=('Monospace Regular',11))
     label.grid(row=0,column=0,sticky='NESW')
 
 # ---------- BithDepth Radio Buttons ----------
 
-	# Set the BithDepth value to Default for variable vPaBitdepth
     RadBit16=Radiobutton(frame0,text='Default',font=('Monospace Regular',11),variable=vPaBitdepth,value='; default-sample-format = s16le',command=Pabitdepth,width=8)
     RadBit16.grid(row=1,column=0,sticky='nsw')
 
-	# Set the BithDepth value to 16 Bit for variable vPaBitdepth
-    RadBit16=Radiobutton(frame0,text='16 Bit',font=('Monospace Regular',11),variable=vPaBitdepth,value='  default-sample-format = s16le',command=Pabitdepth,width=8)
+    RadBit16=Radiobutton(frame0,text='16 Bit',font=('Monospace Regular',11),variable=vPaBitdepth,value='default-sample-format = s16le',command=Pabitdepth,width=8)
     RadBit16.grid(row=2,column=0,sticky='nsw')
 
-    # Set the BithDepth value to 24 Bit for variable vPaBitdepth
-    RadBit24=Radiobutton(frame0,text='24 Bit',font=('Monospace Regular',11),variable=vPaBitdepth,value='  default-sample-format = s24le',command=Pabitdepth,width=8)
+    RadBit24=Radiobutton(frame0,text='24 Bit',font=('Monospace Regular',11),variable=vPaBitdepth,value='default-sample-format = s24le',command=Pabitdepth,width=8)
     RadBit24.grid(row=3,column=0,sticky='nsw')
 
-    # Set the BithDepth value to 32 Bit for variable vPaBitdepth
-    RadBit32=Radiobutton(frame0,text='32 Bit',font=('Monospace Regular',11),variable=vPaBitdepth,value='  default-sample-format = s32le',command=Pabitdepth,width=8)
+    RadBit32=Radiobutton(frame0,text='32 Bit',font=('Monospace Regular',11),variable=vPaBitdepth,value='default-sample-format = s32le',command=Pabitdepth,width=8)
     RadBit32.grid(row=4,column=0,sticky='nsw')
 
 # End ----------
@@ -113,117 +101,136 @@ def main():
     frame4=LabelFrame(page1)
     frame4.grid(row=5,column=0,columnspan=2,sticky='NESW')
 
-	# Label
     label=Label(frame4,text=" 2) Primary Sample Rate         ",font=('Monospace Regular',11))
     label.grid(row=1,column=1,sticky='w')
 
-	# Set the BithDepth value to default for variable vPaBitdepth
     RadPriRateDefault=Radiobutton(frame4,text='Default',font=('Monospace Regular',11),variable=vPaPriRate,value='; default-sample-rate = 44100',command=PaPriRate,width=10)
     RadPriRateDefault.grid(row=1,column=2,sticky='NESW')
 
-	# Set the BithDepth value to 44,100 Hz for variable vPaBitdepth
-    RadPriRate44100=Radiobutton(frame4,text='44,100 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 44100',command=PaPriRate,width=10)
+    RadPriRate44100=Radiobutton(frame4,text='44,100 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='default-sample-rate = 44100',command=PaPriRate,width=10)
     RadPriRate44100.grid(row=1,column=3,sticky='NESW')
 
-	# Set the BithDepth value to 48,000 Hz for variable vPaBitdepth
-    RadPriRate48000=Radiobutton(frame4,text='48,000 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 48000',command=PaPriRate,width=10)
+    RadPriRate48000=Radiobutton(frame4,text='48,000 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='default-sample-rate = 48000',command=PaPriRate,width=10)
     RadPriRate48000.grid(row=1,column=4,sticky='NESW')
 
-	# Set the BithDepth value to 88,200 Hz for variable vPaBitdepth
-    RadPriRate88200=Radiobutton(frame4,text='88,200 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 88200',command=PaPriRate,width=10)
+    RadPriRate88200=Radiobutton(frame4,text='88,200 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='default-sample-rate = 88200',command=PaPriRate,width=10)
     RadPriRate88200.grid(row=1,column=5,sticky='NESW')
 
-	# Set the BithDepth value to 96,000 Hz for variable vPaBitdepth
-    RadPriRate96000=Radiobutton(frame4,text='96,000 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='  default-sample-rate = 96000',command=PaPriRate,width=10)
+    RadPriRate96000=Radiobutton(frame4,text='96,000 Hz',font=('Monospace Regular',11),variable=vPaPriRate,value='default-sample-rate = 96000',command=PaPriRate,width=10)
     RadPriRate96000.grid(row=1,column=6,sticky='NESW')
 
 # End ----------
 
 # ---------- Alternative Samplerate Radio Buttons ----------
 
-	# Label
     label=Label(frame4,text=" 3) Alternative Sample Rate ",font=('Monospace Regular',11))
     label.grid(row=2,column=1,sticky='w')
 
-	# Set the BithDepth value to default for variable vPaAltRate
     RadAltRateDefault=Radiobutton(frame4,text='Default',font=('Monospace Regular',11),variable=vPaAltRate,value='; alternate-sample-rate = 48000',command=PaAltRate,width=10)
     RadAltRateDefault.grid(row=2,column=2)
 
-	# Set the BithDepth value to 48,000 Hz for variable vPaAltRate
-    RadAltRate48000=Radiobutton(frame4,text='44,100 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='  alternate-sample-rate = 44100',command=PaAltRate,width=10)
+    RadAltRate48000=Radiobutton(frame4,text='44,100 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='alternate-sample-rate = 44100',command=PaAltRate,width=10)
     RadAltRate48000.grid(row=2,column=3)
 
-	# Set the BithDepth value to 88,200 Hz for variable vPaAltRate
-    RadAltRate48000=Radiobutton(frame4,text='48,000 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='  alternate-sample-rate = 48000',command=PaAltRate,width=10)
+    RadAltRate48000=Radiobutton(frame4,text='48,000 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='alternate-sample-rate = 48000',command=PaAltRate,width=10)
     RadAltRate48000.grid(row=2,column=4)
 
-	# Set the BithDepth value to 96,000 Hz for variable vPaAltRate
-    RadAltRate96000=Radiobutton(frame4,text='88,200 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='  alternate-sample-rate = 88200',command=PaAltRate,width=10)
+    RadAltRate96000=Radiobutton(frame4,text='88,200 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='alternate-sample-rate = 88200',command=PaAltRate,width=10)
     RadAltRate96000.grid(row=2,column=5)
 
-	# Set the BithDepth value to 192,000 Hz for variable vPaAltRate
-    RadAltRate192000=Radiobutton(frame4,text='96,000 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='  alternate-sample-rate = 96000',command=PaAltRate,width=10)
+    RadAltRate192000=Radiobutton(frame4,text='96,000 Hz',font=('Monospace Regular',11),variable=vPaAltRate,value='alternate-sample-rate = 96000',command=PaAltRate,width=10)
     RadAltRate192000.grid(row=2,column=6)
 
 # End ----------
+
+    global PaAre
+
+# Avoid resampling button
+    def PaAre():
+        global ToggleBtn
+        if ToggleBtn == 'On':
+            vPaAre.set('; avoid-resampling = false')
+            print ("-----------------------------------------------------------")
+            print ("\033[96m PulseAudio \033[00m")
+            print ("-----------------------------------------------------------")
+            print(vPaAre.get())
+            vPaRestop.config(text='avoid resample', font=('Monospace Regular',11))
+
+            vPaRedefault["state"] = "normal"
+            vPaRemedium["state"] = "normal"
+            vPaRebest["state"] = "normal"
+            vPaRezeroOrderhold["state"] = "normal"
+            vPaReffmpeg["state"] = "normal"
+            vPaResrclinear["state"] = "normal"
+            vPaResoxrhq["state"] = "normal"
+            vPaResoxrvhq["state"] = "normal"
+
+            ToggleBtn='Off'
+        else:
+            vPaAre.set('avoid-resampling = true')
+            print ("-----------------------------------------------------------")
+            print ("\033[96m PulseAudio \033[00m")
+            print ("-----------------------------------------------------------")
+            vPaRe.set('; resample-method = speex-float-1')
+            vPaRestop.config(text='enable resample', font=('Monospace Regular',11))
+            print(vPaAre.get())
+
+            vPaRedefault["state"] = "disabled"
+            vPaRemedium["state"] = "disabled"
+            vPaRebest["state"] = "disabled"
+            vPaRezeroOrderhold["state"] = "disabled"
+            vPaReffmpeg["state"] = "disabled"
+            vPaResrclinear["state"] = "disabled"
+            vPaResoxrhq["state"] = "disabled"
+            vPaResoxrvhq["state"] = "disabled"
+
+            ToggleBtn='On'
 
 # ---------- Resample method Radio Buttons ----------
 
     frame5=Frame(page1)
     frame5.grid(row=9,column=0,sticky='NESW')
 
-	# frame for resample method txt
     frame4=Label(frame5)
     frame4.grid(row=1,column=1,sticky='NESW')
 
     # Label Resample method
-    label=Label(frame4,text=" 4) Resample method                  ",font=('Monospace Regular',11))
+    label=Label(frame4,text=" 4) Resample Method                  ",font=('Monospace Regular',11))
     label.grid(row=1,column=1,columnspan=2,sticky='NESW')
 
-	# Set the Resample value to speexfloat-10 for variable vPaRe
-    vPaRespeexfloat10=Radiobutton(frame5,indicatoron=0,text='speexfloat-10',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = speex-float-10',command=PaRe,width=16)
-    vPaRespeexfloat10.grid(row=1,column=4)
+    vPaRedefault=Radiobutton(frame5,indicatoron=0,text='default',font=('Monospace Regular',11),variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=16)
+    vPaRedefault.grid(row=1,column=4)
 
-	# Set the Resample value to medium for variable vPaRe
-    vPaRemedium=Radiobutton(frame5,indicatoron=0,text='medium',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = src-sinc-medium-quality',command=PaRe,width=16)
+    vPaRemedium=Radiobutton(frame5,indicatoron=0,text='medium',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = src-sinc-medium-quality',command=PaRe,width=16)
     vPaRemedium.grid(row=1,column=5)
 
-	# Set the Resample value to best for variable vPaRe
-    vPaRebest=Radiobutton(frame5,indicatoron=0,text='best',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = src-sinc-best-quality',command=PaRe,width=16)
+    vPaRebest=Radiobutton(frame5,indicatoron=0,text='best',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = src-sinc-best-quality',command=PaRe,width=16)
     vPaRebest.grid(row=1,column=6)
 
-	# Set the Resample value to zero-orderhold for variable vPaRe
-    vPaRezeroOrderhold=Radiobutton(frame5,indicatoron=0,text='zero-orderhold',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = src-zero-order-hold',command=PaRe,width=16)
+    vPaRezeroOrderhold=Radiobutton(frame5,indicatoron=0,text='zero-orderhold',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = src-zero-order-hold',command=PaRe,width=16)
     vPaRezeroOrderhold.grid(row=1, column=7)
 
-	# Set the Resample value to Default Resampling for variable vPaRe
-    vPaReStopResampling=Radiobutton(frame5,indicatoron=0,text='Default Resampling',font=('Monospace Regular',11),variable=vPaRe,value='; resample-method = speex-float-1',command=PaRe,width=26)
-    vPaReStopResampling.grid(row=2,column=1,sticky='ew')
+    vPaRestop=Button(frame5,text='avoid resampling',font=('Monospace Regular',11),command=PaAre)
+    vPaRestop.grid(row=2,column=1,sticky='ew')
 
-	# Set the Resample value to ffmpeg for variable vPaRe
-    vPaReffmpeg=Radiobutton(frame5,indicatoron=0,text='ffmpeg',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = ffmpeg',command=PaRe,width=16)
+    vPaReffmpeg=Radiobutton(frame5,indicatoron=0,text='ffmpeg',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = ffmpeg',command=PaRe,width=16)
     vPaReffmpeg.grid(row=2,column=4)
 
-	# Set the Resample value to src-linear for variable vPaRe
-    vPaResrclinear=Radiobutton(frame5,indicatoron=0,text='src-linear',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = src-linear',command=PaRe,width=16)
+    vPaResrclinear=Radiobutton(frame5,indicatoron=0,text='src-linear',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = src-linear',command=PaRe,width=16)
     vPaResrclinear.grid(row=2,column=5)
 
-	# Set the Resample value to soxr-hq for variable vPaRe
-    vPaResoxrhq=Radiobutton(frame5,indicatoron=0,text='soxr-hq',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = soxr-hq',command=PaRe,width=16)
+    vPaResoxrhq=Radiobutton(frame5,indicatoron=0,text='soxr-hq',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = soxr-hq',command=PaRe,width=16)
     vPaResoxrhq.grid(row=2,column=6)
 
-	# Set the Resample value to soxr-vhq for variable vPaRe
-    vPaResoxrvhq=Radiobutton(frame5,indicatoron=0,text='soxr-vhq',font=('Monospace Regular',11),variable=vPaRe,value='  resample-method = soxr-vhq',command=PaRe,width=16)
+    vPaResoxrvhq=Radiobutton(frame5,indicatoron=0,text='soxr-vhq',font=('Monospace Regular',11),variable=vPaRe,value='resample-method = soxr-vhq',command=PaRe,width=16)
     vPaResoxrvhq.grid(row=2,column=7)
 
 # End ----------
 
-	# Set the Buttons (Default Settings)
     frame6=LabelFrame(page1)
     frame6.grid(row=12,column=0,sticky='NESW')
 
 # ---------- Default & Apply PA Button ----------
-
 
 # Text below app
     label = Label(frame6, text="     Restarting services take few seconds     ",font=('Monospace Regular',11))
@@ -254,11 +261,11 @@ def main():
 # -------------------- Tab 2 (ALSA) --------------------
 
     # page2 main frame
-    frame222=tkinter.LabelFrame(page2,bd=6,bg="green3")
+    frame222=LabelFrame(page2,bd=6,bg="green3")
     frame222.grid(row=0,column=1,columnspan=10,sticky='NESW')
 
     # page frame
-    frame33=tkinter.LabelFrame(frame222,bd=5,bg="black")
+    frame33=LabelFrame(frame222,bd=5,bg="black")
     frame33.grid(row=0,column=1,rowspan=10,sticky='NESW')
 
 	# ALSA conf info frame (white)
@@ -266,13 +273,11 @@ def main():
     frame122.grid(row=1,column=1,columnspan=2,sticky='nes',padx=5,pady=5)
 
 
-    frame101=tkinter.LabelFrame(page2,text='2) Apply changes')
+    frame101=LabelFrame(page2,text='2) Apply changes')
     frame101.grid(row=1,column=10,sticky='NES',padx=5,pady=5)
 
-    frame102=tkinter.LabelFrame(page2,text='1) Select Card')
+    frame102=LabelFrame(page2,text='1) Select Card')
     frame102.grid(row=1,column=1,sticky='NSW',padx=5,pady=5)
-
-
 
 # End ----------
 
@@ -447,7 +452,7 @@ def main():
         #new optionmenu
 
         for choice in OPTIONS:
-           FindAL01['menu'].add_command(label=choice, command=tkinter._setit(variable01, choice))
+           FindAL01['menu'].add_command(label=choice, command=_setit(variable01, choice))
 
 
         ALSAdevId=subprocess.check_output([" aplay -l | awk -F \: '/,/{print $1}' | uniq "],universal_newlines=True,shell=True).strip();
@@ -455,17 +460,14 @@ def main():
 
         ALSAdevName=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
         vADefDevName.set(ALSAdevName)
-        subprocess.call('echo "-----------------------------------------------------------" && echo " Detected Soundcards \n"-----------------------------------------------------------""', shell=True)
+        subprocess.call('echo "-----------------------------------------------------------" && echo "\e[32m ALSA \e[0m \n"-----------------------------------------------------------""', shell=True)
+        subprocess.call('echo "Detected ALSA Soundcards \n"', shell=True)
         print (vADefDevName.get())
 
 
     # Button Show Devices
     FindAL=Button(frame33,text='Detect Soundcards',command=optionsupdate)
     FindAL.grid(row=0,column=0,columnspan=9,rowspan=1,padx=5,pady=5,sticky='nsw')
-
-    # User inputbox
-    frame4=Label(frame101)
-    frame4.grid(row=1,column=1,sticky='NESW')
 
     def applyalsa():
         print(variable01.get())
@@ -476,136 +478,52 @@ def main():
         ShvALConf.set(ALSAConf)
 
         subprocess.call('alsactl kill rescan && alsactl nrestore ',stderr=subprocess.DEVNULL, shell=True)
-        subprocess.call('echo "-----------------------------------------------------------" && echo " Current /etc/asound.conf file \n"-----------------------------------------------------------""', shell=True)
+        subprocess.call('echo "-----------------------------------------------------------" && echo "\e[32m ALSA \e[0m \n"-----------------------------------------------------------""', shell=True)
+        subprocess.call('echo "Current /etc/asound.conf file \n"', shell=True)
         subprocess.call('cat /etc/asound.conf', shell=True)
+#        subprocess.call('echo "-----------------------------------------------------------"', shell=True)
 
 
     apply_btn3=Button(frame101,text='Apply & Restart Alsa',font=('Monospace Regular',11),command=applyalsa)
     apply_btn3.grid(row=1,column=1,sticky='nesw')
 
-
 # End ----------
-
-# -------------------- Tab 3 (Config) --------------------
-
-    # Tab3 main frame
-    CMainP=tkinter.LabelFrame(page3, text=" Installer ")
-    CMainP.grid(row=1,column=1,columnspan=7,rowspan=5,sticky='NESW')
-
-    RemPa111=tkinter.LabelFrame(CMainP,text=" PulseAudio (Experimental) ")
-    RemPa111.grid(row=1,column=1,sticky='NESW')
-
-    RemPa1111=tkinter.LabelFrame(CMainP,text=" ALSA Compatible Browser ")
-    RemPa1111.grid(row=1,column=2,sticky='NESW',padx=5,pady=5)
-
-
-# ---------- Remove PulseAudio ----------
-
-	# Select to install PulseAudio
-    RadPul01=Radiobutton(RemPa111,text='Install PulseAudio',variable=vPaInst,value=' Install PulseAudio')
-    RadPul01.grid(row=1,column=1,sticky='NESW')
-
-	# Select to uninstall PulseAudio
-    RadPul02=Radiobutton(RemPa111,text='Uninstall PulseAudio',variable=vPaInst,value=' Uninstall PulseAudio')
-    RadPul02.grid(row=1,column=2,sticky='NESW')
-
-    RemPa12=tkinter.LabelFrame(RemPa111)
-    RemPa12.grid(row=2,column=1,columnspan=4,sticky='NESW')
-
-    label=Label(RemPa12,text="INSTALL Replaces lxde with lubuntu-desktop")
-    label.grid(row=3,column=1,columnspan=10,sticky='nsw')
-
-    # Separator5
-    # ttk.Separator(RemPa12).grid(row=4,column=1,sticky="ew")
-
-    label=Label(RemPa12,text="UNINSTALL Replaces lubuntu-desktop with lxde")
-    label.grid(row=5,column=1,columnspan=10,sticky='nsw')
-
-    # Separator
-    ttk.Separator(RemPa12).grid(row=6,column=1,sticky="ew")
-
-    label=Label(RemPa12,text="System will reboot after install")
-    label.grid(row=7,column=1,columnspan=10,sticky='nsw')
-
-    AplPul1=Button(RemPa111,text='Apply',command=installerPA)
-    AplPul1.grid(row=8,column=1,columnspan=4,padx=5,sticky='NESW')
-
-# End ----------
-
-# ---------- Install Palemoon Browser ----------
-
-	# Select to install Chromium
-    RadAL01=Radiobutton(RemPa1111,text='Install Chromium',variable=vBrowserInst,value=' Install Chromium')
-    RadAL01.grid(row=1,column=0,sticky='nsw')
-
-	# Select to uninstall Chromium
-    RadAL02=Radiobutton(RemPa1111,text='Uninstall Chromium',variable=vBrowserInst,value=' Uninstall Chromium')
-    RadAL02.grid(row=1,column=1,sticky='nsw')
-
-	# Select to install Firefox ESR
-    RadAL03=Radiobutton(RemPa1111,text='Install Firefox ESR',variable=vBrowserInst,value=' Install Firefox ESR')
-    RadAL03.grid(row=2,column=0,sticky='nsw')
-
-	# Select to uninstall Firefox ESR
-    RadAL04=Radiobutton(RemPa1111,text='Uninstall Firefox ESR',variable=vBrowserInst,value=' Uninstall Firefox ESR')
-    RadAL04.grid(row=2,column=1,sticky='nsw')
-
-	# Select to install Palemoon
-
-    RadAL05=Radiobutton(RemPa1111,text='Install Pale Moon',variable=vBrowserInst,value=' Install Palemoon')
-    RadAL05.grid(row=3,column=0,sticky='nsw')
-
-	# Select to uninstall Palemoon
-    RadAL06=Radiobutton(RemPa1111,text='Uninstall Pale Moon',variable=vBrowserInst,value=' Uninstall Palemoon')
-    RadAL06.grid(row=3,column=1,sticky='nsw')
-
-	# Select to install Firefox
-    RadAL03=Radiobutton(RemPa1111,text='Install Firefox (Not Compatible)',variable=vBrowserInst,value=' Install Firefox')
-    RadAL03.grid(row=5,column=0,sticky='nsw')
-
-	# Select to uninstall Firefox
-    RadAL04=Radiobutton(RemPa1111,text='Uninstall Firefox (Not Compatible)',variable=vBrowserInst,value=' Uninstall Firefox')
-    RadAL04.grid(row=5,column=1,sticky='nsw')
-
-    AplAL1=Button(RemPa1111,text='Apply',command=cBrowserInst)
-    AplAL1.grid(row=6,column=1,padx=5,pady=5,sticky='NESW')
-
-# End ----------
-
     top.mainloop()
 
 # ---------- Variable Config ----------
 
 # PulseAudio
-vPaBitdepth=StringVar() 			# BithDepth
-vPaPriRate=StringVar() 				# Primary Samplerate
-vPaAltRate=StringVar() 				# Alternative Samplerate
-vPaRe=StringVar() 				# Resample method
-vPaRun=StringVar()                  		# Check Running PulseAudio instances
-vPaPrefConf=StringVar()             		# Predefined Conf
+vConfPaBitdepth=StringVar()                 # Current BithDepth
+vConfPaPriRate=StringVar()                  # Current Primary Samplerate
+vConfPaAltRate=StringVar()                  # Current Alternative Samplerate
+vConfPaRe=StringVar()                       # Current Resample method
 
-ShvPaOut=StringVar() 				# Show Current PA output
+vPaBitdepth=StringVar()                 # BithDepth
+vPaPriRate=StringVar()                  # Primary Samplerate
+vPaAltRate=StringVar()                  # Alternative Samplerate
+vPaRe=StringVar()                       # Resample method
+vPaAre=StringVar()                      # avoid-resampling
+vPaRun=StringVar()                      # Check Running PulseAudio instances
+vPaPrefConf=StringVar()                 # Predefined Conf
+
+ShvPaOut=StringVar()                    # Show Current PA output
+ToggleBtn=StringVar()                   # Toggle Button
 
 # ALSA
 ShvALConf=StringVar()                   # Alsa asound.conf file data
-vADefDev=StringVar() 			    	# Default Device
+vADefDev=StringVar()                    # Default Device
 vADefDevId=StringVar()                  # Device id
-vADefDevName=StringVar() 		    	# Device name list
+vADefDevName=StringVar()                # Device name list
 
-vADefDevName0=StringVar() 		    	# Device name list
-vADefDevName1=StringVar() 		    	# Device name list
-vADefDevName2=StringVar() 		    	# Device name list
-vADefDevName3=StringVar() 		    	# Device name list
-vADefDevName4=StringVar() 		    	# Device name list
-vADefDevName5=StringVar() 		    	# Device name list
-vADefDevName6=StringVar() 		    	# Device name list
-vADefDevName7=StringVar() 		    	# Device name list
-vADefDevName8=StringVar() 		    	# Device name list
-
-
-# Installers
-vPaInst=StringVar()                		# Install/Uninstall PulseAudio
-vBrowserInst=StringVar()               		# Install Palemoon
+vADefDevName0=StringVar()               # Device name list
+vADefDevName1=StringVar()               # Device name list
+vADefDevName2=StringVar()               # Device name list
+vADefDevName3=StringVar()               # Device name list
+vADefDevName4=StringVar()               # Device name list
+vADefDevName5=StringVar()               # Device name list
+vADefDevName6=StringVar()               # Device name list
+vADefDevName7=StringVar()               # Device name list
+vADefDevName8=StringVar()               # Device name list
 
 # End ----------
 
@@ -616,35 +534,50 @@ vPaBitdepth.set('; default-sample-format = s16le')      # PulseAudio BithDepth
 vPaPriRate.set('; default-sample-rate = 44100')         # PulseAudio Primary Samplerate
 vPaAltRate.set('; alternate-sample-rate = 48000')       # PulseAudio Alternative Samplerate
 vPaRe.set('; resample-method = speex-float-1')          # PulseAudio Resample method
+vPaAre.set('; avoid-resampling = false')                # PulseAudio Avoid Resample
+
+ToggleBtn='Off'                                         # PulseAudio resample button variable
+
 vPaRun.set('')                                          # Check Running PulseAudio instances
 vPaPrefConf.set('')                                     # Predefined Conf initial value
 ShvPaOut.set('')                                        # Show Current PA output
 
+
 # ALSA
-vADefDev.set('') 		                        # ALSA Default Device
-vADefDevName.set('') 		                        # ALSA Default name list
-
-# Installers
-vPaInst.set('0')                                        # Install/Uninstall PulseAudio
-vBrowserInst.set('0')                                      # Install browser
-
+vADefDev.set('')                                        # ALSA Default Device
+vADefDevName.set('')                                    # ALSA Default name list
 
 # ---------- Print Variable Data ----------
 
 # PulseAudio
 def Pabitdepth():
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
     print(vPaBitdepth.get())
 
 def PaPriRate():
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
     print(vPaPriRate.get())
 
 def PaAltRate():
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
     print(vPaAltRate.get())
 
 def PaRe():
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
     print(vPaRe.get())
 
 def PaOut():
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
     print(ShvPaOut.get())
 
 def PaRun():
@@ -657,48 +590,67 @@ def PaPrefConf():
 def ADefDev():
     print(vADefDev.get())
 
-# Installers
-def PaInst():
-    print(vPaInst.get())
-
-def BrowserInst():
-    print(vBrowserInst.get())
-
 # End ----------
 
-# ---------- Button Commands ----------
-
-def helpmenu01():
-    tkinter.messagebox.showinfo("About Audio Powertool: ","Easy audio settings management\n \nNo more boring Config files\n \n")
+# ---------- Predefined Commands ----------
 
 # Default button
 def defpa():
-# Set new values for variables
     vPaBitdepth.set('; default-sample-format = s16le')
     vPaPriRate.set('; default-sample-rate = 44100')
     vPaAltRate.set('; alternate-sample-rate = 48000')
     vPaRe.set('; resample-method = speex-float-1')
-    print (" Default Values ")
-# End ----------
 
+    if ToggleBtn == 'On':
+        PaAre()
+
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
+    print ("Default Values ")
+
+# Recommended button
 def recpa():
-# Set new values for variables
-    vPaBitdepth.set('  default-sample-format = s24le')
-    vPaPriRate.set('  default-sample-rate = 44100')
-    vPaAltRate.set('  alternate-sample-rate = 48000')
-    vPaRe.set('; resample-method = speex-float-1')
-    print (" Recommended Values ")
+    vPaBitdepth.set('default-sample-format = s24le')
+    vPaPriRate.set('default-sample-rate = 44100')
+    vPaAltRate.set('alternate-sample-rate = 48000')
+    vPaRe.set('resample-method = src-sinc-best-quality')
+
+    if ToggleBtn == 'On':
+        PaAre()
+
+    print ("-----------------------------------------------------------")
+    print ("\033[96m PulseAudio \033[00m")
+    print ("-----------------------------------------------------------")
+    print ("Recommended Values ")
 # End ----------
 
 
 # Apply PA Button
 def applyPA():
-    CvPaBitdepth=(vPaBitdepth.get())
-    CvPaPriRate=(vPaPriRate.get())
-    CvPaAltRate=(vPaAltRate.get())
-    CvPaRe=(vPaRe.get())
 
-    subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf | pulseaudio --kill ; pulseaudio --start'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe),shell=True);
+    try:
+        CvPaBitdepth=(vPaBitdepth.get())
+        CvPaPriRate=(vPaPriRate.get())
+        CvPaAltRate=(vPaAltRate.get())
+        CvPaRe=(vPaRe.get())
+        CvPaAre=(vPaAre.get())
+
+        print ("-----------------------------------------------------------")
+        print ("\033[96m PulseAudio \033[00m")
+        print ("-----------------------------------------------------------")
+        print ("Applying Settings ")
+        subprocess.call('sudo sed -i "/default-sample-format =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/default-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/alternate-sample-rate =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/resample-method =/ c {}" /etc/pulse/daemon.conf && sudo sed -i "/avoid-resampling =/ c {}" /etc/pulse/daemon.conf'.format(CvPaBitdepth,CvPaPriRate,CvPaAltRate,CvPaRe,CvPaAre),shell=True);
+
+        print ("Restarting PulseAudio ")
+        PaStatus01=subprocess.check_output(["pulseaudio --kill"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+
+    except subprocess.CalledProcessError as e:
+
+        print ("Handling PulseAudio Error ")
+        subprocess.call('pulseaudio --start', shell=True);
+        print ("Done ")
+        print ("-----------------------------------------------------------")
 
 # The current PulseAudio output setting is passed to variable and printed to terminal
 def showsamplerate():
@@ -707,20 +659,47 @@ def showsamplerate():
         ShvPaOut.set(showsamplerateoutput)
         PaStatus=subprocess.check_output(["pulseaudio --check"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
         vPaRun.set("Status: On")
-        print ("---------------- PulseAudio -----------------")
-        print (vPaRun.get())
+
+        print ("-----------------------------------------------------------")
+        print ("\033[96m PulseAudio \033[00m")
+        print ("-----------------------------------------------------------")
+        print ("Status: \033[92m On \033[00m")
         print (ShvPaOut.get())
-        print ("---------------------------------------------")
+
+        # Check current pulseaudio config and show it to user at startup
+
+        showdefbitdepth=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(default-sample-format\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+        vConfPaBitdepth.set("default-sample-format"+showdefbitdepth)
+
+        showdefsamplerate=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(default-sample-rate\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+        vConfPaPriRate.set("default-sample-rate"+showdefsamplerate)
+
+        showaltsamplerate=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(alternate-sample-rate\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+        vConfPaAltRate.set("alternate-sample-rate"+showaltsamplerate)
+
+        showresamplemethod=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(resample-method\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+
+        vConfPaRe.set("resample-method"+showresamplemethod)
+
+        print()
+        print(vConfPaBitdepth.get())
+        print(vConfPaPriRate.get())
+        print(vConfPaAltRate.get())
+        print(vConfPaRe.get())
+
     except subprocess.CalledProcessError as e:
         ShvPaOut.set("Output: N/A")
         vPaRun.set("Status: Off")
-        print ("---------------- PulseAudio -----------------")
-        print (vPaRun.get())
+        print ("-----------------------------------------------------------")
+        print ("\033[96m PulseAudio \033[00m")
+        print ("-----------------------------------------------------------")
+        print ("Status:\033[91m Off \033[00m")
         print (ShvPaOut.get())
-        sys.stderr.write(
-        "No PulseAudio playback detected: %s\n"
-        % (e.returncode))
-        print ("---------------------------------------------")
+        print ("No Running PulseAudio Detected (Run Apply & Restart PulseAudio)")
+
+#        e.stderr.write(
+#        "No PulseAudio playback detected: %s\n"
+#        % (e.returncode))
 # End ----------
 
 # Apply Alsa
@@ -729,114 +708,6 @@ def applyAL():
     cADefDev=(vADefDev.get())
 
     subprocess.call('sudo sed -i "/card / c card {}" /etc/asound.conf && sudo sed -i "/card / c card {}" /etc/asound.conf | alsactl kill rescan && alsactl nrestore'.format(cADefDev,cADefDev),shell=True);
-
-# Uninstall/install PulseAudio
-def installerPA():
-    PaInst=(vPaInst.get())
-    if PaInst==" Install PulseAudio":
-        print ("-------------- Install PulseAudio --------------")
-        subprocess.call('sudo apt purge --remove lubuntu-* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt purge --remove lxde* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt-get install lubuntu-desktop -y',shell=True);
-        subprocess.call('sudo apt-get install alsa-base pulseaudio -y',shell=True);
-        subprocess.call('sudo alsa force-reload',shell=True);
-        subprocess.call('pulseaudio --kill ; pulseaudio --start',shell=True);
-
-        subprocess.call('sudo apt-get update',shell=True);
-        subprocess.call('sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt-get autoclean -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-        subprocess.call('sleep 1 && echo "System Reboot in..." && sleep 1 && echo "3" && sleep 1 && echo "2" && sleep 1 && echo "1" && sleep 1 && sudo reboot',shell=True);
-
-    if PaInst==" Uninstall PulseAudio":
-        print ("-------------- Uninstall PulseAudio --------------")
-        subprocess.call('pulseaudio -k | killall pulseaudio',shell=True);
-
-	# Uninstall -->
-        subprocess.call('sudo apt purge --remove pulseaudio* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt purge --remove padevchooser* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt purge --remove pavucontrol* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt purge --remove paprefs* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt-get purge gstreamer0.10-pulseaudio -y',shell=True);
-        subprocess.call('sudo apt-get purge alsa-base -y',shell=True);
-#        subprocess.call('sudo apt purge unity-session unity -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt purge --remove lubuntu-* -y; sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt purge --remove lxde* -y; sudo apt autoremove -y',shell=True);
-
-	# New Desktop Env
-        subprocess.call('sudo apt-get install lxde -y',shell=True);
-        subprocess.call('sudo apt install lxde-common -y',shell=True);
-
-	# Cleanup & Reboot
-        subprocess.call('sudo apt-get update',shell=True);
-        subprocess.call('sudo apt autoremove -y',shell=True);
-        subprocess.call('sudo apt-get autoclean -y',shell=True);
-        subprocess.call('sudo apt-get install alsa -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-        subprocess.call('sleep 1 && echo "System Reboot in..." && sleep 1 && echo "3" && sleep 1 && echo "2" && sleep 1 && echo "1" && sleep 1 && sudo reboot',shell=True);
-
-# End ----------
-
-# install Palemoon
-def cBrowserInst():
-    vdBrowserInst=(vBrowserInst.get())
-
-    if vdBrowserInst==" Install Chromium":
-        print ("-------------- Install Chromium --------------")
-        subprocess.call('sudo apt-get install chromium-browser -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Uninstall Chromium":
-        print ("-------------- Uninstall Chromium --------------")
-        subprocess.call('sudo apt-get purge chromium-browser -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Install Firefox ESR":
-        print ("-------------- Install Firefox ESR --------------")
-        subprocess.call('sudo add-apt-repository ppa:mozillateam/ppa -y && sudo apt-get update && sudo apt-get install firefox-esr -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Uninstall Firefox ESR":
-        print ("-------------- Uninstall Firefox ESR --------------")
-        subprocess.call('sudo apt-get remove --auto-remove firefox-esr -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Install Firefox":
-        print ("-------------- Install Firefox --------------")
-        subprocess.call('sudo apt-get install firefox -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Uninstall Firefox":
-        print ("-------------- Uninstall Firefox ESR --------------")
-        subprocess.call('sudo apt-get remove --auto-remove firefox -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Install Palemoon":
-        print ("-------------- install Palemoon --------------")
-        subprocess.call('wget -nv https://download.opensuse.org/repositories/home:stevenpusser/xUbuntu_18.04/Release.key -O Release.key',shell=True);
-        subprocess.call('sudo apt-key add - < Release.key && sudo apt-get update',shell=True);
-        BrowserInst1=("sudo sh -c")
-        BrowserInst2=("'deb http://download.opensuse.org/repositories/home:/stevenpusser/xUbuntu_16.04/ /'")
-        subprocess.call('{} "echo {} > /etc/apt/sources.list.d/home:stevenpusser.list"'.format(BrowserInst1,BrowserInst2),shell=True);
-        subprocess.call('sudo apt-get update',shell=True);
-        subprocess.call('sudo apt-get install palemoon -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
-
-    if vdBrowserInst==" Uninstall Palemoon":
-        print ("-------------- Uninstall Palemoon --------------")
-        subprocess.call('sudo rm /etc/apt/sources.list.d/home:stevenpusser.list',shell=True);
-        subprocess.call('sudo apt-get purge palemoon -y',shell=True);
-        print ("--------------------------------------------")
-        print (" Done !")
 
 # End ----------
 
@@ -849,27 +720,43 @@ def showalsadevices():
 
     ALSAdevName=subprocess.check_output(["aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq"],universal_newlines=True,shell=True).strip();
     vADefDevName.set(ALSAdevName)
-    subprocess.call('echo "-----------------------------------------------------------" && echo " Detected Soundcards \n"-----------------------------------------------------------""', shell=True)
+    subprocess.call('echo "-----------------------------------------------------------" && echo "\e[32m ALSA \e[0m  \n"-----------------------------------------------------------""', shell=True)
+    subprocess.call('echo "Detected ALSA Soundcards"', shell=True)
     print (vADefDevName.get())
-
 
 # End ----------
 
-# Run at start to check --> asound.conf exist and if not it will be created (config file creation will fail if app is not run with sudo. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
+# Run at start to check --> asound.conf exist and if not it will be created. Alternatively config can be created manually by following this tutorial --> https://www.alsa-project.org/main/index.php/Setting_the_default_device)
 try:
     subprocess.check_output(["cat /etc/asound.conf"],stderr=subprocess.DEVNULL,universal_newlines=True,shell=True).strip();
 except subprocess.CalledProcessError as e:
-    subprocess.call('echo "-----------------------------------------------------------" && echo " Creating SystemWide asound.conf file \n"-----------------------------------------------------------""', shell=True)
-    subprocess.call('[ -f /etc/asound.conf ] && echo "------------------------ ALSA Conf ------------------------" || echo "pcm.!default {\ntype hw\ncard "1"\n} \nctl.!default {\ntype hw\ncard "1"\n}" > /etc/asound.conf', shell=True)
+    subprocess.call('echo "-----------------------------------------------------------" && echo "\e[33m Creating SystemWide file \e[0m  \n"-----------------------------------------------------------""', shell=True)
+    subprocess.call('echo "--------------------- /etc/asound.conf --------------------" && sudo touch /etc/asound.conf && echo "-----------------------------------------------------------" && echo "pcm.!default {\ntype hw\ncard 1\n} \nctl.!default {\ntype hw\ncard 1\n}" | sudo tee /etc/asound.conf', shell=True)
     subprocess.call('alsactl kill rescan && alsactl nrestore ', stderr=subprocess.DEVNULL,shell=True)
+    subprocess.call('echo "-----------------------------------------------------------"', shell=True)
+    subprocess.call('echo "\e[31m Please Setup Soundcard from ALSA Tab \e[0m"', shell=True)
+    subprocess.call('echo "-----------------------------------------------------------"', shell=True)
 
-ALSAConf=subprocess.check_output(["cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+ALSAConf=subprocess.check_output(["sudo cat /etc/asound.conf"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
 ShvALConf.set(ALSAConf)
 
-# Close Window
-def close_window():
-    root.destroy()
-    root.mainloop()
+# Check current pulseaudio config and show it to user at startup
+try:
+    showdefbitdepth=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(default-sample-format\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+    vConfPaBitdepth.set("default-sample-format"+showdefbitdepth)
+
+    showdefsamplerate=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(default-sample-rate\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+    vConfPaPriRate.set("default-sample-rate"+showdefsamplerate)
+
+    showaltsamplerate=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(alternate-sample-rate\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+    vConfPaAltRate.set("alternate-sample-rate"+showaltsamplerate)
+
+    showresamplemethod=subprocess.check_output(["cat '/etc/pulse/daemon.conf' | sed -n 's/\(resample-method\)/\1/p'"],universal_newlines=True,shell=True,stderr=subprocess.STDOUT).strip()
+
+    vConfPaRe.set("resample-method"+showresamplemethod)
+
+except subprocess.CalledProcessError as e:
+    print ("Cannot show current pulseaudio config")
 # End ----------
 
 if __name__ == '__main__':
