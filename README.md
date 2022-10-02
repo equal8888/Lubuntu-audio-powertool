@@ -5,12 +5,14 @@
 Enables configuration of PulseAudio & ALSA.
 <br>
 <br>
-Tested on 64-bit Lubuntu (16.04.3 LTS) Link -->
-http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04.3-desktop-amd64.iso
-<br>
-<br>
-In theory should work on other Debian/Lubuntu/Ubuntu versions but untested for now
-<br>
+
+Seems to work on
+
+- Lubuntu 16.04
+- Lubuntu 18.04
+- Debian 11
+
+In theory should work on other Debian based distributions but untested.
 
 ## Usage
 
