@@ -12,7 +12,7 @@ Seems to work on
 - Lubuntu 18.04
 - Debian 11
 
-In theory should work on other Debian based distributions but untested.
+might work on other Debian based distributions but untested.
 
 ## Usage
 
