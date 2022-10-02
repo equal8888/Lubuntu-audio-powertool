@@ -5,8 +5,7 @@
 Enables configuration of PulseAudio & ALSA.
 <br>
 <br>
-
-Tested on 64-bit debian 11
+Tested on 64-bit Lubuntu (16.04.3 LTS)
 
 might work on other Debian based distributions but untested.
 
